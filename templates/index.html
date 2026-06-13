@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Saber o Preço</title>
-</head>
+<html>
 <body>
     <h1>Saber o Preço 🔍</h1>
-    <form method="POST">
+    <form action="/" method="POST">
         <input type="text" name="produto" placeholder="Digite o produto..." required>
         <button type="submit">Buscar</button>
     </form>
+    
+    <hr>
+    
     {% if produto %}
-        <p>Produto: {{ produto }}</p>
-        <p>Preço: {{ preco }}</p>
+        <p><strong>Produto:</strong> {{ produto }}</p>
+        <p><strong>Preço:</strong> {{ preco }}</p>
         <a href="{{ link }}" target="_blank">Ver no Mercado Livre</a>
     {% endif %}
 </body>
