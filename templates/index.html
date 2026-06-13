@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <style>
+        .container { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+        .card { padding: 20px; border: 2px solid #3483fa; border-radius: 10px; width: 300px; }
+        .btn { display: inline-block; padding: 10px; background-color: #3483fa; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
 <body>
-    <h1>Saber o Preço </h1>
+    <h1>Saber o Preço 🔍</h1>
     <form action="/" method="POST">
         <input type="text" name="produto" placeholder="Digite o produto..." required>
         <button type="submit">Buscar</button>
     </form>
     
-    <hr>
-    
-    {% if link %}
+    {% if termo %}
         <h2>Resultados para: {{ termo }}</h2>
-        <div style="padding: 20px; border: 2px solid #3483fa; border-radius: 10px;">
-            <p>Clique no botão abaixo para ver todos os preços atualizados no Mercado Livre:</p>
-            <a href="{{ link }}" target="_blank" style="padding: 10px 20px; background-color: #3483fa; color: white; text-decoration: none; border-radius: 5px;">
-                Ver preços no Mercado Livre
-            </a>
+        <div class="container">
+            {% for loja in lojas %}
+                <div class="card">
+                    <h3>{{ loja.nome }}</h3>
+                    <a href="{{ loja.link }}" target="_blank" class="btn">Ver em {{ loja.nome }}</a>
+                </div>
+            {% endfor %}
         </div>
     {% endif %}
 </body>
