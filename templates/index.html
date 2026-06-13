@@ -9,9 +9,17 @@
     
     <hr>
     
-    {% if produto %}
-        <p><strong>Resultados para:</strong> {{ produto }}</p>
-        <a href="{{ link }}" target="_blank" style="font-size: 20px; font-weight: bold;">Clique aqui para ver os preços no Mercado Livre</a>
+    {% if termo %}
+        <h2>Resultados para: {{ termo }}</h2>
+        {% for item in produtos %}
+            <p>
+                <strong>{{ item.titulo }}</strong><br>
+                Preço: R$ {{ item.preco }} - 
+                <a href="{{ item.link }}" target="_blank">Ver produto</a>
+            </p>
+        {% else %}
+            <p>Nenhum produto encontrado via API.</p>
+        {% endfor %}
     {% endif %}
 </body>
 </html>
