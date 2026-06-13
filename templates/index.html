@@ -1,35 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Saber o Preço</title>
-</head>
-<body>
-    <h1>Saber o Preço 🔍</h1>
-    <form action="/" method="POST">
-        <input type="text" name="produto" placeholder="Digite o produto..." required>
-        <button type="submit">Buscar</button>
-    </form>
-    
-    <hr>
-    
-    {% if termo %}
-        <h2>Resultados para: {{ termo }}</h2>
-        {% if produtos %}
-            <h3>🏆 Mais barato:</h3>
-            <p style="background-color: #d4edda; padding: 10px;">
-                <strong>{{ produtos[0].titulo }}</strong> - R$ {{ produtos[0].preco }} <br>
-                <a href="{{ produtos[0].link }}" target="_blank">Comprar aqui</a>
-            </p>
-            
-            <h3>Outras opções:</h3>
-            <ul>
-            {% for item in produtos[1:] %}
-                <li>{{ item.titulo }} - <strong>R$ {{ item.preco }}</strong> - <a href="{{ item.link }}" target="_blank">Ver</a></li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>Nenhum produto encontrado. Tente um nome mais específico (ex: "Mouse Logitech").</p>
-        {% endif %}
-    {% endif %}
-</body>
-</html>
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    link = None
+    termo = None
+    if request.method == "POST":
+        termo = request.form.get("produto")
+        if termo:
+            # Transforma o termo em um formato de URL seguro
+            termo_formatado = termo.replace(" ", "%20")
+            link = f"https://lista.mercadolivre.com.br/{termo_formatado}"
+    return render_template("index.html", link=link, termo=termo)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000)
