@@ -1,37 +1,33 @@
-import os
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from flask import Flask, render_template, request
+import requests
+from bs4 import BeautifulSoup
 
-# HTML com uma caixa de busca simples
-HTML_PAGINA = """
-<html>
-    <head><title>Meu Buscador</title></head>
-    <body>
-        <h1>Buscador de Preços</h1>
-        <form action="/buscar" method="GET">
-            <input type="text" name="produto" placeholder="Digite o produto...">
-            <button type="submit">Buscar</button>
-        </form>
-    </body>
-</html>
-"""
+app = Flask(__name__)
 
-class ServidorPerfeito(BaseHTTPRequestHandler):
-    def do_GET(self):
-        # Se o usuário acessar a página inicial
-        if self.path == '/':
-            self.send_response(200)
-            self.send_header('Content-type', 'text/html; charset=utf-8')
-            self.end_headers()
-            self.wfile.write(HTML_PAGINA.encode('utf-8'))
-        # Se o usuário clicar em "Buscar"
-        elif self.path.startswith('/buscar'):
-            self.send_response(200)
-            self.send_header('Content-type', 'text/html; charset=utf-8')
-            self.end_headers()
-            self.wfile.write("<h1>Buscando...</h1><p>Em breve mostrarei o preço aqui!</p>".encode('utf-8'))
+def buscar_mercado_livre(produto):
+    # Entra no Mercado Livre e busca o produto
+    url = f"https://lista.mercadolivre.com.br/{produto}"
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+    resposta = requests.get(url, headers=headers)
+    
+    if resposta.status_code == 200:
+        soup = BeautifulSoup(resposta.text, 'html.parser')
+        # Procura o primeiro preço que aparece na página
+        preco_inteiro = soup.find('span', class_='andes-money-amount__fraction')
+        if preco_inteiro:
+            return f"R$ {preco_inteiro.text}"
+    return "Preço não encontrado"
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8055))
-    servidor_final = ThreadingHTTPServer(('0.0.0.0', port), ServidorPerfeito)
-    print(f"🚀 SISTEMA ATUALIZADO NA PORTA {port}!")
-    servidor_final.serve_forever()
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    preco = None
+    produto = None
+    if request.method == 'POST':
+        produto = request.form.get('produto')
+        if produto:
+            preco = buscar_mercado_livre(produto)
+            
+    return render_template('index.html', preco=preco, produto=produto)
+
+if __name__ == '__main__':
+    app.run(debug=True)    servidor_final.serve_forever()
