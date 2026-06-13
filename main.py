@@ -4,14 +4,20 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    link = None
+    lojas = []
     termo = None
     if request.method == "POST":
         termo = request.form.get("produto")
         if termo:
-            termo_formatado = termo.replace(" ", "%20")
-            link = "https://lista.mercadolivre.com.br/" + termo_formatado
-    return render_template("index.html", link=link, termo=termo)
+            t = termo.replace(" ", "%20")
+            # Lista de lojas com seus links de busca prontos
+            lojas = [
+                {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/{t}"},
+                {"nome": "Amazon", "link": f"https://www.amazon.com.br/s?k={t}"},
+                {"nome": "Americanas", "link": f"https://www.americanas.com.br/busca/{t}"},
+                {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/{t}"}
+            ]
+    return render_template("index.html", lojas=lojas, termo=termo)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
