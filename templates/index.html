@@ -1,28 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
+    <meta charset="UTF-8">
+    <title>Saber o Preco</title>
     <style>
-        .container { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .card { padding: 20px; border: 2px solid #3483fa; border-radius: 10px; width: 300px; }
-        .btn { display: inline-block; padding: 10px; background-color: #3483fa; color: white; text-decoration: none; border-radius: 5px; }
+        body { font-family: sans-serif; background: #f4f4f9; padding: 20px; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .card { padding: 20px; border-radius: 12px; color: white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .ml { background-color: #ffe600; color: #333; }
+        .amz { background-color: #232f3e; }
+        .ame { background-color: #e31c2d; }
+        .car { background-color: #ff9900; }
+        .btn { display: inline-block; margin-top: 15px; padding: 10px 20px; background: white; color: #333; text-decoration: none; border-radius: 6px; font-weight: bold; }
     </style>
 </head>
 <body>
-    <h1>Saber o Preço 🔍</h1>
+    <h1>Saber o Preco</h1>
     <form action="/" method="POST">
-        <input type="text" name="produto" placeholder="Digite o produto..." required>
-        <button type="submit">Buscar</button>
+        <input type="text" name="produto" placeholder="O que voce procura hoje?" required style="padding: 10px; width: 300px;">
+        <button type="submit" style="padding: 10px 20px;">Buscar</button>
     </form>
     
     {% if termo %}
-        <h2>Resultados para: {{ termo }}</h2>
-        <div class="container">
-            {% for loja in lojas %}
-                <div class="card">
-                    <h3>{{ loja.nome }}</h3>
-                    <a href="{{ loja.link }}" target="_blank" class="btn">Ver em {{ loja.nome }}</a>
-                </div>
-            {% endfor %}
+        <h2 style="margin-top: 30px;">Resultados para: {{ termo }}</h2>
+        <div class="grid">
+            <div class="card ml"><h3>Mercado Livre</h3><p>Maior variedade do Brasil</p><a href="{{ lojas[0].link }}" target="_blank" class="btn">Ver Precos</a></div>
+            <div class="card amz"><h3>Amazon</h3><p>Entrega rapida Prime</p><a href="{{ lojas[1].link }}" target="_blank" class="btn">Ver Precos</a></div>
+            <div class="card ame"><h3>Americanas</h3><p>Ofertas exclusivas</p><a href="{{ lojas[2].link }}" target="_blank" class="btn">Ver Precos</a></div>
+            <div class="card car"><h3>Carrefour</h3><p>Precos de mercado</p><a href="{{ lojas[3].link }}" target="_blank" class="btn">Ver Precos</a></div>
         </div>
     {% endif %}
 </body>
