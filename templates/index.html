@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Saber o Preço</title>
+</head>
 <body>
     <h1>Saber o Preço 🔍</h1>
     <form action="/" method="POST">
@@ -10,23 +13,22 @@
     <hr>
     
     {% if termo %}
-        <h2>Resultados para: {{ termo }} (Do mais barato ao mais caro)</h2>
-        
+        <h2>Resultados para: {{ termo }}</h2>
         {% if produtos %}
-            <div style="background-color: #d4edda; padding: 15px; border-radius: 5px;">
-                <h3>🏆 O mais barato encontrado:</h3>
-                <p><strong>{{ produtos[0].titulo }}</strong> - R$ {{ produtos[0].preco }}</p>
+            <h3>🏆 Mais barato:</h3>
+            <p style="background-color: #d4edda; padding: 10px;">
+                <strong>{{ produtos[0].titulo }}</strong> - R$ {{ produtos[0].preco }} <br>
                 <a href="{{ produtos[0].link }}" target="_blank">Comprar aqui</a>
-            </div>
-            
-            <hr>
+            </p>
             
             <h3>Outras opções:</h3>
+            <ul>
             {% for item in produtos[1:] %}
-                <p>{{ item.titulo }} - <strong>R$ {{ item.preco }}</strong> - <a href="{{ item.link }}">Ver</a></p>
+                <li>{{ item.titulo }} - <strong>R$ {{ item.preco }}</strong> - <a href="{{ item.link }}" target="_blank">Ver</a></li>
             {% endfor %}
+            </ul>
         {% else %}
-            <p>Nenhum produto encontrado.</p>
+            <p>Nenhum produto encontrado. Tente um nome mais específico (ex: "Mouse Logitech").</p>
         {% endif %}
     {% endif %}
 </body>
