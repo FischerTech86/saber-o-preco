@@ -8,12 +8,10 @@ def buscar_mercado_livre(produto):
     termo_busca = produto.replace(" ", "-")
     url = f"https://lista.mercadolivre.com.br/{termo_busca}"
     headers = {"User-Agent": "Mozilla/5.0"}
-    
     try:
         resposta = requests.get(url, headers=headers)
         soup = BeautifulSoup(resposta.text, "html.parser")
         item = soup.find("div", class_="ui-search-result__wrapper")
-        
         if item:
             link = item.find("a", class_="ui-search-link")["href"]
             preco_inteiro = item.find("span", class_="andes-money-amount__fraction").text
