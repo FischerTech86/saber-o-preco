@@ -1,35 +1,33 @@
-from flask import Flask, render_template, request
-import requests
-
-app = Flask(__name__)
-
-def buscar_na_api_ml(produto):
-    # API oficial do Mercado Livre
-    url = f"https://api.mercadolivre.com/sites/MLB/search?q={produto}&limit=3"
-    try:
-        response = requests.get(url)
-        data = response.json()
-        resultados = []
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Saber o Preço 🔍</h1>
+    <form action="/" method="POST">
+        <input type="text" name="produto" placeholder="Digite o produto..." required>
+        <button type="submit">Buscar</button>
+    </form>
+    
+    <hr>
+    
+    {% if termo %}
+        <h2>Resultados para: {{ termo }} (Do mais barato ao mais caro)</h2>
         
-        # Pega os 3 primeiros resultados da API
-        for item in data.get('results', []):
-            titulo = item.get('title')
-            preco = item.get('price')
-            link = item.get('permalink')
-            resultados.append({'titulo': titulo, 'preco': preco, 'link': link})
-        return resultados
-    except:
-        return []
-
-@app.route("/", methods=["GET", "POST"])
-def index():
-    produtos_encontrados = []
-    termo_busca = None
-    if request.method == "POST":
-        termo_busca = request.form.get("produto")
-        if termo_busca:
-            produtos_encontrados = buscar_na_api_ml(termo_busca)
-    return render_template("index.html", produtos=produtos_encontrados, termo=termo_busca)
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+        {% if produtos %}
+            <div style="background-color: #d4edda; padding: 15px; border-radius: 5px;">
+                <h3>🏆 O mais barato encontrado:</h3>
+                <p><strong>{{ produtos[0].titulo }}</strong> - R$ {{ produtos[0].preco }}</p>
+                <a href="{{ produtos[0].link }}" target="_blank">Comprar aqui</a>
+            </div>
+            
+            <hr>
+            
+            <h3>Outras opções:</h3>
+            {% for item in produtos[1:] %}
+                <p>{{ item.titulo }} - <strong>R$ {{ item.preco }}</strong> - <a href="{{ item.link }}">Ver</a></p>
+            {% endfor %}
+        {% else %}
+            <p>Nenhum produto encontrado.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
