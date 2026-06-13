@@ -5,27 +5,32 @@ from bs4 import BeautifulSoup
 app = Flask(__name__)
 
 def buscar_mercado_livre(produto):
-    url = f"https://lista.mercadolivre.com.br/{produto}"
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
-    resposta = requests.get(url, headers=headers)
+    termo_busca = produto.replace(" ", "-")
+    url = f"https://lista.mercadolivre.com.br/{termo_busca}"
+    headers = {"User-Agent": "Mozilla/5.0"}
     
-    if resposta.status_code == 200:
-        soup = BeautifulSoup(resposta.text, 'html.parser')
-        preco_inteiro = soup.find('span', class_='andes-money-amount__fraction')
-        if preco_inteiro:
-            return f"R$ {preco_inteiro.text}"
-    return "Preço não encontrado"
+    try:
+        resposta = requests.get(url, headers=headers)
+        soup = BeautifulSoup(resposta.text, "html.parser")
+        item = soup.find("div", class_="ui-search-result__wrapper")
+        
+        if item:
+            link = item.find("a", class_="ui-search-link")["href"]
+            preco_inteiro = item.find("span", class_="andes-money-amount__fraction").text
+            return f"R$ {preco_inteiro}", link
+        return "Preço não encontrado", "#"
+    except:
+        return "Erro na busca", "#"
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route("/", methods=["GET", "POST"])
 def index():
-    preco = None
     produto = None
-    if request.method == 'POST':
-        produto = request.form.get('produto')
-        if produto:
-            preco = buscar_mercado_livre(produto)
-            
-    return render_template('index.html', preco=preco, produto=produto)
+    preco = None
+    link = "#"
+    if request.method == "POST":
+        produto = request.form.get("produto")
+        preco, link = buscar_mercado_livre(produto)
+    return render_template("index.html", produto=produto, preco=preco, link=link)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000)
