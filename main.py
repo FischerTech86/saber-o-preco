@@ -1,33 +1,20 @@
-<!DOCTYPE html>
-<html>
-<body>
-    <h1>Saber o Preço 🔍</h1>
-    <form action="/" method="POST">
-        <input type="text" name="produto" placeholder="Digite o produto..." required>
-        <button type="submit">Buscar</button>
-    </form>
-    
-    <hr>
-    
-    {% if termo %}
-        <h2>Resultados para: {{ termo }} (Do mais barato ao mais caro)</h2>
-        
-        {% if produtos %}
-            <div style="background-color: #d4edda; padding: 15px; border-radius: 5px;">
-                <h3>🏆 O mais barato encontrado:</h3>
-                <p><strong>{{ produtos[0].titulo }}</strong> - R$ {{ produtos[0].preco }}</p>
-                <a href="{{ produtos[0].link }}" target="_blank">Comprar aqui</a>
-            </div>
-            
-            <hr>
-            
-            <h3>Outras opções:</h3>
-            {% for item in produtos[1:] %}
-                <p>{{ item.titulo }} - <strong>R$ {{ item.preco }}</strong> - <a href="{{ item.link }}">Ver</a></p>
-            {% endfor %}
-        {% else %}
-            <p>Nenhum produto encontrado.</p>
-        {% endif %}
-    {% endif %}
-</body>
-</html>
+def buscar_na_api_ml(produto):
+    # Mudamos o 'site' para buscar em todo o Brasil (MLB)
+    # E adicionamos um 'sort' para garantir que venha algo
+    url = f"https://api.mercadolivre.com/sites/MLB/search?q={produto}&limit=5"
+    try:
+        response = requests.get(url)
+        # Vamos imprimir o status para debug caso precise
+        if response.status_code == 200:
+            data = response.json()
+            resultados = []
+            for item in data.get('results', []):
+                resultados.append({
+                    'titulo': item.get('title'),
+                    'preco': item.get('price'),
+                    'link': item.get('permalink')
+                })
+            return resultados
+        return []
+    except:
+        return []
