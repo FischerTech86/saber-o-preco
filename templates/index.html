@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Saber o Preço</title>
+</head>
+<body>
+    <h1>Saber o Preço 🔍</h1>
+    <form method="POST">
+        <input type="text" name="produto" placeholder="Digite o produto..." required>
+        <button type="submit">Buscar</button>
+    </form>
+    {% if produto %}
+        <p>Produto: {{ produto }}</p>
+        <p>Preço: {{ preco }}</p>
+        <a href="{{ link }}" target="_blank">Ver no Mercado Livre</a>
+    {% endif %}
+</body>
+</html>
