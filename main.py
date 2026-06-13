@@ -3,24 +3,31 @@ import requests
 
 app = Flask(__name__)
 
-def buscar_ordenado(produto):
-    # Aumentamos o limite para garantir que venham resultados suficientes para ordenar
-    url = f"https://api.mercadolivre.com/sites/MLB/search?q={produto}&limit=15"
+def buscar_produtos(termo):
+    # API oficial para busca no ML Brasil
+    url = f"https://api.mercadolivre.com/sites/MLB/search?q={termo}&limit=10"
+    
     try:
         response = requests.get(url, timeout=10)
         if response.status_code == 200:
             data = response.json()
-            # Filtra apenas itens que possuem preço definido
-            lista = [
-                {'titulo': item.get('title'), 'preco': item.get('price'), 'link': item.get('permalink')}
-                for item in data.get('results', []) if item.get('price') is not None
-            ]
-            # Ordena do mais barato para o mais caro
-            lista.sort(key=lambda x: x['preco'])
-            return lista
-    except Exception as e:
-        print(f"Erro: {e}")
-    return []
+            produtos = []
+            
+            for item in data.get('results', []):
+                # Extrai os dados garantindo que existem
+                preco = item.get('price')
+                titulo = item.get('title')
+                link = item.get('permalink')
+                
+                if preco is not None:
+                    produtos.append({'titulo': titulo, 'preco': preco, 'link': link})
+            
+            # Ordena do menor para o maior preço
+            return sorted(produtos, key=lambda x: x['preco'])
+        else:
+            return []
+    except Exception:
+        return []
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -29,7 +36,7 @@ def index():
     if request.method == "POST":
         termo = request.form.get("produto")
         if termo:
-            produtos = buscar_ordenado(termo)
+            produtos = buscar_produtos(termo)
     return render_template("index.html", produtos=produtos, termo=termo)
 
 if __name__ == "__main__":
