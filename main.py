@@ -11,10 +11,10 @@ def index():
         if termo:
             t = termo.replace(" ", "%20")
             lojas = [
-                # Foco em comida e mercados com busca direta:
+                # Foco em mercados e grandes varejistas:
                 {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={t}"},
                 {"nome": "Sonda", "link": f"https://www.sondadelivery.com.br/delivery/busca/{t}"},
-{"nome": "Tenda Atacadista", "link": f"https://www.tendaatacado.com.br/busca?q={t}"},
+                {"nome": "Tenda Atacadista", "link": f"https://www.tendaatacado.com.br/busca?q={t}"},
                 # Mantendo as grandes lojas de referência:
                 {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/{t}"},
                 {"nome": "Amazon", "link": f"https://www.amazon.com.br/s?k={t}"}
