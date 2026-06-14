@@ -9,15 +9,17 @@ def index():
     if request.method == "POST":
         termo = request.form.get("produto")
         if termo:
-            # Substitui espaços por %20 para a URL ser válida
             t = termo.replace(" ", "%20")
+            # Lista completa e organizada
             lojas = [
                 {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/{t}"},
                 {"nome": "Amazon", "link": f"https://www.amazon.com.br/s?k={t}"},
                 {"nome": "Americanas", "link": f"https://www.americanas.com.br/busca/{t}"},
                 {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/{t}"},
                 {"nome": "Magalu", "link": f"https://www.magazineluiza.com.br/busca/{t}/"},
-                {"nome": "Shopee", "link": f"https://shopee.com.br/search?keyword={t}"}
+                {"nome": "Shopee", "link": f"https://shopee.com.br/search?keyword={t}"},
+                {"nome": "Kabum", "link": f"https://www.kabum.com.br/busca/{t}"},
+                {"nome": "Casas Bahia", "link": f"https://www.casasbahia.com.br/busca/?q={t}"}
             ]
     return render_template("index.html", lojas=lojas, termo=termo)
 
