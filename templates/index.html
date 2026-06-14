@@ -2,24 +2,21 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Comparador de Precos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saber o Preço</title>
     <style>
         body { font-family: sans-serif; background: #f4f4f9; padding: 20px; text-align: center; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px; }
         .card { padding: 20px; border-radius: 15px; color: white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .ml { background-color: #ffe600; color: #333; }
-        .amz { background-color: #232f3e; }
-        .ame { background-color: #e31c2d; }
-        .car { background-color: #ff9900; }
-        .mag { background-color: #009ee3; }
-        .sho { background-color: #ee4d2d; }
+        /* Cores das marcas */
+        .card { background-color: #333; } 
         .btn { display: inline-block; margin-top: 15px; padding: 10px 20px; background: white; color: #333; text-decoration: none; border-radius: 8px; font-weight: bold; }
     </style>
 </head>
 <body>
-    <h1>Comparador de Precos</h1>
+    <h1>Saber o Preço</h1>
     <form action="/" method="POST">
-        <input type="text" name="produto" placeholder="Digite o produto..." required style="padding: 10px; width: 300px;">
+        <input type="text" name="produto" placeholder="O que você procura?" required style="padding: 10px; width: 300px;">
         <button type="submit" style="padding: 10px 20px;">Buscar</button>
     </form>
     
@@ -27,9 +24,9 @@
         <h2 style="margin-top: 30px;">Resultados para: {{ termo }}</h2>
         <div class="grid">
             {% for loja in lojas %}
-                <div class="card {% if loja.nome == 'Mercado Livre' %}ml{% elif loja.nome == 'Amazon' %}amz{% elif loja.nome == 'Americanas' %}ame{% elif loja.nome == 'Carrefour' %}car{% elif loja.nome == 'Magalu' %}mag{% else %}sho{% endif %}">
+                <div class="card">
                     <h3>{{ loja.nome }}</h3>
-                    <a href="{{ loja.link }}" target="_blank" class="btn">Ver Precos</a>
+                    <a href="{{ loja.link }}" target="_blank" class="btn">Ver Preço</a>
                 </div>
             {% endfor %}
         </div>
