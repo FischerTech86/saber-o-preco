@@ -9,6 +9,7 @@ def index():
     if request.method == "POST":
         termo = request.form.get("produto")
         if termo:
+            # Substitui espaços por %20 para URLs funcionarem
             t = termo.replace(" ", "%20")
             lojas = [
                 {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/{t}"},
