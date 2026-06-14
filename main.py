@@ -9,24 +9,18 @@ def index():
     if request.method == "POST":
         termo = request.form.get("produto")
         if termo:
-            # Substitui espaços por %20 para as URLs
             t = termo.replace(" ", "%20")
             lojas = [
-                {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/{t}"},
-                {"nome": "Amazon", "link": f"https://www.amazon.com.br/s?k={t}"},
-                {"nome": "Americanas", "link": f"https://www.americanas.com.br/busca/{t}"},
+                # Foco em comida e mercados com busca direta:
                 {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={t}"},
-                {"nome": "Magalu", "link": f"https://www.magazineluiza.com.br/busca/{t}/"},
-                {"nome": "Shopee", "link": f"https://shopee.com.br/search?keyword={t}"},
-                {"nome": "Kabum", "link": f"https://www.kabum.com.br/busca/{t}"},
-                {"nome": "Casas Bahia", "link": f"https://www.casasbahia.com.br/busca/?q={t}"},
-                {"nome": "Extra", "link": f"https://www.clubeextra.com.br/busca/?q={t}"},
-                {"nome": "Assai", "link": f"https://www.assai.com.br/busca?q={t}"},
-                {"nome": "Tenda Atacadista", "link": f"https://www.tendaatacado.com.br/busca?q={t}"},
-                # Tentativa de busca direta com novos parâmetros:
-                {"nome": "Oxxo", "link": f"https://www.mercadooxxo.com.br/s?q={t}"},
-                {"nome": "Coop", "link": f"https://www.portalcoop.com.br/busca/?q={t}"},
-                {"nome": "Swift", "link": f"https://www.swift.com.br/busca?termo={t}"}
+                {"nome": "Pão de Açúcar", "link": f"https://www.paodeacucar.com/busca/{t}"},
+                {"nome": "Mambo", "link": f"https://www.mambo.com.br/busca?q={t}"},
+                {"nome": "St. Marche", "link": f"https://www.marche.com.br/busca?q={t}"},
+                {"nome": "Sonda", "link": f"https://www.sondadelivery.com.br/delivery/busca/{t}"},
+                {"nome": "Hirota", "link": f"https://www.hirota.com.br/busca?q={t}"},
+                # Mantendo as grandes lojas de referência:
+                {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/{t}"},
+                {"nome": "Amazon", "link": f"https://www.amazon.com.br/s?k={t}"}
             ]
     return render_template("index.html", lojas=lojas, termo=termo)
 
