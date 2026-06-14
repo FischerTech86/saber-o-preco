@@ -11,14 +11,14 @@ def index():
         if termo:
             t = termo.replace(" ", "%20")
             lojas = [
-                # Mercados com busca direta:
+                # Mercados regionais com busca mais direta:
                 {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={t}"},
                 {"nome": "Sonda", "link": f"https://www.sondadelivery.com.br/delivery/busca/{t}"},
                 {"nome": "Tenda Atacadista", "link": f"https://www.tendaatacado.com.br/busca?q={t}"},
-                {"nome": "Atacadão", "link": f"https://www.atacadao.com.br/busca?q={t}"},
-                {"nome": "Assaí", "link": f"https://www.assai.com.br/busca?q={t}"},
-                {"nome": "Hirota", "link": f"https://www.hirota.com.br/busca?q={t}"},
-                # Grandes varejistas:
+                {"nome": "D'avó", "link": f"https://www.davosupermercados.com.br/busca?q={t}"},
+                {"nome": "Nagumo", "link": f"https://www.nagumodelivery.com.br/busca?q={t}"},
+                {"nome": "Ricoy", "link": f"https://www.ricoy.com.br/busca?q={t}"},
+                # Mantendo os grandes:
                 {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/{t}"},
                 {"nome": "Amazon", "link": f"https://www.amazon.com.br/s?k={t}"}
             ]
