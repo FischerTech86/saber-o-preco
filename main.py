@@ -9,7 +9,6 @@ def index():
     if request.method == "POST":
         termo = request.form.get("produto")
         if termo:
-            # Substitui espaços por %20 para a URL funcionar em qualquer site
             t = termo.replace(" ", "%20")
             lojas = [
                 {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/{t}"},
@@ -20,12 +19,12 @@ def index():
                 {"nome": "Shopee", "link": f"https://shopee.com.br/search?keyword={t}"},
                 {"nome": "Kabum", "link": f"https://www.kabum.com.br/busca/{t}"},
                 {"nome": "Casas Bahia", "link": f"https://www.casasbahia.com.br/busca/?q={t}"},
-                {"nome": "Extra", "link": f"https://www.clubeextra.com.br/busca/?q={t}"},
-                {"nome": "Assai", "link": f"https://www.assai.com.br/busca?q={t}"},
-                {"nome": "Tenda Atacadista", "link": f"https://www.tendaatacado.com.br/busca?q={t}"},
-                {"nome": "Oxxo", "link": f"https://www.mercadooxxo.com.br/busca?q={t}"},
-                {"nome": "Coop", "link": f"https://www.portalcoop.com.br/busca/?q={t}"},
-                {"nome": "Swift", "link": f"https://www.swift.com.br/busca?q={t}"}
+                {"nome": "Extra", "link": "https://www.clubeextra.com.br/"},
+                {"nome": "Assai", "link": "https://www.assai.com.br/"},
+                {"nome": "Tenda Atacadista", "link": "https://www.tendaatacado.com.br/"},
+                {"nome": "Oxxo", "link": "https://www.mercadooxxo.com.br/"},
+                {"nome": "Coop", "link": "https://www.portalcoop.com.br/"},
+                {"nome": "Swift", "link": "https://www.swift.com.br/"}
             ]
     return render_template("index.html", lojas=lojas, termo=termo)
 
