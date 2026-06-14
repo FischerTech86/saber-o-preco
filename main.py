@@ -13,11 +13,8 @@ def index():
             lojas = [
                 # Foco em comida e mercados com busca direta:
                 {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={t}"},
-                {"nome": "Pão de Açúcar", "link": f"https://www.paodeacucar.com/busca/{t}"},
-                {"nome": "Mambo", "link": f"https://www.mambo.com.br/busca?q={t}"},
-                {"nome": "St. Marche", "link": f"https://www.marche.com.br/busca?q={t}"},
                 {"nome": "Sonda", "link": f"https://www.sondadelivery.com.br/delivery/busca/{t}"},
-                {"nome": "Hirota", "link": f"https://www.hirota.com.br/busca?q={t}"},
+{"nome": "Tenda Atacadista", "link": f"https://www.tendaatacado.com.br/busca?q={t}"},
                 # Mantendo as grandes lojas de referência:
                 {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/{t}"},
                 {"nome": "Amazon", "link": f"https://www.amazon.com.br/s?k={t}"}
