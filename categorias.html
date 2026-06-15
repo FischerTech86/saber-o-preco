@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titulo }} - Optimo</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #f4f7f6; padding: 20px; }
+        .botao { display: block; padding: 15px; margin: 10px auto; background: #2c3e50; color: white; text-decoration: none; border-radius: 10px; max-width: 300px; }
+        input { padding: 10px; width: 200px; }
+    </style>
+</head>
+<body>
+    <h1>{{ titulo }}</h1>
+    <form method="POST">
+        <input type="text" name="produto" placeholder="Buscar..." value="{{ termo }}">
+        <button type="submit">Pesquisar</button>
+    </form>
+    
+    {% for loja in lojas %}
+        <a href="{{ loja.url_final }}" target="_blank" class="botao">{{ loja.nome }}</a>
+    {% endfor %}
+
+</body>
+</html>
