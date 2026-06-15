@@ -30,28 +30,28 @@
     {% if mercados %}
     <div class="secao">
         <h3>Mercados</h3>
-        {% for m in mercados %} <a href="{{ m.link }}" target="_blank" class="botao">{{ m.nome }}</a> {% endfor %}
+        {% for m in mercados %}<a href="{{ m.link }}" target="_blank" class="botao">{{ m.nome }}</a>{% endfor %}
     </div>
     {% endif %}
 
     {% if lojas %}
     <div class="secao">
         <h3>Lojas Gerais</h3>
-        {% for l in lojas %} <a href="{{ l.link }}" target="_blank" class="botao">{{ l.nome }}</a> {% endfor %}
+        {% for l in lojas %}<a href="{{ l.link }}" target="_blank" class="botao">{{ l.nome }}</a>{% endfor %}
     </div>
     {% endif %}
 
     {% if carros %}
     <div class="secao">
         <h3>Carros</h3>
-        {% for c in carros %} <a href="{{ c.link }}" target="_blank" class="botao">{{ c.nome }}</a> {% endfor %}
+        {% for c in carros %}<a href="{{ c.link }}" target="_blank" class="botao">{{ c.nome }}</a>{% endfor %}
     </div>
     {% endif %}
 
     {% if relogios %}
     <div class="secao">
         <h3>Relógios</h3>
-        {% for r in relogios %} <a href="{{ r.link }}" target="_blank" class="botao">{{ r.nome }}</a> {% endfor %}
+        {% for r in relogios %}<a href="{{ r.link }}" target="_blank" class="botao">{{ r.nome }}</a>{% endfor %}
     </div>
     {% endif %}
 </body>
