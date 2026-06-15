@@ -3,11 +3,16 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 def gerar_resumo_ia(termo):
+    # Deixamos o termo em minúsculo para a IA entender melhor
     termo = termo.lower()
+    
+    # Lógica da IA
     if "motorola" in termo and "xiaomi" in termo:
-        return "Motorola: Ponto positivo é a interface limpa e boa assistência no Brasil; negativo é o custo-benefício em modelos topo de linha. Xiaomi: Ponto positivo é o hardware potente por preço baixo; negativo é a interface (MIUI) carregada de propagandas."
+        return "Motorola: Foco em interface limpa e boa assistência técnica no Brasil. Xiaomi: Foco em hardware potente por preço baixo, mas interface mais carregada."
     if "carro" in termo:
         return "Dica: Ao comprar um carro, sempre verifique o histórico de manutenção, quilometragem e se há leilões no histórico do chassi."
+    
+    # Se não for uma dessas, a IA não aparece
     return None
 
 @app.route("/", methods=["GET", "POST"])
@@ -16,8 +21,10 @@ def index():
     mercados, lojas, carros, relogios, ia = [], [], [], [], None
 
     if termo:
+        # Aqui chamamos a função da IA
         ia = gerar_resumo_ia(termo)
-        t = termo.replace(" ", "+")
+        
+        t = termo.replace(" ", "%20")
         
         mercados = [
             {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={t}"},
