@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Buscadores globais
+# Configuração dos buscadores
 GERAIS = [
     {"nome": "Mercado Livre", "link": "https://lista.mercadolivre.com.br/{t}"},
     {"nome": "Amazon", "link": "https://www.amazon.com.br/s?k={t}"}
@@ -40,11 +40,12 @@ def buscar(categoria):
     
     if termo:
         t = termo.replace(" ", "%20")
-        lista_lojas = links_especificos.get(categoria, []) + GERAIS
+        # Pega a lista da categoria OU uma lista vazia se a categoria não existir
+        lista_lojas = links_especificos.get(categoria.lower(), []) + GERAIS
         for loja in lista_lojas:
             loja["url_final"] = loja["link"].replace("{t}", t)
             
     return render_template("categorias.html", titulo=categoria.capitalize(), lojas=lista_lojas, termo=termo)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    app.run()
