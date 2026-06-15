@@ -2,7 +2,6 @@
 <html>
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-11594943586085153" crossorigin="anonymous"></script>
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body { font-family: sans-serif; text-align: center; background: #f4f7f6; padding: 20px; }
@@ -15,7 +14,6 @@
 </head>
 <body>
     <h1>Optimo</h1>
-    
     <div class="secao ia-box">
         <h3>IA Optimo</h3>
         <p>{{ resposta_ia }}</p>
@@ -25,40 +23,15 @@
             <button type="submit">Enviar</button>
         </form>
     </div>
-
     <div class="secao">
         <form method="POST">
             <input type="text" name="produto" placeholder="Buscar produto..." value="{{ produto }}">
             <button type="submit">Buscar</button>
         </form>
     </div>
-
-    {% if mercados %}
-    <div class="secao">
-        <h3>Mercados</h3>
-        {% for m in mercados %}<a href="{{ m.link }}" target="_blank" class="botao">{{ m.nome }}</a>{% endfor %}
-    </div>
-    {% endif %}
-
-    {% if lojas %}
-    <div class="secao">
-        <h3>Lojas Gerais</h3>
-        {% for l in lojas %}<a href="{{ l.link }}" target="_blank" class="botao">{{ l.nome }}</a>{% endfor %}
-    </div>
-    {% endif %}
-
-    {% if carros %}
-    <div class="secao">
-        <h3>Carros</h3>
-        {% for c in carros %}<a href="{{ c.link }}" target="_blank" class="botao">{{ c.nome }}</a>{% endfor %}
-    </div>
-    {% endif %}
-
-    {% if relogios %}
-    <div class="secao">
-        <h3>Relógios</h3>
-        {% for r in relogios %}<a href="{{ r.link }}" target="_blank" class="botao">{{ r.nome }}</a>{% endfor %}
-    </div>
-    {% endif %}
+    {% if mercados %}<div class="secao"><h3>Mercados</h3>{% for m in mercados %}<a href="{{ m.link }}" target="_blank" class="botao">{{ m.nome }}</a>{% endfor %}</div>{% endif %}
+    {% if lojas %}<div class="secao"><h3>Lojas Gerais</h3>{% for l in lojas %}<a href="{{ l.link }}" target="_blank" class="botao">{{ l.nome }}</a>{% endfor %}</div>{% endif %}
+    {% if carros %}<div class="secao"><h3>Carros</h3>{% for c in carros %}<a href="{{ c.link }}" target="_blank" class="botao">{{ c.nome }}</a>{% endfor %}</div>{% endif %}
+    {% if relogios %}<div class="secao"><h3>Relógios</h3>{% for r in relogios %}<a href="{{ r.link }}" target="_blank" class="botao">{{ r.nome }}</a>{% endfor %}</div>{% endif %}
 </body>
 </html>
