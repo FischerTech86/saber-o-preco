@@ -9,12 +9,11 @@ def index():
     termo = request.form.get("produto", "")
 
     if termo:
-        # Trocamos o espaço por '+' que é o formato padrão de busca do Sonda
-        t = termo.replace(" ", "+")
-        
+        # Mantemos o termo original para as outras lojas
+        # Para o Sonda, vamos usar um formato que eles costumam aceitar melhor
         mercados = [
             {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={termo.replace(' ', '%20')}"},
-            {"nome": "Sonda", "link": f"https://www.sondadelivery.com.br/delivery/busca?termo={t}"},
+            {"nome": "Sonda", "link": f"https://www.sondadelivery.com.br/delivery/busca/{termo.replace(' ', '-')}"},
             {"nome": "Tenda", "link": f"https://www.tendaatacado.com.br/busca?q={termo.replace(' ', '%20')}"}
         ]
         lojas = [
