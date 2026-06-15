@@ -5,31 +5,25 @@ app = Flask(__name__)
 def gerar_resumo_ia(termo):
     termo = termo.lower()
     
-    # IA agora identifica modelos específicos e categorias
-    if "motorola" in termo:
-        if "edge" in termo:
-            return "Linha Edge: Foco em design premium, câmeras avançadas e telas curvas de alta qualidade."
-        return "Motorola: Conhecida pela interface limpa (quase Android puro) e excelente custo-benefício no Brasil."
-    
-    if "xiaomi" in termo or "poco" in termo or "redmi" in termo:
-        return "Xiaomi: Foco total em custo-benefício, entregando hardware potente e câmeras com muitos recursos por um preço agressivo."
-    
-    if "iphone" in termo or "apple" in termo:
-        return "iPhone/Apple: Foco em ecossistema integrado, alta performance, valor de revenda e atualizações por muitos anos."
-    
-    if "samsung" in termo or "galaxy" in termo:
-        return "Samsung: Foco em telas incríveis (AMOLED), câmeras versáteis e a linha S, que compete no topo com os melhores."
-    
-    if "notebook" in termo or "laptop" in termo:
-        return "Dica: Ao escolher um notebook, verifique o processador (i5/Ryzen 5 para uso geral), memória RAM (mínimo 8GB) e se o SSD é do tipo NVMe para maior velocidade."
-    
-    if "tablet" in termo:
-        return "Dica: Tablets são ótimos para consumo de mídia e estudo. Verifique a resolução da tela e a compatibilidade com canetas stylus se for desenhar ou anotar."
-    
-    if "carro" in termo:
-        return "Dica: Verifique sempre o histórico de manutenção, quilometragem e se há leilões no histórico do chassi."
+    # Dicionário de respostas curtas (máximo 5 palavras)
+    respostas = {
+        "motorola": "Interface limpa, ótimo custo-benefício.",
+        "xiaomi": "Hardware potente, preço muito baixo.",
+        "iphone": "Ecossistema integrado, alta performance.",
+        "samsung": "Telas incríveis, câmeras versáteis.",
+        "notebook": "Priorize 8GB RAM e SSD.",
+        "tablet": "Ótimo para estudo e mídia.",
+        "carro": "Verifique histórico de manutenção.",
+        "iphone 15": "Câmera excelente, bateria boa.",
+        "moto g84": "Melhor intermediário da Motorola."
+    }
 
-    return "IA Optimo: Analisando seu produto... Procure sempre verificar a garantia oficial e opiniões de quem já comprou o modelo específico que você escolheu."
+    # Procura se o termo existe nas nossas respostas curtas
+    for chave in respostas:
+        if chave in termo:
+            return respostas[chave]
+            
+    return "Pesquise modelos específicos aqui."
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -37,10 +31,9 @@ def index():
     mercados, lojas, carros, relogios, ia = [], [], [], [], None
 
     if termo:
-        ia = gerar_resumo_ia(termo) # Chama a IA com o termo mais detalhado
+        ia = gerar_resumo_ia(termo)
         t = termo.replace(" ", "%20")
         
-        # (Mantive a sua estrutura de lojas igual, apenas ajustada para o termo)
         mercados = [
             {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={t}"},
             {"nome": "Tenda", "link": f"https://www.tendaatacado.com.br/busca?q={t}"},
