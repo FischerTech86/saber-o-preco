@@ -23,13 +23,11 @@ def index():
         ia_resumo = gerar_resumo_ia(termo)
         t = termo.replace(" ", "+")
         
-        # Lista completa de mercados
         mercados = [
             {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={t}"},
             {"nome": "Tenda", "link": f"https://www.tendaatacado.com.br/busca?q={t}"},
             {"nome": "Sonda", "link": f"https://www.sondadelivery.com.br/delivery/busca?termo={t}"}
         ]
-        # Lista completa de lojas gerais
         lojas = [
             {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/search?q={t}"},
             {"nome": "Amazon", "link": f"https://www.amazon.com.br/s?k={t}"},
