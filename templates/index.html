@@ -44,11 +44,18 @@
         {% for l in lojas %}<a href="{{ l.link }}" target="_blank" class="botao">{{ l.nome }}</a>{% endfor %}
     </div>
     {% endif %}
-    
+
     {% if carros %}
     <div class="secao">
         <h3>Carros</h3>
         {% for c in carros %}<a href="{{ c.link }}" target="_blank" class="botao">{{ c.nome }}</a>{% endfor %}
+    </div>
+    {% endif %}
+
+    {% if relogios %}
+    <div class="secao">
+        <h3>Relógios</h3>
+        {% for r in relogios %}<a href="{{ r.link }}" target="_blank" class="botao">{{ r.nome }}</a>{% endfor %}
     </div>
     {% endif %}
 </body>
