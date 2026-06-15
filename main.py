@@ -2,25 +2,20 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-def responder_ia(pergunta):
-    if not pergunta: return "Olá! Pergunte algo sobre produtos."
-    p = pergunta.lower()
-    
-    # Base de conhecimento rápida (respostas curtas)
+def responder_ia(p):
+    if not p: return "Olá! Pergunte algo sobre produtos."
+    p = p.lower()
     if "motorola" in p: return "Interface limpa, ótimo custo-benefício."
     if "xiaomi" in p: return "Hardware potente, preço baixo."
     if "iphone" in p: return "Ecossistema integrado, alta performance."
     if "notebook" in p: return "Priorize 8GB RAM e SSD."
     if "carro" in p: return "Verifique histórico de manutenção."
-    
     return "Pesquise por marcas ou produtos."
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     produto = request.form.get("produto", "")
     pergunta_ia = request.form.get("pergunta_ia", "")
-    
-    # Lógica da IA sempre ativa
     resposta_ia = responder_ia(pergunta_ia)
     
     mercados, lojas, carros, relogios = [], [], [], []
