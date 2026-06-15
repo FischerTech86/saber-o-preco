@@ -11,9 +11,9 @@ GERAIS = [
 @app.route("/", methods=["GET", "POST"])
 def index():
     apps = [
-        {"nome": "Mercados", "icone": "", "link": "/mercados"},
-        {"nome": "Carros", "icone": "", "link": "/carros"},
-        {"nome": "Relógios", "icone": "", "link": "/relogios"}
+        {"nome": "Mercados", "link": "/mercados"},
+        {"nome": "Carros", "link": "/carros"},
+        {"nome": "Relogios", "link": "/relogios"}
     ]
     return render_template("index.html", apps=apps)
 
