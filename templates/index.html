@@ -2,19 +2,39 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Optimo</title>
+    <title>Optimo - Comparador de Preços</title>
     <style>
-        body { font-family: sans-serif; text-align: center; background: #2c3e50; color: white; padding: 50px 20px; }
-        .grid-app { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 20px; max-width: 500px; margin: 40px auto; }
-        .app-icon { background: white; padding: 30px 10px; border-radius: 12px; text-decoration: none; color: #2c3e50; font-weight: bold; }
+        body { font-family: sans-serif; text-align: center; background-color: #f4f7f6; padding: 20px; }
+        h1 { color: #2c3e50; }
+        .secao { margin: 20px auto; max-width: 500px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .botao { display: block; padding: 10px; margin: 5px 0; background: #2c3e50; color: white; text-decoration: none; border-radius: 4px; }
+        input[type="text"] { padding: 10px; width: 60%; }
+        button { padding: 10px 20px; background: #27ae60; color: white; border: none; cursor: pointer; }
     </style>
 </head>
 <body>
+
     <h1>Optimo</h1>
-    <div class="grid-app">
-        {% for app in apps %}
-        <a href="{{ app.link }}" class="app-icon">{{ app.nome }}</a>
+    <p>Compare preços de forma rápida e eficiente</p>
+
+    <form method="POST" style="margin-bottom: 30px;">
+        <input type="text" name="produto" placeholder="Digite o produto..." required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    <div class="secao">
+        <h3>Mercados</h3>
+        {% for m in mercados %}
+            <a href="{{ m.link }}" target="_blank" class="botao">{{ m.nome }}</a>
         {% endfor %}
     </div>
+
+    <div class="secao">
+        <h3>Lojas Gerais</h3>
+        {% for l in lojas %}
+            <a href="{{ l.link }}" target="_blank" class="botao">{{ l.nome }}</a>
+        {% endfor %}
+    </div>
+
 </body>
 </html>
