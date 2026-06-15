@@ -10,7 +10,6 @@ def index():
 
     if termo:
         t = termo.replace(" ", "%20")
-        # Links ajustados para funcionar corretamente
         mercados = [
             {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={t}"},
             {"nome": "Sonda", "link": f"https://www.sondadelivery.com.br/delivery/busca?termo={t}"},
