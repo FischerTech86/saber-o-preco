@@ -2,55 +2,19 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimo - Comparador de Preços</title>
+    <title>Optimo</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background-color: #f4f7f6; padding: 20px; }
-        h1 { color: #2c3e50; margin-bottom: 10px; font-size: 2.2em; }
-        p { color: #7f8c8d; margin-bottom: 30px; }
-        
-        .secao { margin: 20px auto; max-width: 500px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .titulo-secao { color: #2c3e50; font-size: 1.1em; font-weight: bold; border-bottom: 1px solid #eee; margin-bottom: 15px; padding-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
-        
-        .grid-botoes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .botao { display: block; padding: 10px; background: #2c3e50; color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.9em; transition: 0.3s; }
-        .botao:hover { background: #34495e; }
-        
-        input[type="text"] { padding: 10px; width: 60%; border: 1px solid #bdc3c7; border-radius: 4px; font-size: 1em; }
-        button { padding: 10px 20px; background: #27ae60; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        body { font-family: sans-serif; text-align: center; background: #2c3e50; color: white; padding: 50px 20px; }
+        .grid-app { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 20px; max-width: 500px; margin: 40px auto; }
+        .app-icon { background: white; padding: 30px 10px; border-radius: 12px; text-decoration: none; color: #2c3e50; font-weight: bold; }
     </style>
 </head>
 <body>
-
     <h1>Optimo</h1>
-    <p>Compare preços de forma rápida e eficiente</p>
-
-    <form method="POST" style="margin-bottom: 30px;">
-        <input type="text" name="produto" placeholder="Digite o produto..." required>
-        <button type="submit">Buscar</button>
-    </form>
-
-    {% if mercados %}
-    <div class="secao">
-        <div class="titulo-secao">Mercados</div>
-        <div class="grid-botoes">
-            {% for m in mercados %}
-                <a href="{{ m.link }}" target="_blank" class="botao">{{ m.nome }}</a>
-            {% endfor %}
-        </div>
+    <div class="grid-app">
+        {% for app in apps %}
+        <a href="{{ app.link }}" class="app-icon">{{ app.nome }}</a>
+        {% endfor %}
     </div>
-    {% endif %}
-
-    {% if lojas %}
-    <div class="secao">
-        <div class="titulo-secao">Lojas Gerais</div>
-        <div class="grid-botoes">
-            {% for l in lojas %}
-                <a href="{{ l.link }}" target="_blank" class="botao">{{ l.nome }}</a>
-            {% endfor %}
-        </div>
-    </div>
-    {% endif %}
-
 </body>
 </html>
