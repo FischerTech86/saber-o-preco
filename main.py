@@ -9,7 +9,9 @@ def index():
     termo = request.form.get("produto", "")
 
     if termo:
-        t = termo.replace(" ", "%20")
+        # Substitui espaços por '+' para garantir que a busca funcione em todos os sites
+        t = termo.replace(" ", "+")
+        
         mercados = [
             {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={t}"},
             {"nome": "Sonda", "link": f"https://www.sondadelivery.com.br/delivery/busca?termo={t}"},
