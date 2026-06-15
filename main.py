@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Buscadores globais que aparecem em todas as categorias
+# Buscadores globais
 GERAIS = [
     {"nome": "Mercado Livre", "link": "https://lista.mercadolivre.com.br/{t}"},
     {"nome": "Amazon", "link": "https://www.amazon.com.br/s?k={t}"}
