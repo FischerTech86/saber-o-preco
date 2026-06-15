@@ -9,17 +9,17 @@ def index():
     termo = request.form.get("produto", "")
 
     if termo:
-        # Substitui espaços por '+' para garantir que a busca funcione em todos os sites
+        # Trocamos o espaço por '+' que é o formato padrão de busca do Sonda
         t = termo.replace(" ", "+")
         
         mercados = [
-            {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={t}"},
+            {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={termo.replace(' ', '%20')}"},
             {"nome": "Sonda", "link": f"https://www.sondadelivery.com.br/delivery/busca?termo={t}"},
-            {"nome": "Tenda", "link": f"https://www.tendaatacado.com.br/busca?q={t}"}
+            {"nome": "Tenda", "link": f"https://www.tendaatacado.com.br/busca?q={termo.replace(' ', '%20')}"}
         ]
         lojas = [
-            {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/{t}"},
-            {"nome": "Amazon", "link": f"https://www.amazon.com.br/s?k={t}"}
+            {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/search?q={termo.replace(' ', '%20')}"},
+            {"nome": "Amazon", "link": f"https://www.amazon.com.br/s?k={termo.replace(' ', '+')}"}
         ]
         
     return render_template("index.html", mercados=mercados, lojas=lojas, termo=termo)
