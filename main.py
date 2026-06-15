@@ -9,16 +9,17 @@ def index():
     termo = request.form.get("produto", "")
 
     if termo:
-        # Mantemos o termo original para as outras lojas
-        # Para o Sonda, vamos usar um formato que eles costumam aceitar melhor
+        # Usamos o termo vindo do formulário para montar os links na hora
+        t = termo.replace(" ", "+")
+        
         mercados = [
-            {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={termo.replace(' ', '%20')}"},
-            {"nome": "Sonda", "link": f"https://www.sondadelivery.com.br/delivery/busca/{termo.replace(' ', '-')}"},
-            {"nome": "Tenda", "link": f"https://www.tendaatacado.com.br/busca?q={termo.replace(' ', '%20')}"}
+            {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={t}"},
+            {"nome": "Sonda", "link": f"https://www.sondadelivery.com.br/delivery/busca?termo={t}"},
+            {"nome": "Tenda", "link": f"https://www.tendaatacado.com.br/busca?q={t}"}
         ]
         lojas = [
-            {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/search?q={termo.replace(' ', '%20')}"},
-            {"nome": "Amazon", "link": f"https://www.amazon.com.br/s?k={termo.replace(' ', '+')}"}
+            {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/search?q={t}"},
+            {"nome": "Amazon", "link": f"https://www.amazon.com.br/s?k={t}"}
         ]
         
     return render_template("index.html", mercados=mercados, lojas=lojas, termo=termo)
