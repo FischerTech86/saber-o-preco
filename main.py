@@ -1,47 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body { font-family: sans-serif; text-align: center; background: #f4f7f6; padding: 20px; }
-        .secao { margin: 20px auto; max-width: 400px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .ia-box { background: #e8f4fd; border: 1px solid #b3d7ff; color: #00485d; }
-        .botao { display: block; padding: 10px; margin: 5px 0; background: #2c3e50; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; }
-        input { padding: 10px; width: 60%; border: 1px solid #ccc; border-radius: 4px; }
-        button { padding: 10px 20px; background: #27ae60; color: white; border: none; border-radius: 4px; cursor: pointer; }
-    </style>
-</head>
-<body>
-    <h1>Optimo</h1>
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+def responder_ia(p):
+    if not p: return "Olá! Sou a IA Optimo. Como posso ajudar?"
+    p = p.lower()
+    respostas = {
+        "motorola": "Interface limpa, ótimo custo-benefício.",
+        "xiaomi": "Hardware potente, preço baixo.",
+        "iphone": "Ecossistema integrado, alta performance.",
+        "notebook": "Priorize 8GB RAM e SSD.",
+        "carro": "Verifique histórico de manutenção."
+    }
+    for chave in respostas:
+        if chave in p: return respostas[chave]
+    return "Entendido! O que mais deseja saber?"
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    produto = request.form.get("produto", "")
+    pergunta_ia = request.form.get("pergunta_ia", "")
+    resposta_ia = responder_ia(pergunta_ia)
     
-    <div class="secao ia-box">
-        <h3>IA Optimo</h3>
-        <p>{{ resposta_ia }}</p>
-        <form method="POST">
-            <input type="text" name="pergunta_ia" placeholder="Pergunte à IA...">
-            <button type="submit">Enviar</button>
-        </form>
-    </div>
+    mercados, lojas, carros = [], [], []
+    if produto:
+        t = produto.replace(" ", "%20")
+        mercados = [{"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={t}"}, {"nome": "Tenda", "link": f"https://www.tendaatacado.com.br/busca?q={t}"}]
+        lojas = [{"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/search?q={t}"}, {"nome": "Amazon", "link": f"https://www.amazon.com.br/s?k={t}"}]
+        carros = [{"nome": "Webmotors", "link": f"https://www.webmotors.com.br/carros/estoque/?q={t}"}]
+        
+    return render_template("index.html", mercados=mercados, lojas=lojas, carros=carros, produto=produto, resposta_ia=resposta_ia)
 
-    <div class="secao">
-        <form method="POST">
-            <input type="text" name="produto" placeholder="Buscar produto..." value="{{ produto }}">
-            <button type="submit">Buscar</button>
-        </form>
-    </div>
-
-    {% if mercados %}
-    <div class="secao">
-        <h3>Mercados</h3>
-        {% for m in mercados %}<a href="{{ m.link }}" target="_blank" class="botao">{{ m.nome }}</a>{% endfor %}
-    </div>
-    {% endif %}
-
-    {% if lojas %}
-    <div class="secao">
-        <h3>Lojas Gerais</h3>
-        {% for l in lojas %}<a href="{{ l.link }}" target="_blank" class="botao">{{ l.nome }}</a>{% endfor %}
-    </div>
-    {% endif %}
-</body>
-</html>
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000)
