@@ -4,20 +4,19 @@ app = Flask(__name__)
 
 def gerar_resumo_ia(termo):
     termo = termo.lower()
-    # A IA só aparece se você digitar um comparativo
     if "motorola" in termo and "xiaomi" in termo:
-        return "Motorola: Foco em interface limpa e boa assistência técnica no Brasil. Xiaomi: Foco em hardware potente por preço baixo, mas interface mais carregada."
+        return "Motorola: Ponto positivo é a interface limpa e boa assistência no Brasil; negativo é o custo-benefício em modelos topo de linha. Xiaomi: Ponto positivo é o hardware potente por preço baixo; negativo é a interface (MIUI) carregada de propagandas."
     if "carro" in termo:
         return "Dica: Ao comprar um carro, sempre verifique o histórico de manutenção, quilometragem e se há leilões no histórico do chassi."
-    return None # Não retorna nada se não for uma dúvida técnica
+    return None
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     termo = request.form.get("produto", "")
-    mercados, lojas, carros, relogios, ia_resumo = [], [], [], [], None
+    mercados, lojas, carros, relogios, ia = [], [], [], [], None
 
     if termo:
-        ia_resumo = gerar_resumo_ia(termo)
+        ia = gerar_resumo_ia(termo)
         t = termo.replace(" ", "+")
         
         mercados = [
@@ -40,7 +39,7 @@ def index():
             {"nome": "Amazon Relógios", "link": f"https://www.amazon.com.br/s?k=relogio+{t}"}
         ]
         
-    return render_template("index.html", mercados=mercados, lojas=lojas, carros=carros, relogios=relogios, termo=termo, ia=ia_resumo)
+    return render_template("index.html", mercados=mercados, lojas=lojas, carros=carros, relogios=relogios, termo=termo, ia=ia)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
