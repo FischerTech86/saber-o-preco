@@ -7,74 +7,62 @@
     <title>Optimo - IA de Compras</title>
     <style>
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            text-align: center; 
+            font-family: 'Segoe UI', sans-serif; 
             margin: 0; 
-            padding: 0;
-            background-image: url('https://i.imgur.com/example_image.jpg'); /* Substitua pelo link da imagem gerada */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-color: #0a1e3c; /* Fundo azul moderno */
             color: white;
+            text-align: center;
         }
-        .container {
-            padding-top: 50px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        .header-line { border-top: 1px solid #ccc; width: 90%; margin: 20px auto; }
+        .container { padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        
         .ia-box { 
-            background: rgba(10, 30, 60, 0.85); 
-            border: 2px solid #007bff; 
+            background: rgba(255, 255, 255, 0.1); 
+            border: 1px solid #007bff; 
             border-radius: 15px; 
-            padding: 25px; 
+            padding: 30px; 
             width: 90%; 
-            max-width: 450px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            max-width: 600px;
             margin-bottom: 20px;
         }
-        .botao { 
-            display: inline-block; 
-            padding: 10px 20px; 
-            margin: 5px; 
-            background: #28a745; 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 5px; 
-            font-weight: bold; 
-        }
-        input { padding: 10px; width: 60%; border-radius: 5px; border: none; }
-        button { padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        .logo-credito { position: fixed; bottom: 20px; right: 20px; width: 60px; opacity: 0.8; }
+        
+        /* Barra de pesquisa maior */
+        input[type="text"] { padding: 15px; width: 70%; border-radius: 5px; border: none; font-size: 16px; }
+        button { padding: 15px 25px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        
+        .botao { display: inline-block; padding: 12px 25px; margin: 8px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .logo-credito { position: fixed; bottom: 20px; right: 20px; width: 50px; opacity: 0.7; }
     </style>
 </head>
 <body>
 
+<div class="header-line"></div>
+<h1>Optimo</h1>
+
 <div class="container">
-    <h1>Optimo</h1>
-    
     <div class="ia-box">
         <h3>IA Optimo</h3>
         <p>{{ resposta_ia }}</p>
         <form method="POST">
-            <input type="hidden" name="produto" value="{{ produto }}">
-            <input type="text" name="pergunta_ia" placeholder="Pergunte algo à IA...">
+            <input type="text" name="pergunta_ia" placeholder="Pergunte algo à IA..." style="width: 70%;">
             <button type="submit">Enviar</button>
         </form>
     </div>
 
     <div class="ia-box">
         <form method="POST">
-            <input type="text" name="produto" placeholder="Buscar produto..." value="{{ produto }}">
+            <input type="text" name="produto" placeholder="Buscar produto..." style="width: 70%;">
             <button type="submit">Buscar</button>
         </form>
     </div>
 
     {% if mercados %}<div class="ia-box"><h3>Mercados</h3>{% for m in mercados %}<a href="{{ m.link }}" target="_blank" class="botao">{{ m.nome }}</a>{% endfor %}</div>{% endif %}
     {% if lojas %}<div class="ia-box"><h3>Lojas Gerais</h3>{% for l in lojas %}<a href="{{ l.link }}" target="_blank" class="botao">{{ l.nome }}</a>{% endfor %}</div>{% endif %}
+    {% if carros %}<div class="ia-box"><h3>Carros</h3>{% for c in carros %}<a href="{{ c.link }}" target="_blank" class="botao">{{ c.nome }}</a>{% endfor %}</div>{% endif %}
+    {% if relogios %}<div class="ia-box"><h3>Relógios</h3>{% for r in relogios %}<a href="{{ r.link }}" target="_blank" class="botao">{{ r.nome }}</a>{% endfor %}</div>{% endif %}
 </div>
 
-<img src="https://i.imgur.com/seu_simbolo.png" class="logo-credito" alt="Crédito">
+<img src="URL_DO_SEU_SIMBOLO_AQUI" class="logo-credito" alt="Crédito">
 
 </body>
 </html>
