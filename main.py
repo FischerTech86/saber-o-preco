@@ -1,61 +1,157 @@
-from flask import Flask, render_template, request, send_from_directory
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1159494586085153" crossorigin="anonymous"></script>
+    <title>Optimo - IA de Compras</title>
+    <style>
+        /* 1. ESTILO DO FUNDO E FONTE */
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            margin: 0; 
+            padding: 0;
+            background-color: #05080f; /* Fundo escuro da imagem */
+            color: white;
+            text-align: center;
+        }
 
-app = Flask(__name__)
+        /* 2. BARRA SUPERIOR E TÍTULO ANIMADO */
+        .header-bar {
+            background-color: #1a2332;
+            padding: 20px 0;
+            border-top: 2px solid #666; /* Linha cinza no topo */
+            margin-bottom: 40px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
 
-# Rota obrigatória para o Google AdSense verificar o seu ads.txt
-@app.route('/ads.txt')
-def ads_txt():
-    return send_from_directory('.', 'ads.txt')
+        .optimo-title {
+            font-size: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            display: inline-block;
+            /* Animação de Cores Estilo Google */
+            background: linear-gradient(to right, #4285F4, #EA4335, #FBBC05, #34A853, #4285F4);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: googleGradient 4s linear infinite;
+        }
 
-def responder_ia(p):
-    if not p: return "Olá! Sou a IA Optimo. Como posso ajudar?"
-    p = p.lower()
-    respostas = {
-        "motorola": "Interface limpa, ótimo custo-benefício.",
-        "xiaomi": "Hardware potente, preço baixo.",
-        "iphone": "Ecossistema integrado, alta performance.",
-        "samsung": "Telas incríveis, câmeras versáteis.",
-        "notebook": "Priorize 8GB RAM e SSD.",
-        "carro": "Verifique histórico de manutenção.",
-        "relogio": "Modelos digitais oferecem mais funções."
-    }
-    for chave in respostas:
-        if chave in p: return respostas[chave]
-    return "Entendido! O que mais deseja saber?"
+        @keyframes googleGradient {
+            to { background-position: 200% center; }
+        }
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    produto = request.form.get("produto", "")
-    pergunta_ia = request.form.get("pergunta_ia", "")
-    resposta_ia = responder_ia(pergunta_ia)
-    
-    mercados, lojas, carros, relogios = [], [], [], []
-    
-    if produto:
-        t = produto.replace(" ", "%20")
-        mercados = [
-            {"nome": "Carrefour", "link": f"https://www.carrefour.com.br/busca/?q={t}"},
-            {"nome": "Tenda", "link": f"https://www.tendaatacado.com.br/busca?q={t}"},
-            {"nome": "Sonda", "link": f"https://www.sondadelivery.com.br/delivery/busca?termo={t}"}
-        ]
-        lojas = [
-            {"nome": "Mercado Livre", "link": f"https://lista.mercadolivre.com.br/search?q={t}"},
-            {"nome": "Amazon", "link": f"https://www.amazon.com.br/s?k={t}"},
-            {"nome": "Magalu", "link": f"https://www.magazineluiza.com.br/busca/{t}/"},
-            {"nome": "Shopee", "link": f"https://shopee.com.br/search?keyword={t}"}
-        ]
-        carros = [
-            {"nome": "Webmotors", "link": f"https://www.webmotors.com.br/carros/estoque/?q={t}"},
-            {"nome": "OLX", "link": f"https://www.olx.com.br/autos-e-pecas/carros/q/{t}"}
-        ]
-        relogios = [
-            {"nome": "Vivara", "link": f"https://www.vivara.com.br/busca?q={t}"},
-            {"nome": "Amazon Relógios", "link": f"https://www.amazon.com.br/s?k=relogio+{t}"}
-        ]
+        /* 3. CONTAINERS (CAIXAS AZUIS) */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .ia-box { 
+            background: #111d35; /* Azul marinho da foto */
+            border: 2px solid #1e3a8a; /* Bordas azuis */
+            border-radius: 20px; 
+            padding: 35px; 
+            width: 90%; 
+            max-width: 700px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+
+        .ia-box h3 { margin-top: 0; font-size: 22px; }
+        .subtitle { color: #aaa; font-size: 14px; margin-bottom: 25px; }
+
+        /* 4. INPUTS E BOTÕES VERDES */
+        .form-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        input[type="text"] { 
+            padding: 15px; 
+            width: 75%; 
+            border-radius: 10px; 
+            border: 1px solid #333; 
+            font-size: 16px;
+            outline: none;
+        }
+
+        .btn-green { 
+            padding: 15px 30px; 
+            background: #28a745; /* Verde da foto */
+            color: white; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-green:hover { background: #218838; transform: scale(1.05); }
+
+        /* 5. CATEGORIAS DE LOJAS */
+        .category-box {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .btn-loja {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background: #1e40af;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .logo-credito { position: fixed; bottom: 20px; right: 20px; width: 40px; opacity: 0.5; }
+    </style>
+</head>
+<body>
+
+<div class="header-bar">
+    <div class="optimo-title">Optimo</div>
+</div>
+
+<div class="container">
+    <div class="ia-box">
+        <h3>IA Optimo</h3>
+        <div class="subtitle">Ecossistema integrado, alta performance.</div>
         
-    return render_template("index.html", 
-                           mercados=mercados, lojas=lojas, carros=carros, relogios=relogios,
-                           produto=produto, resposta_ia=resposta_ia)
+        {% if resposta_ia %}<p style="background:rgba(0,0,0,0.3); padding:10px; border-radius:10px;">{{ resposta_ia }}</p>{% endif %}
+        
+        <form method="POST" class="form-group">
+            <input type="text" name="pergunta_ia" placeholder="Pergunte algo à IA...">
+            <button type="submit" class="btn-green">Enviar</button>
+        </form>
+    </div>
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    <div class="ia-box">
+        <form method="POST" class="form-group">
+            <input type="text" name="produto" placeholder="Buscar produto...">
+            <button type="submit" class="btn-green">Buscar</button>
+        </form>
+    </div>
+
+    {% if mercados %}<div class="category-box"><h3>Mercados</h3>{% for m in mercados %}<a href="{{ m.link }}" target="_blank" class="btn-loja">{{ m.nome }}</a>{% endfor %}</div>{% endif %}
+    {% if lojas %}<div class="category-box"><h3>Lojas Gerais</h3>{% for l in lojas %}<a href="{{ l.link }}" target="_blank" class="btn-loja">{{ l.nome }}</a>{% endfor %}</div>{% endif %}
+    {% if carros %}<div class="category-box"><h3>Carros</h3>{% for c in carros %}<a href="{{ c.link }}" target="_blank" class="btn-loja">{{ c.nome }}</a>{% endfor %}</div>{% endif %}
+    {% if relogios %}<div class="category-box"><h3>Relógios</h3>{% for r in relogios %}<a href="{{ r.link }}" target="_blank" class="btn-loja">{{ r.nome }}</a>{% endfor %}</div>{% endif %}
+</div>
+
+<img src="https://i.imgur.com/seu_simbolo.png" class="logo-credito" alt="Crédito">
+
+</body>
+</html>
