@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Exemplo de como estruturar seus dados
+# Seus dados
 LISTA_MERCADOS = [
     {"nome": "Carrefour", "link": "https://www.carrefour.com.br"},
     {"nome": "Tenda", "link": "https://www.tendaatacado.com.br"}
@@ -29,14 +29,12 @@ def index():
     produto_busca = ""
     
     if request.method == 'POST':
-        # Aqui entra a sua lógica de IA
         if 'pergunta_ia' in request.form:
             resposta_ia = "Aqui está a resposta da sua pergunta à IA!"
         
         if 'produto' in request.form:
             produto_busca = request.form.get('produto')
 
-    # É AQUI QUE O MAIN.PY MANDA OS DADOS PARA O HTML
     return render_template('index.html', 
                            resposta_ia=resposta_ia, 
                            produto=produto_busca,
