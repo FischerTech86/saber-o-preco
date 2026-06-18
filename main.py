@@ -1,157 +1,49 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1159494586085153" crossorigin="anonymous"></script>
-    <title>Optimo - IA de Compras</title>
-    <style>
-        /* 1. ESTILO DO FUNDO E FONTE */
-        body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            margin: 0; 
-            padding: 0;
-            background-color: #05080f; /* Fundo escuro da imagem */
-            color: white;
-            text-align: center;
-        }
+from flask import Flask, render_template, request
 
-        /* 2. BARRA SUPERIOR E TÍTULO ANIMADO */
-        .header-bar {
-            background-color: #1a2332;
-            padding: 20px 0;
-            border-top: 2px solid #666; /* Linha cinza no topo */
-            margin-bottom: 40px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
+app = Flask(__name__)
 
-        .optimo-title {
-            font-size: 50px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 8px;
-            display: inline-block;
-            /* Animação de Cores Estilo Google */
-            background: linear-gradient(to right, #4285F4, #EA4335, #FBBC05, #34A853, #4285F4);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: googleGradient 4s linear infinite;
-        }
+# Exemplo de como estruturar seus dados
+LISTA_MERCADOS = [
+    {"nome": "Carrefour", "link": "https://www.carrefour.com.br"},
+    {"nome": "Tenda", "link": "https://www.tendaatacado.com.br"}
+]
 
-        @keyframes googleGradient {
-            to { background-position: 200% center; }
-        }
+LISTA_LOJAS = [
+    {"nome": "Mercado Livre", "link": "https://www.mercadolivre.com.br"},
+    {"nome": "Amazon", "link": "https://www.amazon.com.br"}
+]
 
-        /* 3. CONTAINERS (CAIXAS AZUIS) */
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
-            padding: 20px;
-        }
+LISTA_CARROS = [
+    {"nome": "Webmotors", "link": "https://www.webmotors.com.br"},
+    {"nome": "OLX Carros", "link": "https://www.olx.com.br/autos"}
+]
 
-        .ia-box { 
-            background: #111d35; /* Azul marinho da foto */
-            border: 2px solid #1e3a8a; /* Bordas azuis */
-            border-radius: 20px; 
-            padding: 35px; 
-            width: 90%; 
-            max-width: 700px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-        }
+LISTA_RELOGIOS = [
+    {"nome": "Vivara", "link": "https://www.vivara.com.br"},
+    {"nome": "Amazon Relógios", "link": "https://www.amazon.com.br/relogios"}
+]
 
-        .ia-box h3 { margin-top: 0; font-size: 22px; }
-        .subtitle { color: #aaa; font-size: 14px; margin-bottom: 25px; }
-
-        /* 4. INPUTS E BOTÕES VERDES */
-        .form-group {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        input[type="text"] { 
-            padding: 15px; 
-            width: 75%; 
-            border-radius: 10px; 
-            border: 1px solid #333; 
-            font-size: 16px;
-            outline: none;
-        }
-
-        .btn-green { 
-            padding: 15px 30px; 
-            background: #28a745; /* Verde da foto */
-            color: white; 
-            border: none; 
-            border-radius: 10px; 
-            cursor: pointer; 
-            font-size: 16px; 
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .btn-green:hover { background: #218838; transform: scale(1.05); }
-
-        /* 5. CATEGORIAS DE LOJAS */
-        .category-box {
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 15px;
-            width: 100%;
-            max-width: 700px;
-        }
-
-        .btn-loja {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 5px;
-            background: #1e40af;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 14px;
-        }
-
-        .logo-credito { position: fixed; bottom: 20px; right: 20px; width: 40px; opacity: 0.5; }
-    </style>
-</head>
-<body>
-
-<div class="header-bar">
-    <div class="optimo-title">Optimo</div>
-</div>
-
-<div class="container">
-    <div class="ia-box">
-        <h3>IA Optimo</h3>
-        <div class="subtitle">Ecossistema integrado, alta performance.</div>
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    resposta_ia = ""
+    produto_busca = ""
+    
+    if request.method == 'POST':
+        # Aqui entra a sua lógica de IA
+        if 'pergunta_ia' in request.form:
+            resposta_ia = "Aqui está a resposta da sua pergunta à IA!"
         
-        {% if resposta_ia %}<p style="background:rgba(0,0,0,0.3); padding:10px; border-radius:10px;">{{ resposta_ia }}</p>{% endif %}
-        
-        <form method="POST" class="form-group">
-            <input type="text" name="pergunta_ia" placeholder="Pergunte algo à IA...">
-            <button type="submit" class="btn-green">Enviar</button>
-        </form>
-    </div>
+        if 'produto' in request.form:
+            produto_busca = request.form.get('produto')
 
-    <div class="ia-box">
-        <form method="POST" class="form-group">
-            <input type="text" name="produto" placeholder="Buscar produto...">
-            <button type="submit" class="btn-green">Buscar</button>
-        </form>
-    </div>
+    # É AQUI QUE O MAIN.PY MANDA OS DADOS PARA O HTML
+    return render_template('index.html', 
+                           resposta_ia=resposta_ia, 
+                           produto=produto_busca,
+                           mercados=LISTA_MERCADOS, 
+                           lojas=LISTA_LOJAS, 
+                           carros=LISTA_CARROS, 
+                           relogios=LISTA_RELOGIOS)
 
-    {% if mercados %}<div class="category-box"><h3>Mercados</h3>{% for m in mercados %}<a href="{{ m.link }}" target="_blank" class="btn-loja">{{ m.nome }}</a>{% endfor %}</div>{% endif %}
-    {% if lojas %}<div class="category-box"><h3>Lojas Gerais</h3>{% for l in lojas %}<a href="{{ l.link }}" target="_blank" class="btn-loja">{{ l.nome }}</a>{% endfor %}</div>{% endif %}
-    {% if carros %}<div class="category-box"><h3>Carros</h3>{% for c in carros %}<a href="{{ c.link }}" target="_blank" class="btn-loja">{{ c.nome }}</a>{% endfor %}</div>{% endif %}
-    {% if relogios %}<div class="category-box"><h3>Relógios</h3>{% for r in relogios %}<a href="{{ r.link }}" target="_blank" class="btn-loja">{{ r.nome }}</a>{% endfor %}</div>{% endif %}
-</div>
-
-<img src="https://i.imgur.com/seu_simbolo.png" class="logo-credito" alt="Crédito">
-
-</body>
-</html>
+if __name__ == '__main__':
+    app.run(debug=True)
