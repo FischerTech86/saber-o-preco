@@ -2,54 +2,49 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OPTIMO</title>
     <style>
         body {
             margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center;
-            /* Design de tijolos geométricos com tons de azul e escuro */
-            background-color: #0b1a2f;
+            background-color: #0a192f;
             background-image: 
-                linear-gradient(90deg, #1e3a8a 2px, transparent 2px),
-                linear-gradient(0deg, #1e3a8a 2px, transparent 2px),
-                linear-gradient(90deg, #112240 100px, transparent 100px),
-                linear-gradient(0deg, #0b1a2f 50px, transparent 50px);
+                linear-gradient(90deg, #112240 2px, transparent 2px),
+                linear-gradient(0deg, #112240 2px, transparent 2px),
+                linear-gradient(90deg, #0a192f 100px, transparent 100px),
+                linear-gradient(0deg, #0a192f 50px, transparent 50px);
             background-size: 100px 50px;
-            background-position: 0 0, 0 0, 0 0, 0 0;
             font-family: sans-serif;
         }
-
         .box-central {
-            background: #112240; /* Cor do container */
-            padding: 40px; 
-            border-radius: 15px; 
-            width: 90%;
-            max-width: 400px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.8); 
-            z-index: 10;
-            text-align: center;
+            background: #112240; padding: 40px; border-radius: 15px; width: 90%;
+            max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.8); text-align: center; color: white;
         }
-
-        h1 { color: #ffffff; margin-top: 0; }
         input { width: 100%; padding: 12px; margin: 10px 0; border: none; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; border: none; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; }
+        button { width: 100%; padding: 12px; border: none; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; margin-top: 5px;}
         .btn-busca { background-color: #28a745; }
-        .resultado { margin-top: 20px; padding: 15px; background: #0a192f; border-radius: 5px; font-size: 14px; color: #ffffff; }
+        .btn-comp { background-color: #007bff; }
+        .resultado { margin-top: 20px; padding: 15px; background: #0a192f; border-radius: 5px; font-size: 14px; }
     </style>
 </head>
 <body>
     <div class="box-central">
         <h1>OPTIMO</h1>
+        
         <form method="POST">
-            <input type="text" name="produto" placeholder="Digite o produto..." required>
+            <input type="text" name="produto" placeholder="Busca simples...">
             <button type="submit" class="btn-busca">BUSCAR</button>
         </form>
-        
-        {% if query %}
-        <div class="resultado">
-            <p>Resultados para: {{ query }}</p>
-            <a href="https://www.google.com/search?q={{ query }}&tbm=shop" style="color: #60a5fa;">Ver no Google</a>
-        </div>
+
+        <hr style="margin: 20px 0; border: 0.5px solid #233554;">
+
+        <form method="POST">
+            <input type="text" name="p1" placeholder="Produto A...">
+            <input type="text" name="p2" placeholder="Produto B...">
+            <button type="submit" class="btn-comp">COMPARAR AGORA</button>
+        </form>
+
+        {% if resultado %}
+        <div class="resultado">{{ resultado }}</div>
         {% endif %}
     </div>
 </body>
