@@ -3,38 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OPTIMO - Busca e Comparação</title>
+    <title>OPTIMO</title>
     <style>
-        body { margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #0a0f1d; font-family: 'Segoe UI', sans-serif; color: white; }
-        .box { background: #16213e; padding: 40px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h1 { margin-bottom: 20px; letter-spacing: 2px; }
-        form { display: flex; flex-direction: column; gap: 15px; }
-        input { width: 100%; padding: 15px; border-radius: 10px; border: none; outline: none; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; color: white; transition: 0.3s; }
-        .btn-busca { background: #34A853; }
-        .btn-comp { background: #4285F4; }
-        .resultado-box { margin-top: 20px; padding: 15px; background: #1a2a44; border-radius: 10px; font-size: 14px; line-height: 1.5; color: #ddd; }
+        :root {
+            --azul-escuro: #0a192f;
+            --azul-medio: #1e3a8a;
+            --azul-claro: #60a5fa;
+            --branco: #f8fafc;
+        }
+
+        body {
+            margin: 0; padding: 20px; background-color: #0f172a;
+            font-family: sans-serif; display: flex; justify-content: center;
+            align-items: center; min-height: 100vh;
+        }
+
+        .container-azulejos {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 15px; max-width: 500px; width: 100%;
+        }
+
+        .azulejo {
+            padding: 25px; border-radius: 4px; display: flex;
+            flex-direction: column; justify-content: center;
+        }
+
+        .tile-header { grid-column: span 2; background-color: var(--azul-medio); text-align: center; }
+        .tile-search { grid-column: span 2; background-color: var(--branco); }
+        .tile-input { background-color: var(--azul-claro); }
+        .tile-button { grid-column: span 2; background-color: var(--azul-escuro); padding: 0; }
+        .tile-result { grid-column: span 2; background-color: #dbeafe; color: var(--azul-escuro); border-left: 10px solid var(--azul-medio); }
+
+        input { width: 100%; padding: 12px; border: 2px solid rgba(0,0,0,0.1); outline: none; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; height: 100%; background: none; border: none; color: white; font-weight: bold; font-size: 18px; cursor: pointer; padding: 20px; }
+        .btn-busca { background-color: var(--azul-escuro); margin-top: 10px; }
+        label { font-size: 12px; font-weight: bold; margin-bottom: 5px; text-transform: uppercase; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h1>OPTIMO</h1>
-        
-        <form method="POST">
-            <input type="text" name="produto" placeholder="O que você procura?" required>
-            <button type="submit" class="btn-busca">BUSCAR NO SHOPPING</button>
-        </form>
+    <div class="container-azulejos">
+        <div class="azulejo tile-header">
+            <h1 style="color: white; margin: 0;">OPTIMO</h1>
+        </div>
 
-        <hr style="margin: 30px 0; border: 0; border-top: 1px solid #30475e;">
+        <div class="azulejo tile-search">
+            <h3>BUSCA INTELIGENTE</h3>
+            <form method="POST">
+                <input type="text" name="produto" placeholder="Produto..." required>
+                <button type="submit" class="btn-busca">IR PARA O SHOPPING</button>
+            </form>
+        </div>
 
-        <form method="POST">
-            <input type="text" name="p1" placeholder="Produto 1..." required>
-            <input type="text" name="p2" placeholder="Produto 2..." required>
-            <button type="submit" class="btn-comp">VERIFICAR MELHOR</button>
+        <form method="POST" style="display: contents;">
+            <div class="azulejo tile-input">
+                <label>Produto A</label>
+                <input type="text" name="p1" required>
+            </div>
+            <div class="azulejo tile-input" style="background-color: var(--branco);">
+                <label style="color: var(--azul-escuro);">Produto B</label>
+                <input type="text" name="p2" required>
+            </div>
+            <div class="azulejo tile-button">
+                <button type="submit">COMPARAR AGORA</button>
+            </div>
         </form>
 
         {% if comparacao %}
-            <div class="resultado-box">{{ comparacao }}</div>
+        <div class="azulejo tile-result">
+            <p style="margin: 0;">{{ comparacao }}</p>
+        </div>
         {% endif %}
     </div>
 </body>
