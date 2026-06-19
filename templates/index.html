@@ -6,7 +6,8 @@
     <style>
         body { 
             margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center;
-            background: url('/static/fundo.jpg') no-repeat center center fixed; 
+            /* Usando url_for para garantir que o Flask encontre a imagem */
+            background: url("{{ url_for('static', filename='fundo.jpg') }}") no-repeat center center fixed; 
             background-size: cover; font-family: sans-serif; 
         }
         .box { 
@@ -21,7 +22,7 @@
 </head>
 <body>
     <div class="box">
-        <img src="/static/logo.png" class="logo" onerror="this.style.display='none'">
+        <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
         <div class="titulo">OPTIMO</div>
         <form method="POST">
             <input type="text" name="produto" placeholder="Digite: carro, relogio ou mercado">
