@@ -8,7 +8,6 @@ def index():
     query = None
     if request.method == 'POST':
         query = request.form.get('produto', '').strip()
-    
     return render_template('index.html', query=query)
 
 if __name__ == '__main__':
