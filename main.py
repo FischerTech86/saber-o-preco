@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+# Rota principal
 @app.route('/', methods=['GET', 'POST'])
 def index():
     resultado = None
@@ -10,9 +11,10 @@ def index():
         p1 = request.form.get('p1')
         p2 = request.form.get('p2')
         if p1 and p2:
-            resultado = f"Análise Optimo: Comparando {p1} vs {p2}. O {p1} destaca-se pela inovação e performance, enquanto o {p2} oferece um melhor custo-benefício. A escolha ideal depende se você prioriza tecnologia ou economia."
+            resultado = f"Análise Optimo: Comparando {p1} vs {p2}. O {p1} destaca-se pela inovação, enquanto o {p2} oferece um melhor custo-benefício."
     return render_template('index.html', resultado=resultado)
 
+# Rotas das páginas extras
 @app.route('/sobre')
 def sobre():
     return render_template('sobre.html')
