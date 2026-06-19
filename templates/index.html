@@ -2,51 +2,20 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>OPTIMO</title>
+    <title>Sobre - OPTIMO</title>
     <style>
-        body {
-            margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center;
-            background-color: #0a192f;
-            background-image: 
-                linear-gradient(90deg, #112240 2px, transparent 2px),
-                linear-gradient(0deg, #112240 2px, transparent 2px),
-                linear-gradient(90deg, #0a192f 100px, transparent 100px),
-                linear-gradient(0deg, #0a192f 50px, transparent 50px);
-            background-size: 100px 50px;
-            font-family: sans-serif;
-        }
-        .box-central {
-            background: #112240; padding: 40px; border-radius: 15px; width: 90%;
-            max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.8); text-align: center; color: white;
-        }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: none; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; border: none; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; margin-top: 5px;}
-        .btn-busca { background-color: #28a745; }
-        .btn-comp { background-color: #007bff; }
-        .resultado { margin-top: 20px; padding: 15px; background: #0a192f; border-radius: 5px; font-size: 14px; }
+        body { margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center; background-color: #0a192f;
+               background-image: linear-gradient(90deg, #112240 2px, transparent 2px), linear-gradient(0deg, #112240 2px, transparent 2px);
+               background-size: 100px 50px; font-family: sans-serif; color: white; }
+        .box-central { background: #112240; padding: 40px; border-radius: 15px; width: 90%; max-width: 600px; text-align: center; }
+        a { color: #60a5fa; text-decoration: none; }
     </style>
 </head>
 <body>
     <div class="box-central">
-        <h1>OPTIMO</h1>
-        
-        <form action="https://www.google.com/search" method="GET" target="_blank">
-            <input type="text" name="q" placeholder="Busca simples..." required>
-            <input type="hidden" name="tbm" value="shop">
-            <button type="submit" class="btn-busca">BUSCAR NO SHOPPING</button>
-        </form>
-
-        <hr style="margin: 20px 0; border: 0.5px solid #233554;">
-
-        <form method="POST">
-            <input type="text" name="p1" placeholder="Produto A..." required>
-            <input type="text" name="p2" placeholder="Produto B..." required>
-            <button type="submit" class="btn-comp">COMPARAR AGORA</button>
-        </form>
-
-        {% if resultado %}
-        <div class="resultado">{{ resultado }}</div>
-        {% endif %}
+        <h1>Sobre o OPTIMO</h1>
+        <p>O OPTIMO é um assistente de decisão de compras. Nosso objetivo é ajudar consumidores a comparar produtos de forma rápida, removendo o ruído excessivo de sites de busca comuns.</p>
+        <a href="/">Voltar para o início</a>
     </div>
 </body>
 </html>
