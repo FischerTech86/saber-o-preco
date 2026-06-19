@@ -7,7 +7,7 @@ app = Flask(__name__)
 PRODUTOS_DB = {
     "carro": "https://www.webmotors.com.br",
     "relogio": "https://www.vivara.com.br",
-    "mercado": "https://www.carrefour.com.br"
+    "mercado": "https://www.carrefour.com.br" 
 }
 
 @app.route('/', methods=['GET', 'POST'])
