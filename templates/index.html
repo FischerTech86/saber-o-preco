@@ -7,45 +7,49 @@
     <style>
         body {
             margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center;
-            /* Design de tijolos feito apenas com código CSS */
-            background-color: #000000;
+            /* Design de tijolos geométricos com tons de azul e escuro */
+            background-color: #0b1a2f;
             background-image: 
-                linear-gradient(90deg, #1e3a8a 50px, transparent 50px),
-                linear-gradient(0deg, #3b82f6 5px, transparent 5px),
-                linear-gradient(90deg, #ffffff 50px, transparent 50px),
-                linear-gradient(0deg, #1e293b 5px, transparent 5px);
+                linear-gradient(90deg, #1e3a8a 2px, transparent 2px),
+                linear-gradient(0deg, #1e3a8a 2px, transparent 2px),
+                linear-gradient(90deg, #112240 100px, transparent 100px),
+                linear-gradient(0deg, #0b1a2f 50px, transparent 50px);
             background-size: 100px 50px;
-            background-position: 0 0, 0 0, 50px 25px, 50px 25px;
+            background-position: 0 0, 0 0, 0 0, 0 0;
+            font-family: sans-serif;
         }
 
         .box-central {
-            background: #ffffff; padding: 40px; border-radius: 20px; width: 90%;
-            max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 10;
+            background: #112240; /* Cor do container */
+            padding: 40px; 
+            border-radius: 15px; 
+            width: 90%;
+            max-width: 400px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8); 
+            z-index: 10;
+            text-align: center;
         }
 
-        h1 { color: #0a192f; text-align: center; margin-top: 0; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; }
-        .btn-busca { background-color: #34A853; }
-        .btn-comp { background-color: #4285F4; margin-top: 5px; }
-        .resultado { margin-top: 20px; padding: 15px; background: #e2e8f0; border-radius: 8px; font-size: 14px; color: #000; }
+        h1 { color: #ffffff; margin-top: 0; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: none; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; border: none; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; }
+        .btn-busca { background-color: #28a745; }
+        .resultado { margin-top: 20px; padding: 15px; background: #0a192f; border-radius: 5px; font-size: 14px; color: #ffffff; }
     </style>
 </head>
 <body>
     <div class="box-central">
         <h1>OPTIMO</h1>
         <form method="POST">
-            <input type="text" name="produto" placeholder="O que você procura?" required>
-            <button type="submit" class="btn-busca">BUSCAR NO SHOPPING</button>
+            <input type="text" name="produto" placeholder="Digite o produto..." required>
+            <button type="submit" class="btn-busca">BUSCAR</button>
         </form>
-        <hr style="margin: 20px 0;">
-        <form method="POST">
-            <input type="text" name="p1" placeholder="Produto A..." required>
-            <input type="text" name="p2" placeholder="Produto B..." required>
-            <button type="submit" class="btn-comp">COMPARAR AGORA</button>
-        </form>
-        {% if comparacao %}
-        <div class="resultado">{{ comparacao }}</div>
+        
+        {% if query %}
+        <div class="resultado">
+            <p>Resultados para: {{ query }}</p>
+            <a href="https://www.google.com/search?q={{ query }}&tbm=shop" style="color: #60a5fa;">Ver no Google</a>
+        </div>
         {% endif %}
     </div>
 </body>
