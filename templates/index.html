@@ -7,13 +7,15 @@
     <style>
         body {
             margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center;
+            /* Design de tijolos feito apenas com código CSS */
             background-color: #000000;
-            background-image: radial-gradient(circle at 100% 50%, transparent 20%, #ffffff 21%, #ffffff 34%, transparent 35%, transparent),
-                              radial-gradient(circle at 0% 50%, transparent 20%, #1e3a8a 21%, #1e3a8a 34%, transparent 35%, transparent),
-                              radial-gradient(circle at 50% 0%, transparent 20%, #000000 21%, #000000 34%, transparent 35%, transparent),
-                              radial-gradient(circle at 50% 100%, transparent 20%, #3b82f6 21%, #3b82f6 34%, transparent 35%, transparent);
-            background-size: 80px 80px;
-            background-position: 0 0, 0 40px, 40px -40px, -40px 0px;
+            background-image: 
+                linear-gradient(90deg, #1e3a8a 50px, transparent 50px),
+                linear-gradient(0deg, #3b82f6 5px, transparent 5px),
+                linear-gradient(90deg, #ffffff 50px, transparent 50px),
+                linear-gradient(0deg, #1e293b 5px, transparent 5px);
+            background-size: 100px 50px;
+            background-position: 0 0, 0 0, 50px 25px, 50px 25px;
         }
 
         .box-central {
