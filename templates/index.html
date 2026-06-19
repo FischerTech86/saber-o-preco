@@ -2,39 +2,31 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Optimo - IA de Compras</title>
+    <title>Optimo</title>
     <style>
-        body { margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; 
-               background: url('{{ url_for("static", filename="fundo.jpg") }}') no-repeat center center fixed; 
-               background-size: cover; font-family: sans-serif; color: white; }
-        .main-box { background: rgba(17, 29, 53, 0.9); padding: 40px; border-radius: 20px; text-align: center; width: 90%; max-width: 500px; border: 1px solid #1e3a8a; }
+        body { 
+            margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center;
+            background: url('/static/fundo.jpg') no-repeat center center fixed; 
+            background-size: cover; font-family: sans-serif; 
+        }
+        .box { 
+            background: rgba(17, 29, 53, 0.95); padding: 40px; border-radius: 20px; 
+            text-align: center; width: 350px; border: 2px solid #1e3a8a; 
+        }
         .logo { width: 80px; margin-bottom: 10px; }
-        .optimo-title { font-size: 45px; font-weight: bold; text-transform: uppercase; 
-                        background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853); 
-                        -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-                        animation: ani 3s linear infinite; background-size: 200%; }
-        @keyframes ani { 0% { background-position: 0%; } 100% { background-position: 200%; } }
-        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; box-sizing: border-box; }
-        .btn { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        .titulo { font-size: 40px; font-weight: bold; color: #4285F4; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; }
+        button { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer; }
     </style>
 </head>
 <body>
-<div class="main-box">
-    <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
-    <div class="optimo-title">Optimo</div>
-    
-    <form method="POST">
-        <input type="text" name="pergunta_ia" placeholder="Pergunte algo à IA...">
-        <button type="submit" class="btn">Enviar Pergunta</button>
-    </form>
-    
-    <form method="POST" style="margin-top: 20px;">
-        <input type="text" name="produto" placeholder="Buscar produto (ex: carro, relogio)...">
-        <button type="submit" class="btn">Buscar Produto</button>
-    </form>
-
-    {% if resposta %}<p style="margin-top:20px; color:#FBBC05;">{{ resposta }}</p>{% endif %}
-    {% if resultado %}<script>window.open('{{ resultado }}', '_blank');</script>{% endif %}
-</div>
+    <div class="box">
+        <img src="/static/logo.png" class="logo" onerror="this.style.display='none'">
+        <div class="titulo">OPTIMO</div>
+        <form method="POST">
+            <input type="text" name="produto" placeholder="Digite: carro, relogio ou mercado">
+            <button type="submit">Buscar Produto</button>
+        </form>
+    </div>
 </body>
 </html>
