@@ -2,51 +2,42 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Optimo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPTIMO - Busca Inteligente</title>
     <style>
-        /* Reset para garantir alinhamento perfeito */
-        * { box-sizing: border-box; }
-        
         body { 
             margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center;
-            background: #0a0f1d; font-family: sans-serif;
+            background: #0a0f1d; font-family: 'Segoe UI', sans-serif;
         }
-
         .box { 
-            background: #16213e; padding: 40px; border-radius: 10px; 
-            width: 400px; text-align: center;
+            background: #16213e; padding: 40px; border-radius: 20px; 
+            width: 90%; max-width: 400px; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
-        h1 { color: white; margin-bottom: 20px; }
-
-        /* Barra de pesquisa reta e alinhada */
-        form { width: 100%; display: flex; flex-direction: column; gap: 15px; }
+        h1 { color: #fff; margin-bottom: 30px; letter-spacing: 2px; }
+        
+        form { width: 100%; display: flex; flex-direction: column; gap: 20px; }
         
         input { 
-            width: 100%; padding: 15px; border-radius: 5px; border: none; 
-            outline: none; font-size: 16px;
+            width: 100%; padding: 15px; border-radius: 10px; border: none; 
+            outline: none; font-size: 16px; box-sizing: border-box;
         }
 
         button { 
             width: 100%; padding: 15px; background: #34A853; color: white; 
-            border: none; border-radius: 5px; cursor: pointer; font-weight: bold;
+            border: none; border-radius: 10px; cursor: pointer; 
+            font-weight: bold; font-size: 16px; transition: 0.3s;
         }
-
-        button:hover { background: #2d8a46; }
+        button:hover { background: #2d8a46; transform: scale(1.02); }
     </style>
 </head>
 <body>
     <div class="box">
         <h1>OPTIMO</h1>
         <form method="POST">
-            <input type="text" name="produto" placeholder="Digite o produto..." required>
-            <button type="submit">BUSCAR</button>
+            <input type="text" name="produto" placeholder="O que você procura?" required>
+            <button type="submit">BUSCAR NO SHOPPING</button>
         </form>
-
-        {% if query %}
-            <h2 style="color: white; margin-top: 30px;">Resultados para: {{ query }}</h2>
-            <a href="https://www.google.com/search?q={{ query }}" target="_blank" style="color: #4285F4;">Ver no Google</a>
-        {% endif %}
     </div>
 </body>
 </html>
