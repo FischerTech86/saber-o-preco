@@ -5,90 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Optimo - IA de Compras</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            margin: 0; padding: 0;
-            background-color: #05080f; 
-            color: white;
-            text-align: center;
-        }
-        .header-bar {
-            background-color: #1a2332;
-            padding: 20px 0;
-            border-bottom: 2px solid #1e3a8a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-        }
-        /* Símbolo do site */
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #05080f; color: white; text-align: center; margin: 0; padding: 0; }
+        .header-bar { background-color: #1a2332; padding: 20px 0; border-bottom: 2px solid #1e3a8a; display: flex; justify-content: center; align-items: center; gap: 15px; }
         .site-logo { width: 50px; height: 50px; }
-        
-        /* Título Animado Estilo Google */
-        .optimo-title {
-            font-size: 50px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            background: linear-gradient(to right, #4285F4, #EA4335, #FBBC05, #34A853, #4285F4);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: googleGradient 4s linear infinite;
-        }
+        .optimo-title { font-size: 50px; font-weight: bold; text-transform: uppercase; background: linear-gradient(to right, #4285F4, #EA4335, #FBBC05, #34A853); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: googleGradient 4s linear infinite; background-size: 200% auto; }
         @keyframes googleGradient { to { background-position: 200% center; } }
-
-        .container { display: flex; flex-direction: column; align-items: center; gap: 25px; padding: 20px; }
-        .ia-box { 
-            background: #111d35; 
-            border: 2px solid #1e3a8a; 
-            border-radius: 20px; 
-            padding: 35px; 
-            width: 90%; 
-            max-width: 700px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-        }
-        .subtitle { color: #aaa; font-size: 14px; margin-bottom: 25px; }
-        .form-group { display: flex; justify-content: center; gap: 10px; }
-        input[type="text"] { padding: 15px; width: 75%; border-radius: 10px; border: 1px solid #333; font-size: 16px; outline: none; }
-        .btn-green { padding: 15px 30px; background: #28a745; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; }
-        .btn-green:hover { background: #218838; transform: scale(1.05); }
-        .category-box { margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px; width: 100%; max-width: 700px; }
-        .btn-loja { display: inline-block; padding: 10px 20px; margin: 5px; background: #1e40af; color: white; text-decoration: none; border-radius: 8px; font-size: 14px; }
+        .container { display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .ia-box { background: #111d35; border: 2px solid #1e3a8a; border-radius: 20px; padding: 30px; margin-bottom: 20px; width: 90%; max-width: 600px; }
+        .btn-green { padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 10px; cursor: pointer; }
+        .btn-loja { display: inline-block; padding: 8px 15px; margin: 5px; background: #1e40af; color: white; text-decoration: none; border-radius: 5px; }
     </style>
 </head>
 <body>
-
-<div class="header-bar">
-    <img src="{{ url_for('static', filename='logo.png') }}" class="site-logo" alt="Logo Optimo">
-    <div class="optimo-title">Optimo</div>
-</div>
-
-<div class="container">
-    <div class="ia-box">
-        <h3>IA Optimo</h3>
-        <div class="subtitle">Sua IA de Compras Inteligente.</div>
-        {% if resposta_ia %}<p style="background:rgba(0,0,0,0.3); padding:10px; border-radius:10px;">{{ resposta_ia }}</p>{% endif %}
-        <form method="POST" class="form-group">
-            <input type="text" name="pergunta_ia" placeholder="Pergunte algo à IA...">
-            <button type="submit" class="btn-green">Enviar</button>
-        </form>
+    <div class="header-bar">
+        <img src="{{ url_for('static', filename='logo.png') }}" class="site-logo" alt="Logo">
+        <div class="optimo-title">Optimo</div>
     </div>
-
-    <div class="ia-box">
-        <form method="POST" class="form-group">
-            <input type="text" name="produto" placeholder="Buscar produto...">
-            <button type="submit" class="btn-green">Buscar</button>
-        </form>
+    <div class="container">
+        <div class="ia-box">
+            <h3>IA Optimo</h3>
+            <form method="POST">
+                <input type="text" name="pergunta_ia" placeholder="Pergunte algo...">
+                <button type="submit" class="btn-green">Enviar</button>
+            </form>
+        </div>
+        {% for nome, lista in [('Mercados', mercados), ('Lojas Gerais', lojas), ('Carros', carros), ('Relógios', relogios)] %}
+        <div class="ia-box">
+            <h3>{{ nome }}</h3>
+            {% for item in lista %}<a href="{{ item.link }}" target="_blank" class="btn-loja">{{ item.nome }}</a>{% endfor %}
+        </div>
+        {% endfor %}
     </div>
-
-    {% if mercados %}<div class="category-box"><h3>Mercados</h3>{% for m in mercados %}<a href="{{ m.link }}" target="_blank" class="btn-loja">{{ m.nome }}</a>{% endfor %}</div>{% endif %}
-    {% if lojas %}<div class="category-box"><h3>Lojas Gerais</h3>{% for l in lojas %}<a href="{{ l.link }}" target="_blank" class="btn-loja">{{ l.nome }}</a>{% endfor %}</div>{% endif %}
-    {% if carros %}<div class="category-box"><h3>Carros</h3>{% for c in carros %}<a href="{{ c.link }}" target="_blank" class="btn-loja">{{ c.nome }}</a>{% endfor %}</div>{% endif %}
-    {% if relogios %}<div class="category-box"><h3>Relógios</h3>{% for r in relogios %}<a href="{{ r.link }}" target="_blank" class="btn-loja">{{ r.nome }}</a>{% endfor %}</div>{% endif %}
-</div>
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1159494586085153" crossorigin="anonymous"></script>
-
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1159494586085153" crossorigin="anonymous"></script>
 </body>
 </html>
