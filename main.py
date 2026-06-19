@@ -5,13 +5,20 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    comparacao = None
     if request.method == 'POST':
-        produto = request.form.get('produto', '').strip()
-        if produto:
-            # Redireciona para o Google Shopping diretamente
+        # Busca direta no Shopping
+        if 'produto' in request.form and request.form.get('produto'):
+            produto = request.form.get('produto', '').strip()
             return redirect(f"https://www.google.com/search?q={produto}&tbm=shop")
-    
-    return render_template('index.html')
+        
+        # Comparador Tático
+        if 'p1' in request.form and 'p2' in request.form:
+            p1 = request.form.get('p1').strip()
+            p2 = request.form.get('p2').strip()
+            comparacao = f"Comparação Tática: O {p1} destaca-se pela inovação e performance, enquanto o {p2} foca em durabilidade e eficiência de custo. A escolha ideal depende se sua prioridade é tecnologia de ponta ou melhor valor investido."
+            
+    return render_template('index.html', comparacao=comparacao)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
