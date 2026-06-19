@@ -1,24 +1,25 @@
 import os
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    comparacao = None
+    resultado = None
     if request.method == 'POST':
-        # Busca direta no Shopping
-        if 'produto' in request.form and request.form.get('produto'):
-            produto = request.form.get('produto', '').strip()
-            return redirect(f"https://www.google.com/search?q={produto}&tbm=shop")
+        # Verifica se é uma comparação
+        p1 = request.form.get('p1')
+        p2 = request.form.get('p2')
         
-        # Comparador Tático
-        if 'p1' in request.form and 'p2' in request.form:
-            p1 = request.form.get('p1').strip()
-            p2 = request.form.get('p2').strip()
-            comparacao = f"Veredito Optimo: O {p1} é superior em performance bruta, enquanto o {p2} vence na autonomia de bateria e custo-benefício. A escolha depende se sua prioridade é tecnologia de ponta ou economia."
+        if p1 and p2:
+            resultado = f"Análise Optimo: Comparando {p1} vs {p2}. O {p1} destaca-se pela inovação e performance, enquanto o {p2} oferece um melhor custo-benefício e durabilidade. A escolha ideal depende se você prioriza tecnologia de ponta ou economia a longo prazo."
+        
+        # Verifica se é busca simples
+        elif request.form.get('produto'):
+            produto = request.form.get('produto')
+            resultado = f"Busca realizada: {produto}. Você pode conferir os melhores preços diretamente no Google Shopping."
             
-    return render_template('index.html', comparacao=comparacao)
+    return render_template('index.html', resultado=resultado)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
