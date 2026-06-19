@@ -4,10 +4,35 @@
     <meta charset="UTF-8">
     <title>Optimo</title>
     <style>
-        body { background: #0a0f1d; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }
-        .box { background: #16213e; padding: 30px; border-radius: 15px; width: 100%; max-width: 400px; text-align: center; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; }
-        button { width: 100%; padding: 10px; background: #34A853; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        /* Reset para garantir alinhamento perfeito */
+        * { box-sizing: border-box; }
+        
+        body { 
+            margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center;
+            background: #0a0f1d; font-family: sans-serif;
+        }
+
+        .box { 
+            background: #16213e; padding: 40px; border-radius: 10px; 
+            width: 400px; text-align: center;
+        }
+
+        h1 { color: white; margin-bottom: 20px; }
+
+        /* Barra de pesquisa reta e alinhada */
+        form { width: 100%; display: flex; flex-direction: column; gap: 15px; }
+        
+        input { 
+            width: 100%; padding: 15px; border-radius: 5px; border: none; 
+            outline: none; font-size: 16px;
+        }
+
+        button { 
+            width: 100%; padding: 15px; background: #34A853; color: white; 
+            border: none; border-radius: 5px; cursor: pointer; font-weight: bold;
+        }
+
+        button:hover { background: #2d8a46; }
     </style>
 </head>
 <body>
@@ -17,13 +42,11 @@
             <input type="text" name="produto" placeholder="Digite o produto..." required>
             <button type="submit">BUSCAR</button>
         </form>
-    </div>
 
-    {% if query %}
-        <h2 style="margin-top: 30px;">Resultados para: {{ query }}</h2>
-        <div style="display: flex; gap: 10px;">
-            <a href="https://www.google.com/search?q={{ query }}" target="_blank">Ver no Google</a>
-        </div>
-    {% endif %}
+        {% if query %}
+            <h2 style="color: white; margin-top: 30px;">Resultados para: {{ query }}</h2>
+            <a href="https://www.google.com/search?q={{ query }}" target="_blank" style="color: #4285F4;">Ver no Google</a>
+        {% endif %}
+    </div>
 </body>
 </html>
