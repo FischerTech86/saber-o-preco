@@ -30,16 +30,17 @@
     <div class="box-central">
         <h1>OPTIMO</h1>
         
-        <form method="POST">
-            <input type="text" name="produto" placeholder="Busca simples...">
-            <button type="submit" class="btn-busca">BUSCAR</button>
+        <form action="https://www.google.com/search" method="GET" target="_blank">
+            <input type="text" name="q" placeholder="Busca simples..." required>
+            <input type="hidden" name="tbm" value="shop">
+            <button type="submit" class="btn-busca">BUSCAR NO SHOPPING</button>
         </form>
 
         <hr style="margin: 20px 0; border: 0.5px solid #233554;">
 
         <form method="POST">
-            <input type="text" name="p1" placeholder="Produto A...">
-            <input type="text" name="p2" placeholder="Produto B...">
+            <input type="text" name="p1" placeholder="Produto A..." required>
+            <input type="text" name="p2" placeholder="Produto B..." required>
             <button type="submit" class="btn-comp">COMPARAR AGORA</button>
         </form>
 
