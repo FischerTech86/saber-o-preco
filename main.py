@@ -3,18 +3,10 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Rota principal
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
-    resultado = None
-    if request.method == 'POST':
-        p1 = request.form.get('p1')
-        p2 = request.form.get('p2')
-        if p1 and p2:
-            resultado = f"Análise Optimo: Comparando {p1} vs {p2}. O {p1} destaca-se pela inovação, enquanto o {p2} oferece um melhor custo-benefício."
-    return render_template('index.html', resultado=resultado)
+    return render_template('index.html')
 
-# Rotas das páginas extras
 @app.route('/sobre')
 def sobre():
     return render_template('sobre.html')
@@ -26,6 +18,13 @@ def dicas():
 @app.route('/politica-privacidade')
 def politica():
     return render_template('politica.html')
+
+@app.route('/resultado', methods=['POST'])
+def resultado():
+    p1 = request.form.get('p1')
+    p2 = request.form.get('p2')
+    res = f"Análise Optimo: Comparando {p1} vs {p2}. O {p1} destaca-se pela inovação, enquanto o {p2} oferece um melhor custo-benefício."
+    return render_template('index.html', resultado=res)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
