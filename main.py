@@ -3,7 +3,6 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Rotas que exibem as páginas
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -20,7 +19,6 @@ def dicas():
 def politica():
     return render_template('politica.html')
 
-# Rota para processar a busca do formulário
 @app.route('/resultado', methods=['POST'])
 def resultado():
     p1 = request.form.get('p1')
