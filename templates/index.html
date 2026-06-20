@@ -2,25 +2,47 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>OPTIMO - Busca Shopping</title>
+    <title>OPTIMO</title>
     <style>
-        body { background-color: #0a192f; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        .box-central { background: #112240; padding: 40px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; }
-        input { padding: 10px; width: 80%; margin-bottom: 10px; border-radius: 5px; border: none; }
-        button { padding: 10px 20px; background-color: #60a5fa; border: none; color: white; border-radius: 5px; cursor: pointer; }
+        body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; background-color: #0a192f; color: white; font-family: sans-serif; }
+        .menu { margin: 20px; text-align: center; }
+        .menu a { color: #60a5fa; margin: 0 10px; text-decoration: none; }
+        .box-central { background: #112240; padding: 30px; border-radius: 15px; width: 90%; max-width: 450px; text-align: center; margin-bottom: 20px; }
+        input { padding: 10px; width: 80%; margin: 5px; border-radius: 5px; border: none; }
+        button { padding: 10px 20px; background-color: #60a5fa; border: none; color: white; border-radius: 5px; cursor: pointer; margin-top: 10px; }
     </style>
 </head>
 <body>
 
+    <nav class="menu">
+        <a href="/">Início</a>
+        <a href="/sobre">Sobre</a>
+        <a href="/dicas">Dicas</a>
+        <a href="/politica-privacidade">Privacidade</a>
+    </nav>
+
     <div class="box-central">
-        <h1>OPTIMO</h1>
-        <p>Digite o produto que deseja comparar no Google Shopping:</p>
-        
+        <h2>Busca Shopping</h2>
         <form action="https://www.google.com/search" method="GET" target="_blank">
-            <input type="text" name="q" placeholder="Ex: Arroz, Celular, Tênis..." required>
+            <input type="text" name="q" placeholder="Buscar produto no Shopping..." required>
             <input type="hidden" name="tbm" value="shop">
             <button type="submit">BUSCAR NO SHOPPING</button>
         </form>
+    </div>
+
+    <div class="box-central">
+        <h2>Comparação Rápida</h2>
+        <form action="/resultado" method="POST">
+            <input type="text" name="p1" placeholder="Produto A..." required>
+            <input type="text" name="p2" placeholder="Produto B..." required>
+            <button type="submit">COMPARAR</button>
+        </form>
+
+        {% if resultado %}
+        <div style="margin-top: 20px; padding: 10px; border: 1px solid #60a5fa; border-radius: 5px;">
+            {{ resultado }}
+        </div>
+        {% endif %}
     </div>
 
 </body>
