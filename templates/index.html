@@ -2,14 +2,46 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>OPTIMO</title>
+    <title>OPTIMO - Comparação e Busca</title>
     <style>
-        body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; background-color: #0a192f; color: white; font-family: sans-serif; }
+        /* O fundo azul escuro original está aqui */
+        body { 
+            margin: 0; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            background-color: #0a192f; 
+            color: white; 
+            font-family: sans-serif; 
+        }
         .menu { margin: 20px; text-align: center; }
         .menu a { color: #60a5fa; margin: 0 10px; text-decoration: none; }
-        .box-central { background: #112240; padding: 30px; border-radius: 15px; width: 90%; max-width: 450px; text-align: center; margin-bottom: 20px; }
-        input { padding: 10px; width: 80%; margin: 5px; border-radius: 5px; border: none; }
-        button { padding: 10px 20px; background-color: #60a5fa; border: none; color: white; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+        
+        /* A caixa central escura */
+        .box-central { 
+            background: #112240; 
+            padding: 30px; 
+            border-radius: 15px; 
+            width: 90%; 
+            max-width: 400px; 
+            text-align: center; 
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+        }
+        
+        input { padding: 12px; width: 85%; margin: 8px 0; border-radius: 5px; border: none; }
+        button { 
+            padding: 12px 25px; 
+            background-color: #60a5fa; 
+            border: none; 
+            color: #0a192f; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            margin-top: 10px; 
+        }
+        h1, h2 { color: #e6f1ff; }
     </style>
 </head>
 <body>
@@ -24,22 +56,22 @@
     <div class="box-central">
         <h2>Busca Shopping</h2>
         <form action="https://www.google.com/search" method="GET" target="_blank">
-            <input type="text" name="q" placeholder="Buscar produto no Shopping..." required>
+            <input type="text" name="q" placeholder="Digite o produto..." required>
             <input type="hidden" name="tbm" value="shop">
             <button type="submit">BUSCAR NO SHOPPING</button>
         </form>
     </div>
 
     <div class="box-central">
-        <h2>Comparação Rápida</h2>
+        <h2>IA de Comparação</h2>
         <form action="/resultado" method="POST">
             <input type="text" name="p1" placeholder="Produto A..." required>
             <input type="text" name="p2" placeholder="Produto B..." required>
-            <button type="submit">COMPARAR</button>
+            <button type="submit">COMPARAR PRODUTOS</button>
         </form>
 
         {% if resultado %}
-        <div style="margin-top: 20px; padding: 10px; border: 1px solid #60a5fa; border-radius: 5px;">
+        <div style="margin-top: 20px; padding: 15px; background: #0a192f; border-radius: 8px; border: 1px solid #60a5fa; color: #ccd6f6;">
             {{ resultado }}
         </div>
         {% endif %}
