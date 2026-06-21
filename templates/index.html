@@ -1,39 +1,66 @@
 <!DOCTYPE html>
-
 <html lang="pt-br">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <title>Sobre o OPTIMO</title>
-
+    <title>OPTIMO</title>
     <style>
-
-        body { background-color: #0a192f; color: white; font-family: sans-serif; padding: 20px; text-align: center; }
-
-        a { color: #60a5fa; }
-
+        body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; background-color: #0a192f; color: white; font-family: sans-serif; }
+        .menu { margin: 20px; text-align: center; }
+        .menu a { color: #60a5fa; margin: 0 10px; text-decoration: none; }
+        .box-central { background: #112240; padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; margin-bottom: 20px; }
+        input { padding: 10px; width: 80%; margin: 5px; border-radius: 5px; border: none; }
+        button { padding: 10px 20px; background-color: #60a5fa; border: none; color: white; border-radius: 5px; cursor: pointer; margin-top: 10px; }
     </style>
-
 </head>
-
 <body>
-
-    <nav><a href="/">Início</a></nav>
-
-    <div style="max-width: 600px; margin: auto;">
-
-        <h1>Sobre o OPTIMO</h1>
-
-        <p>O OPTIMO foi criado para simplificar a jornada de compras online. Sabemos que, hoje, encontrar o melhor preço em meio a tantas opções pode ser uma tarefa exaustiva.</p>
-
-        <p>Nossa missão é fornecer ferramentas rápidas e imparciais para que você possa comparar características de produtos e encontrar as melhores ofertas com segurança.</p>
-
-        <p>Acreditamos que uma compra inteligente começa com informação de qualidade. O OPTIMO não é apenas um comparador, é o seu parceiro para economizar tempo e dinheiro em cada clique.</p>
-
+    <nav class="menu">
+        <a href="/">Início</a> <a href="/sobre">Sobre</a> <a href="/dicas">Dicas</a> <a href="/politica-privacidade">Privacidade</a>
+    </nav>
+    <div class="box-central">
+        <h2>Busca Shopping</h2>
+        <form action="https://www.google.com/search" method="GET" target="_blank">
+            <input type="text" name="q" placeholder="Digite o produto..." required>
+            <input type="hidden" name="tbm" value="shop">
+            <button type="submit">BUSCAR NO SHOPPING</button>
+        </form>
     </div>
-
+    <div class="box-central">
+        <h2>IA de Comparação</h2>
+        <form action="/resultado" method="POST">
+            <input type="text" name="p1" placeholder="Produto A..." required>
+            <input type="text" name="p2" placeholder="Produto B..." required>
+            <button type="submit">COMPARAR PRODUTOS</button>
+        </form>
+        {% if resultado %}
+        <div style="margin-top: 20px; padding: 10px; border: 1px solid #60a5fa; border-radius: 5px;">{{ resultado }}</div>
+        {% endif %}
+    </div>
 </body>
-
+</html> 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head><meta charset="UTF-8"><title>Sobre o OPTIMO</title></head>
+<body style="background-color: #0a192f; color: white; font-family: sans-serif; padding: 20px; text-align: center;">
+    <nav><a href="/" style="color: #60a5fa;">Início</a></nav>
+    <h1>Sobre o OPTIMO</h1>
+    <p>O OPTIMO é uma ferramenta de auxílio à decisão de compra, desenvolvida para facilitar a sua busca pelos melhores produtos e preços.</p>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head><meta charset="UTF-8"><title>Dicas OPTIMO</title></head>
+<body style="background-color: #0a192f; color: white; font-family: sans-serif; padding: 20px; text-align: center;">
+    <nav><a href="/" style="color: #60a5fa;">Início</a></nav>
+    <h1>Dicas de Compra</h1>
+    <p>Sempre verifique a reputação da loja e compare preços antes de finalizar o pedido.</p>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head><meta charset="UTF-8"><title>Privacidade OPTIMO</title></head>
+<body style="background-color: #0a192f; color: white; font-family: sans-serif; padding: 20px; text-align: center;">
+    <nav><a href="/" style="color: #60a5fa;">Início</a></nav>
+    <h1>Política de Privacidade</h1>
+    <p>Respeitamos a sua privacidade. Nenhuma informação pessoal sensível é coletada por este site.</p>
+</body>
 </html>
