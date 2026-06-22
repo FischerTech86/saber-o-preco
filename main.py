@@ -1,31 +1,23 @@
-import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/sobre')
-def sobre():
-    return render_template('sobre.html')
-
-@app.route('/dicas')
-def dicas():
-    return render_template('dicas.html')
-
-@app.route('/politica-privacidade')
-def politica():
-    return render_template('politica.html')
-
-@app.route('/resultado', methods=['POST'])
+@app.route('/resultado')
 def resultado():
-    p1 = request.form.get('p1')
-    p2 = request.form.get('p2')
-    res = f"Análise Optimo: Comparando {p1} vs {p2}. O {p1} destaca-se pela inovação, enquanto o {p2} oferece um melhor custo-benefício."
-    return render_template('index.html', resultado=res)
+    # Aqui, no futuro, você vai conectar a sua API de busca (como Google Shopping)
+    # Por enquanto, estas variáveis representam o que a IA vai encontrar
+    return render_template('resultado.html', 
+                           nome_a="Smartphone Samsung Galaxy S23 Ultra", 
+                           img_a="https://images.samsung.com/galaxy-s23-ultra.jpg", 
+                           preco_a="R$ 5.999", 
+                           specs_a="Tela 6.8', Snapdragon 8 Gen 2, 256GB",
+                           
+                           nome_b="Smartphone Apple iPhone 15 Pro", 
+                           img_b="https://store.storeimages.cdn-apple.com/iphone-15-pro.jpg", 
+                           preco_b="R$ 5.999", 
+                           specs_b="Tela 6.1', Chip A17 Pro, 128GB",
+                           
+                           analise="O S23 Ultra é superior em produtividade e câmeras, enquanto o iPhone 15 Pro vence na integração de software.")
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
