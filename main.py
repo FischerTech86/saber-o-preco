@@ -1,17 +1,16 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 import os
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    # Aqui é onde sua barra de pesquisa vai ficar
-    return render_template('index.html') 
-
 @app.route('/resultado')
 def resultado():
-    # Esta é a análise da sua IA que já estava funcionando
-    analise_ia = "O S23 Ultra é superior em tela e bateria, enquanto o iPhone 15 Pro vence na integração de software."
+    # Esta é a IA comparando os dados técnicos que colocamos no HTML
+    analise_ia = """
+    • Sistema Operacional: Android 13 vs iOS 17. 
+    • Vida útil da bateria: O S23 Ultra apresenta maior duração em uso intenso devido à capacidade de 5000mAh. 
+    • Câmeras: O S23 Ultra oferece maior resolução (200MP) e zoom, enquanto o iPhone 15 Pro foca em processamento de imagem profissional e vídeo ProRes.
+    """
     return render_template('resultado.html', analise=analise_ia)
 
 if __name__ == '__main__':
