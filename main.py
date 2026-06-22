@@ -1,13 +1,13 @@
 from flask import Flask, render_template
+import os
 
 app = Flask(__name__)
 
-# Rota para a página inicial
 @app.route('/')
 def home():
-    return "Bem-vindo ao OPTIMO! Tente acessar /resultado para ver a comparação."
+    # Página inicial para evitar o erro "Not Found" no endereço principal
+    return "Bem-vindo ao OPTIMO! Acesse /resultado para ver a comparação."
 
-# Rota para a página de resultado
 @app.route('/resultado')
 def resultado():
     return render_template('resultado.html', 
@@ -24,4 +24,6 @@ def resultado():
                            analise="O S23 Ultra é superior em produtividade e câmeras, enquanto o iPhone 15 Pro vence na integração de software.")
 
 if __name__ == '__main__':
-    app.run()
+    # O Render usa a porta definida pelo sistema, por isso usamos os.environ.get
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
