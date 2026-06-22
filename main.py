@@ -1,22 +1,18 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 import os
 
 app = Flask(__name__)
 
+# Redireciona a página principal para a página de resultados
 @app.route('/')
-def index():
-    # Página inicial com o campo de busca
-    return render_template('index.html')
+def home():
+    return '<meta http-equiv="refresh" content="0; url=/resultado">'
 
-@app.route('/comparar')
-def comparar():
-    # Captura os nomes dos produtos digitados pelo usuário
-    p1 = request.args.get('produto1', 'Produto 1')
-    p2 = request.args.get('produto2', 'Produto 2')
-    
-    # Aqui a IA seria chamada para preencher os dados técnicos automaticamente
-    # Por enquanto, o layout está pronto para receber os dados
-    return render_template('resultado.html', p1=p1, p2=p2)
+@app.route('/resultado')
+def resultado():
+    # Conteúdo fixo conforme solicitado para restaurar o estado original
+    analise_ia = "O S23 Ultra é superior em tela e bateria, enquanto o iPhone 15 Pro vence na integração de software."
+    return render_template('resultado.html', analise=analise_ia)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
