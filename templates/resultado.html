@@ -2,36 +2,41 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>OPTIMO - Comparador</title>
+    <title>OPTIMO</title>
     <style>
         body { background-color: #0a192f; color: white; font-family: sans-serif; padding: 20px; }
-        .card { background-color: #112240; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #233554; }
-        .container { display: flex; gap: 20px; max-width: 1200px; margin: auto; }
-        .produto-img { width: 100%; height: 200px; object-fit: contain; background: white; border-radius: 8px; margin-bottom: 10px; }
-        .analise-box { background-color: #112240; padding: 20px; border-radius: 10px; border-top: 4px solid #60a5fa; }
-        h2 { color: #60a5fa; }
+        .header { display: flex; justify-content: space-between; border-bottom: 1px solid #233554; padding-bottom: 10px; }
+        .main-container { display: flex; gap: 20px; margin-top: 20px; }
+        .card { background-color: #112240; padding: 15px; border-radius: 10px; flex: 1; border: 1px solid #233554; }
+        .info-col { font-size: 0.85em; }
+        .analise-box { background-color: #112240; padding: 20px; border-radius: 10px; margin-top: 20px; border: 1px solid #60a5fa; }
+        h2 { color: #60a5fa; font-size: 1.2em; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h2>Busca Shopping</h2>
-        <form action="https://www.google.com/search" method="GET" target="_blank">
-            <input type="text" name="q" placeholder="Pesquisar produto...">
-            <input type="hidden" name="tbm" value="shop">
-            <button type="submit">BUSCAR NO SHOPPING</button>
-        </form>
+    <div class="header">
+        <h1>OPTIMO</h1>
+        <p>Início | Sobre | Dicas | Privacidade</p>
     </div>
 
-    <div class="container">
+    <div class="main-container">
         <div class="card">
-            <h2>Samsung Galaxy S23 Ultra</h2>
-            <img src="https://images.samsung.com/galaxy-s23-ultra.jpg" class="produto-img">
-            <p><strong>Preço:</strong> R$ 5.999</p>
+            <h2>Smartphone Samsung Galaxy S23 Ultra</h2>
+            <div class="info-col">
+                <p><strong>Preço:</strong> R$ 5.999</p>
+                <p><strong>Bateria:</strong> 5000mAh, 45W</p>
+                <p><strong>Câmera:</strong> 200MP f/1.7</p>
+                <p><strong>Processador:</strong> Snapdragon 8 Gen 2</p>
+            </div>
         </div>
         <div class="card">
-            <h2>Apple iPhone 15 Pro</h2>
-            <img src="https://store.storeimages.cdn-apple.com/iphone-15-pro.jpg" class="produto-img">
-            <p><strong>Preço:</strong> R$ 5.999</p>
+            <h2>Smartphone Apple iPhone 15 Pro</h2>
+            <div class="info-col">
+                <p><strong>Preço:</strong> R$ 5.999</p>
+                <p><strong>Bateria:</strong> 3274mAh, 20W</p>
+                <p><strong>Câmera:</strong> 48MP f/1.78</p>
+                <p><strong>Processador:</strong> Apple A17 Pro</p>
+            </div>
         </div>
     </div>
 
