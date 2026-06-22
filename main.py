@@ -2,10 +2,14 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+# Rota para a página inicial
+@app.route('/')
+def home():
+    return "Bem-vindo ao OPTIMO! Tente acessar /resultado para ver a comparação."
+
+# Rota para a página de resultado
 @app.route('/resultado')
 def resultado():
-    # Aqui, no futuro, você vai conectar a sua API de busca (como Google Shopping)
-    # Por enquanto, estas variáveis representam o que a IA vai encontrar
     return render_template('resultado.html', 
                            nome_a="Smartphone Samsung Galaxy S23 Ultra", 
                            img_a="https://images.samsung.com/galaxy-s23-ultra.jpg", 
@@ -20,4 +24,4 @@ def resultado():
                            analise="O S23 Ultra é superior em produtividade e câmeras, enquanto o iPhone 15 Pro vence na integração de software.")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
