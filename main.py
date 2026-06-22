@@ -5,14 +5,18 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    # Página inicial com o campo de busca
     return render_template('index.html')
 
-@app.route('/resultado')
-def resultado():
-    produto = request.args.get('produto', 'Produto não especificado')
-    # Aqui a IA processaria o nome do produto
-    analise_ia = f"Análise detalhada para: {produto}. O mercado oferece diversas opções, focando em custo-benefício e especificações técnicas específicas."
-    return render_template('resultado.html', produto=produto, analise=analise_ia)
+@app.route('/comparar')
+def comparar():
+    # Captura os nomes dos produtos digitados pelo usuário
+    p1 = request.args.get('produto1', 'Produto 1')
+    p2 = request.args.get('produto2', 'Produto 2')
+    
+    # Aqui a IA seria chamada para preencher os dados técnicos automaticamente
+    # Por enquanto, o layout está pronto para receber os dados
+    return render_template('resultado.html', p1=p1, p2=p2)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
