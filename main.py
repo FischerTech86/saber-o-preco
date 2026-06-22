@@ -3,16 +3,11 @@ import os
 
 app = Flask(__name__)
 
-# Redireciona a página principal para a página de resultados
-@app.route('/')
-def home():
-    return '<meta http-equiv="refresh" content="0; url=/resultado">'
-
 @app.route('/resultado')
 def resultado():
-    # Conteúdo fixo conforme solicitado para restaurar o estado original
-    analise_ia = "O S23 Ultra é superior em tela e bateria, enquanto o iPhone 15 Pro vence na integração de software."
-    return render_template('resultado.html', analise=analise_ia)
+    # Esta é a análise da IA original
+    texto_da_ia = "O S23 Ultra é superior em produtividade e bateria, enquanto o iPhone 15 Pro vence na integração."
+    return render_template('resultado.html', analise=texto_da_ia)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
