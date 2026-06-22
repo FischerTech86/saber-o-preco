@@ -2,50 +2,25 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>OPTIMO - Comparação Detalhada</title>
+    <title>OPTIMO</title>
     <style>
         body { background-color: #0a192f; color: white; font-family: sans-serif; padding: 20px; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .main-container { display: flex; gap: 20px; }
-        .card { background-color: #112240; padding: 15px; border-radius: 10px; flex: 1; border: 1px solid #233554; }
-        .produto-info { font-size: 0.9em; line-height: 1.4; }
-        .ad-area { width: 150px; background-color: #60a5fa; color: #0a192f; text-align: center; padding: 20px; border-radius: 10px; font-weight: bold; }
-        .analise-box { background-color: #112240; padding: 20px; border-radius: 10px; margin-top: 20px; border: 2px solid #60a5fa; }
-        h2 { color: #60a5fa; margin-top: 0; }
+        .card { background-color: #112240; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        h2 { color: #60a5fa; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>OPTIMO</h1>
-        <nav>Início | Sobre | Dicas | Privacidade</nav>
+    <div class="card">
+        <h2>Busca Shopping</h2>
+        <form action="https://www.google.com/search" method="GET" target="_blank">
+            <input type="text" name="q" placeholder="Digite o produto...">
+            <input type="hidden" name="tbm" value="shop">
+            <button type="submit">BUSCAR NO SHOPPING</button>
+        </form>
     </div>
 
-    <div class="main-container">
-        <div class="card">
-            <h2>Smartphone Samsung Galaxy S23 Ultra</h2>
-            <div class="produto-info">
-                <p><strong>Preço:</strong> R$ 5.999</p>
-                <p><strong>Bateria:</strong> 5000mAh, charging 45W</p>
-                <p><strong>Câmera:</strong> 200MP f/1.7 OIS</p>
-                <p><strong>Processador:</strong> Snapdragon 8 Gen 2</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Smartphone Apple iPhone 15 Pro</h2>
-            <div class="produto-info">
-                <p><strong>Preço:</strong> R$ 5.999</p>
-                <p><strong>Bateria:</strong> 3274mAh, charging 20W</p>
-                <p><strong>Câmera:</strong> 48MP f/1.78 OIS</p>
-                <p><strong>Processador:</strong> Apple A17 Pro</p>
-            </div>
-        </div>
-
-        <div class="ad-area">Área para Anúncios (Em Análise)</div>
-    </div>
-
-    <div class="analise-box">
-        <h2>Análise Comparativa OPTIMO</h2>
+    <div class="card">
+        <h2>IA de Comparação</h2>
         <p>{{ analise }}</p>
     </div>
 </body>
