@@ -1,16 +1,16 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import os
 
 app = Flask(__name__)
 
-# Redireciona a página principal para o seu design
 @app.route('/')
 def home():
-    return '<meta http-equiv="refresh" content="0; url=/resultado">'
+    # Aqui é onde sua barra de pesquisa vai ficar
+    return render_template('index.html') 
 
 @app.route('/resultado')
 def resultado():
-    # O conteúdo da análise da IA
+    # Esta é a análise da sua IA que já estava funcionando
     analise_ia = "O S23 Ultra é superior em tela e bateria, enquanto o iPhone 15 Pro vence na integração de software."
     return render_template('resultado.html', analise=analise_ia)
 
