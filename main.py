@@ -3,14 +3,13 @@ import os
 
 app = Flask(__name__)
 
-# Mantenha suas rotas atuais para o site não mudar nada
 @app.route('/resultado')
 def resultado():
-    # AQUI É ONDE VOCÊ ATUALIZA A IA
-    # Você não precisa mudar o site, apenas o texto desta variável:
-    nova_analise_da_ia = "Aqui vai a nova resposta da sua IA após a atualização..."
+    # Aqui é onde a sua IA entra. 
+    # Mude apenas o texto dentro das aspas abaixo sempre que quiser atualizar a análise:
+    texto_da_ia = "O S23 Ultra é superior em produtividade com a S Pen e bateria, enquanto o iPhone 15 Pro oferece um desempenho de processamento inigualável e um ecossistema mais fechado e otimizado."
     
-    return render_template('resultado.html', analise=nova_analise_da_ia)
+    return render_template('resultado.html', analise=texto_da_ia)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
