@@ -1,14 +1,24 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import os
 
 app = Flask(__name__)
 
-# Esta rota renderiza o resultado da comparação
+# Rota para a página inicial (Busca)
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+# Rota para a página de resultado
 @app.route('/resultado')
 def resultado():
-    # Esta variável 'analise' é o que aparece na caixa da IA
-    analise_ia = "O S23 Ultra é superior em tela e bateria, enquanto o iPhone 15 Pro vence na integração de software."
-    return render_template('resultado.html', analise=analise_ia)
+    # Pega o que o usuário digitou
+    p1 = request.args.get('produto1', 'Produto 1')
+    p2 = request.args.get('produto2', 'Produto 2')
+    
+    # Análise fixa para garantir o funcionamento
+    analise = f"Análise entre {p1} e {p2}: Ambos são excelentes, mas cada um atende a um perfil diferente."
+    
+    return render_template('resultado.html', p1=p1, p2=p2, analise=analise)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
