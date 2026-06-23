@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/resultado')
 def resultado():
-    # Análise fixa para manter a consistência do visual aprovado
+    # Análise original
     analise_ia = "O S23 Ultra é superior em tela e bateria, enquanto o iPhone 15 Pro vence na integração de software."
     return render_template('resultado.html', analise=analise_ia)
 
