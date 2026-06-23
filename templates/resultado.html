@@ -5,22 +5,13 @@
     <title>Resultado da Comparação | OPTIMO</title>
     <style>
         body { background-color: #0a192f; color: white; font-family: sans-serif; padding: 20px; }
-        .search-box { background-color: #112240; padding: 20px; margin-bottom: 20px; border-radius: 10px; text-align: center; }
         .container { display: flex; gap: 20px; max-width: 1200px; margin: auto; }
         .card { background-color: #112240; padding: 20px; border-radius: 10px; flex: 1; border: 1px solid #233554; }
         .analise-box { background-color: #112240; padding: 20px; border-radius: 10px; margin: 20px auto; max-width: 1200px; border: 1px solid #60a5fa; }
         h2 { color: #60a5fa; }
-        button { padding: 10px 20px; background-color: #60a5fa; color: white; border: none; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div class="search-box">
-        <form action="/resultado" method="GET">
-            <input type="text" name="busca" placeholder="Digite outro produto..." required>
-            <button type="submit">CONFIRMAR E BUSCAR</button>
-        </form>
-    </div>
-
     <div class="container">
         <div class="card">
             <h2>Smartphone Samsung Galaxy S23 Ultra</h2>
@@ -37,7 +28,6 @@
             <p><strong>Processador:</strong> Apple A17 Pro</p>
         </div>
     </div>
-    
     <div class="analise-box">
         <h2>Análise Comparativa OPTIMO</h2>
         <p>{{ analise }}</p>
