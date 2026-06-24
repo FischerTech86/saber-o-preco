@@ -4,9 +4,6 @@ import google.generativeai as genai
 
 app = Flask(__name__)
 
-# Configuração da chave de API
-api_key = os.environ.get("GOOGLE_API_KEY")
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -15,19 +12,22 @@ def index():
 def resultado():
     termo = request.args.get('pesquisa', 'Produto')
     
+    # Leitura forçada da variável de ambiente no momento da consulta
+    api_key = os.environ.get("GOOGLE_API_KEY")
+    
     if not api_key:
-        return "ERRO GRAVE: A variável GOOGLE_API_KEY não foi encontrada pelo servidor. Verifique a aba 'Environment' no Render."
+        return "ERRO: A variável GOOGLE_API_KEY não foi encontrada. Verifique no Render se você escreveu exatamente 'GOOGLE_API_KEY' (tudo maiúsculo) na aba 'Environment'."
 
     try:
         genai.configure(api_key=api_key)
         model = genai.GenerativeModel('gemini-1.5-flash')
         
-        prompt = f"Liste 5 opções, marcas ou modelos para o produto '{termo}'. Para cada um, forneça: Nome do Produto, Preço Médio Estimado e um Curto Diferencial. Formate como uma lista limpa."
+        prompt = f"Liste 5 opções para o produto '{termo}'. Forneça: Nome, Preço Médio e Diferencial. Lista limpa."
         
         response = model.generate_content(prompt)
         lista_produtos = response.text
     except Exception as e:
-        lista_produtos = f"Erro ao processar busca: {str(e)}"
+        lista_produtos = f"Erro na comunicação com o Gemini: {str(e)}"
 
     return render_template('resultado.html', termo=termo, lista=lista_produtos)
 
