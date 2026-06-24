@@ -5,20 +5,29 @@
     <title>Resultado | OPTIMO</title>
     <style>
         body { background-color: #0a192f; color: white; font-family: sans-serif; padding: 20px; }
-        .container { display: flex; justify-content: center; }
-        .card { background-color: #112240; padding: 30px; border-radius: 15px; width: 80%; max-width: 800px; border: 1px solid #60a5fa; }
+        .container { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .card { background-color: #112240; padding: 25px; border-radius: 15px; width: 45%; min-width: 300px; border: 1px solid #233554; }
+        .analise-box { background-color: #112240; padding: 30px; margin-top: 20px; border-radius: 15px; border: 1px solid #60a5fa; max-width: 1000px; margin-left: auto; margin-right: auto; }
         h2 { color: #60a5fa; }
-        pre { white-space: pre-wrap; font-family: sans-serif; line-height: 1.6; }
+        pre { white-space: pre-wrap; font-family: sans-serif; line-height: 1.6; font-size: 1.05em; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="card">
-            <h2>Comparação: {{ p1 }} vs {{ p2 }}</h2>
-            <pre>{{ analise }}</pre>
-            <br>
-            <a href="/" style="color: #60a5fa; text-decoration: none;">← Voltar e realizar nova busca</a>
+            <h2>Produto A: {{ p1 }}</h2>
+            <pre>{{ analise.split('---')[0] }}</pre>
         </div>
+        <div class="card">
+            <h2>Produto B: {{ p2 }}</h2>
+            <pre>{{ analise.split('---')[1] if '---' in analise else "Dados em processamento..." }}</pre>
+        </div>
+    </div>
+    
+    <div class="analise-box">
+        <h2>Análise Comparativa OPTIMO</h2>
+        <pre>{{ analise }}</pre>
+        <a href="/" style="color: #60a5fa; text-decoration: none;">← Nova Busca</a>
     </div>
 </body>
 </html>
