@@ -2,19 +2,39 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados para {{ termo }}</title>
     <style>
-        body { background-color: #000; color: #fff; font-family: Arial, sans-serif; padding: 40px; }
-        .result-card { background: #111; padding: 20px; border-radius: 10px; border: 1px solid #333; max-width: 600px; margin: 20px auto; }
-        pre { white-space: pre-wrap; font-family: Arial, sans-serif; font-size: 16px; }
-        a { color: #60a5fa; text-decoration: none; }
+        body { background-color: #000; color: #fff; font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        .header { display: flex; align-items: center; border-bottom: 1px solid #333; padding-bottom: 20px; margin-bottom: 30px; }
+        .logo-small { font-size: 24px; font-weight: bold; color: #60a5fa; text-decoration: none; margin-right: 30px; }
+        .search-box input { padding: 12px 20px; border-radius: 25px; border: 1px solid #444; background: #111; color: white; width: 100%; max-width: 400px; outline: none; font-size: 15px; }
+        .search-box input:focus { border-color: #60a5fa; }
+        .content { max-width: 800px; margin: 0 auto; }
+        h1 { font-size: 20px; font-weight: normal; margin-bottom: 25px; color: #aaa; }
+        strong { color: #fff; }
+        .card { background: #111; padding: 30px; border-radius: 12px; border: 1px solid #333; }
+        pre { white-space: pre-wrap; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; margin: 0; }
+        .back-link { display: inline-block; margin-top: 25px; color: #60a5fa; text-decoration: none; font-size: 14px; }
+        .back-link:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
-    <h1>Resultados para: {{ termo }}</h1>
-    <div class="result-card">
-        <pre>{{ lista }}</pre>
+    <div class="header">
+        <a href="/" class="logo-small">OPTIMO</a>
+        <div class="search-box">
+            <form action="/resultado" method="GET">
+                <input type="text" name="pesquisa" value="{{ termo }}" required autocomplete="off">
+            </form>
+        </div>
     </div>
-    <div style="text-align: center;"><a href="/">← Nova Busca</a></div>
+
+    <div class="content">
+        <h1>Resultados para: <strong>{{ termo }}</strong></h1>
+        <div class="card">
+            <pre>{{ lista }}</pre>
+        </div>
+        <a href="/" class="back-link">← Nova Busca Inicial</a>
+    </div>
 </body>
 </html>
