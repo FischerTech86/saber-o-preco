@@ -1,16 +1,20 @@
-<div class="container">
-    <div class="card">
-        <h2>Produto A: {{ p1 }}</h2>
-        <pre>{{ ficha_a }}</pre>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados para {{ termo }}</title>
+    <style>
+        body { background-color: #000; color: #fff; font-family: Arial, sans-serif; padding: 40px; }
+        .result-card { background: #111; padding: 20px; border-radius: 10px; border: 1px solid #333; max-width: 600px; margin: 20px auto; }
+        pre { white-space: pre-wrap; font-family: Arial, sans-serif; font-size: 16px; }
+        a { color: #60a5fa; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>Resultados para: {{ termo }}</h1>
+    <div class="result-card">
+        <pre>{{ lista }}</pre>
     </div>
-    <div class="card">
-        <h2>Produto B: {{ p2 }}</h2>
-        <pre>{{ ficha_b }}</pre>
-    </div>
-</div>
-
-<div class="analise-box">
-    <h2>Análise Comparativa OPTIMO</h2>
-    <pre>{{ analise }}</pre>
-    <a href="/">← Nova Busca</a>
-</div>
+    <div style="text-align: center;"><a href="/">← Nova Busca</a></div>
+</body>
+</html>
