@@ -2,21 +2,19 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>OPTIMO - Comparador</title>
+    <title>OPTIMO - Busca</title>
     <style>
-        body { background-color: #0a192f; color: white; font-family: sans-serif; text-align: center; padding-top: 50px; }
-        .box { background-color: #112240; padding: 30px; display: inline-block; border-radius: 15px; border: 1px solid #60a5fa; }
-        input { padding: 12px; margin: 10px; width: 300px; border-radius: 5px; border: none; }
-        button { padding: 12px 25px; background-color: #60a5fa; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        body { background-color: #000; color: #fff; text-align: center; font-family: Arial, sans-serif; }
+        .logo { font-size: 60px; font-weight: bold; margin-top: 150px; color: #60a5fa; }
+        .search-box { margin-top: 30px; }
+        input { width: 500px; padding: 15px; border-radius: 30px; border: 1px solid #333; background: #111; color: white; outline: none; }
     </style>
 </head>
 <body>
-    <h1>OPTIMO</h1>
-    <div class="box">
+    <div class="logo">OPTIMO</div>
+    <div class="search-box">
         <form action="/resultado" method="GET">
-            <input type="text" name="produto1" placeholder="Nome do Produto 1" required><br>
-            <input type="text" name="produto2" placeholder="Nome do Produto 2" required><br>
-            <button type="submit">COMPARAR PRODUTOS</button>
+            <input type="text" name="pesquisa" placeholder="O que você está procurando hoje?" required>
         </form>
     </div>
 </body>
