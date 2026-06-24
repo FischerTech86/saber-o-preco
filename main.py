@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request
 import os
+import time
 import google.generativeai as genai
+from config import Config  # <--- ESSA LINHA CONECTA OS DOIS ARQUIVOS
+
+# Validar configuração logo no início
+Config.validate()
 
 app = Flask(__name__)
 
@@ -12,11 +17,8 @@ def index():
 def resultado():
     termo = request.args.get('pesquisa', 'Produto')
     
-    # Leitura forçada da variável de ambiente no momento da consulta
-    api_key = os.environ.get("GOOGLE_API_KEY")
-    
-    if not api_key:
-        return "ERRO: A variável GOOGLE_API_KEY não foi encontrada. Verifique no Render se você escreveu exatamente 'GOOGLE_API_KEY' (tudo maiúsculo) na aba 'Environment'."
+    # Agora usamos a chave que vem do config.py
+    api_key = Config.GOOGLE_API_KEY
 
     try:
         genai.configure(api_key=api_key)
@@ -27,7 +29,7 @@ def resultado():
         response = model.generate_content(prompt)
         lista_produtos = response.text
     except Exception as e:
-        lista_produtos = f"Erro na comunicação com o Gemini: {str(e)}"
+        lista_produtos = f"Erro na conexão com a IA: {str(e)}"
 
     return render_template('resultado.html', termo=termo, lista=lista_produtos)
 
