@@ -1,22 +1,17 @@
-from flask import Flask, render_template, request
-import os
+# ... (código anterior igual)
 
-app = Flask(__name__)
+for linha in linhas:
+    if ';' in linha:
+        partes = linha.split(';')
+        if len(partes) >= 3:
+            nome = partes[0].strip()
+            preco = partes[1].strip()
+            dif = partes[2].strip()
+            
+            # CRIAÇÃO DO LINK: Garante que o link seja gerado baseado no nome
+            # Usamos replace para trocar espaços por '+' para a URL funcionar
+            link_busca = f"https://www.google.com/search?q={nome.replace(' ', '+')}&tbm=shop"
+            
+            lista_final.append({'nome': nome, 'preco': preco, 'dif': dif, 'link': link_busca})
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/resultado')
-def resultado():
-    termo = request.args.get('pesquisa', 'Produto')
-    
-    # Como removemos a IA, vamos apenas exibir o termo que o usuário buscou
-    # ou uma mensagem simples de confirmação.
-    mensagem = f"Busca realizada para: {termo}. (O sistema de IA foi desativado conforme solicitado)."
-    
-    return render_template('resultado.html', termo=termo, lista=mensagem)
-
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+# ... (código posterior igual)
