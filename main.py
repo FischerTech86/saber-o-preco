@@ -4,8 +4,8 @@ import google.generativeai as genai
 
 app = Flask(__name__)
 
-# Configure a sua chave aqui
-genai.configure(api_key="COLE_SUA_API_KEY_AQUI")
+# Configura a chave de forma segura através de variável de ambiente
+genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
 model = genai.GenerativeModel('gemini-1.5-flash')
 
 @app.route('/')
@@ -14,16 +14,19 @@ def index():
 
 @app.route('/resultado')
 def resultado():
-    p1 = request.args.get('produto1')
-    p2 = request.args.get('produto2')
+    p1 = request.args.get('produto1', 'Produto 1')
+    p2 = request.args.get('produto2', 'Produto 2')
     
-    # Pergunta para a IA buscar os dados
-    prompt = f"Crie uma ficha técnica comparativa em formato de lista simples para: {p1} e {p2}. Inclua: Preço, Tela, Bateria, Câmera e Processador. Depois faça um resumo comparativo."
+    # IA busca os dados
+    prompt = f"Crie uma ficha técnica técnica curta e objetiva para os produtos: {p1} e {p2}. Liste apenas: Preço, Tela, Bateria, Câmera e Processador."
     
-    response = model.generate_content(prompt)
-    analise_completa = response.text
+    try:
+        response = model.generate_content(prompt)
+        resultado_ia = response.text
+    except Exception as e:
+        resultado_ia = "Erro ao carregar dados da IA. Tente novamente."
     
-    return render_template('resultado.html', p1=p1, p2=p2, analise=analise_completa)
+    return render_template('resultado.html', p1=p1, p2=p2, analise=resultado_ia)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
