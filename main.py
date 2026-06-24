@@ -1,10 +1,9 @@
 from flask import Flask, render_template, request
 import os
-import time
 import google.generativeai as genai
-from config import Config  # <--- ESSA LINHA CONECTA OS DOIS ARQUIVOS
+from config import Config
 
-# Validar configuração logo no início
+# Validação obrigatória da chave
 Config.validate()
 
 app = Flask(__name__)
@@ -17,21 +16,38 @@ def index():
 def resultado():
     termo = request.args.get('pesquisa', 'Produto')
     
-    # Agora usamos a chave que vem do config.py
-    api_key = Config.GOOGLE_API_KEY
-
     try:
-        genai.configure(api_key=api_key)
+        genai.configure(api_key=Config.GOOGLE_API_KEY)
         model = genai.GenerativeModel('gemini-1.5-flash')
         
-        prompt = f"Liste 5 opções para o produto '{termo}'. Forneça: Nome, Preço Médio e Diferencial. Lista limpa."
+        # Prompt otimizado para o Python separar os dados depois
+        prompt = f"Liste 5 opções para o produto '{termo}'. Formate cada linha exatamente assim: Nome do Produto;Preço Médio;Diferencial. Não escreva introduções."
         
         response = model.generate_content(prompt)
-        lista_produtos = response.text
-    except Exception as e:
-        lista_produtos = f"Erro na conexão com a IA: {str(e)}"
+        
+        # Processamento: transforma o texto em uma lista de objetos
+        lista_final = []
+        linhas = response.text.strip().split('\n')
+        
+        for linha in linhas:
+            if ';' in linha:
+                partes = linha.split(';')
+                if len(partes) >= 3:
+                    nome = partes[0].strip()
+                    preco = partes[1].strip()
+                    dif = partes[2].strip()
+                    # Link mágico para o Google Shopping
+                    link = f"https://www.google.com/search?q={nome.replace(' ', '+')}&tbm=shop"
+                    lista_final.append({'nome': nome, 'preco': preco, 'dif': dif, 'link': link})
+        
+        # Caso o Gemini não siga o formato, envia o texto bruto
+        if not lista_final:
+            lista_final = [{'nome': "Erro na formatação", 'preco': "-", 'dif': response.text, 'link': "#"}]
 
-    return render_template('resultado.html', termo=termo, lista=lista_produtos)
+    except Exception as e:
+        lista_final = [{'nome': "Erro", 'preco': "-", 'dif': str(e), 'link': "#"}]
+
+    return render_template('resultado.html', termo=termo, lista=lista_final)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
