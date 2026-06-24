@@ -1,24 +1,29 @@
 from flask import Flask, render_template, request
 import os
+import google.generativeai as genai
 
 app = Flask(__name__)
 
-# Rota para a página inicial (Busca)
+# Configure a sua chave aqui
+genai.configure(api_key="COLE_SUA_API_KEY_AQUI")
+model = genai.GenerativeModel('gemini-1.5-flash')
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# Rota para a página de resultado
 @app.route('/resultado')
 def resultado():
-    # Pega o que o usuário digitou
-    p1 = request.args.get('produto1', 'Produto 1')
-    p2 = request.args.get('produto2', 'Produto 2')
+    p1 = request.args.get('produto1')
+    p2 = request.args.get('produto2')
     
-    # Análise fixa para garantir o funcionamento
-    analise = f"Análise entre {p1} e {p2}: Ambos são excelentes, mas cada um atende a um perfil diferente."
+    # Pergunta para a IA buscar os dados
+    prompt = f"Crie uma ficha técnica comparativa em formato de lista simples para: {p1} e {p2}. Inclua: Preço, Tela, Bateria, Câmera e Processador. Depois faça um resumo comparativo."
     
-    return render_template('resultado.html', p1=p1, p2=p2, analise=analise)
+    response = model.generate_content(prompt)
+    analise_completa = response.text
+    
+    return render_template('resultado.html', p1=p1, p2=p2, analise=analise_completa)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
