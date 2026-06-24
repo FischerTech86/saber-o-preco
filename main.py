@@ -4,6 +4,9 @@ import google.generativeai as genai
 
 app = Flask(__name__)
 
+# Configuração da chave de API
+api_key = os.environ.get("GOOGLE_API_KEY")
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -12,25 +15,19 @@ def index():
 def resultado():
     termo = request.args.get('pesquisa', 'Produto')
     
-    # Pega a chave da API do servidor
-    api_key = os.environ.get("GOOGLE_API_KEY")
-    
-    # Se a chave nem existir, ele já avisa na tela
     if not api_key:
-         return render_template('resultado.html', termo=termo, lista="ERRO GRAVE: O Render não encontrou a sua GOOGLE_API_KEY. Você precisa adicionar ela na aba 'Environment' do Render.")
+        return "ERRO GRAVE: A variável GOOGLE_API_KEY não foi encontrada pelo servidor. Verifique a aba 'Environment' no Render."
 
     try:
         genai.configure(api_key=api_key)
         model = genai.GenerativeModel('gemini-1.5-flash')
         
-        prompt = f"Liste 3 opções de {termo} de forma bem curta."
+        prompt = f"Liste 5 opções, marcas ou modelos para o produto '{termo}'. Para cada um, forneça: Nome do Produto, Preço Médio Estimado e um Curto Diferencial. Formate como uma lista limpa."
+        
         response = model.generate_content(prompt)
-        
         lista_produtos = response.text
-        
     except Exception as e:
-        # AQUI ESTÁ A MÁGICA: Ele vai escrever na tela o erro exato que o Google ou o servidor retornar!
-        lista_produtos = f"ERRO TÉCNICO DETECTADO:\n\n{str(e)}\n\n(Copie esse erro e mande para o assistente)"
+        lista_produtos = f"Erro ao processar busca: {str(e)}"
 
     return render_template('resultado.html', termo=termo, lista=lista_produtos)
 
