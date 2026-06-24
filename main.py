@@ -3,8 +3,6 @@ import os
 import google.generativeai as genai
 
 app = Flask(__name__)
-
-# Configuração da chave de API vinda das variáveis de ambiente do Render
 genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
 model = genai.GenerativeModel('gemini-1.5-flash')
 
@@ -14,16 +12,22 @@ def index():
 
 @app.route('/resultado')
 def resultado():
-    p1 = request.args.get('produto1', 'Produto 1')
-    p2 = request.args.get('produto2', 'Produto 2')
+    p1 = request.args.get('produto1')
+    p2 = request.args.get('produto2')
     
-    prompt = f"Crie um comparativo técnico entre {p1} e {p2}. Liste: Preço, Tela, Bateria, Câmera e Processador, seguido de um resumo final."
+    # Pedimos para a IA separar os dados técnicos de forma estruturada
+    prompt = f"""
+    Crie uma ficha técnica comparativa para: {p1} e {p2}.
+    Para CADA produto, forneça apenas: Preço, Tela, Processador, Armazenamento e Câmera.
+    Depois, forneça um 'Veredito Geral' e 'Recomendação' como na imagem original.
+    Formate a resposta para que eu possa exibir em cards separados.
+    """
     
     try:
         response = model.generate_content(prompt)
         analise = response.text
     except Exception:
-        analise = "Erro ao conectar com a IA. Verifique sua chave API no Render."
+        analise = "Erro ao buscar dados."
     
     return render_template('resultado.html', p1=p1, p2=p2, analise=analise)
 
