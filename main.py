@@ -1,10 +1,6 @@
 from flask import Flask, render_template, request
 import os
 import google.generativeai as genai
-from config import Config
-
-# Validação obrigatória da chave
-Config.validate()
 
 app = Flask(__name__)
 
@@ -15,39 +11,27 @@ def index():
 @app.route('/resultado')
 def resultado():
     termo = request.args.get('pesquisa', 'Produto')
-    
+    api_key = os.environ.get("GOOGLE_API_KEY")
+
+    # Se não tiver chave, o site não trava, apenas avisa na tela
+    if not api_key:
+        mensagem = "A inteligência artificial está temporariamente indisponível no momento."
+        return render_template('resultado.html', termo=termo, lista=mensagem)
+
     try:
-        genai.configure(api_key=Config.GOOGLE_API_KEY)
+        genai.configure(api_key=api_key)
         model = genai.GenerativeModel('gemini-1.5-flash')
         
-        # Prompt otimizado para o Python separar os dados depois
-        prompt = f"Liste 5 opções para o produto '{termo}'. Formate cada linha exatamente assim: Nome do Produto;Preço Médio;Diferencial. Não escreva introduções."
-        
+        prompt = f"Liste 5 opções para o produto '{termo}'. Formate como: Nome;Preço;Diferencial."
         response = model.generate_content(prompt)
         
-        # Processamento: transforma o texto em uma lista de objetos
-        lista_final = []
-        linhas = response.text.strip().split('\n')
-        
-        for linha in linhas:
-            if ';' in linha:
-                partes = linha.split(';')
-                if len(partes) >= 3:
-                    nome = partes[0].strip()
-                    preco = partes[1].strip()
-                    dif = partes[2].strip()
-                    # Link mágico para o Google Shopping
-                    link = f"https://www.google.com/search?q={nome.replace(' ', '+')}&tbm=shop"
-                    lista_final.append({'nome': nome, 'preco': preco, 'dif': dif, 'link': link})
-        
-        # Caso o Gemini não siga o formato, envia o texto bruto
-        if not lista_final:
-            lista_final = [{'nome': "Erro na formatação", 'preco': "-", 'dif': response.text, 'link': "#"}]
-
+        # Aqui você mantém a lógica de tratar o texto se quiser continuar usando a IA
+        # Se quiser apenas testar o site sem a IA, pode remover o bloco de try/except acima
+        resultado_final = response.text 
     except Exception as e:
-        lista_final = [{'nome': "Erro", 'preco': "-", 'dif': str(e), 'link': "#"}]
+        resultado_final = f"Ocorreu um erro ao processar: {str(e)}"
 
-    return render_template('resultado.html', termo=termo, lista=lista_final)
+    return render_template('resultado.html', termo=termo, lista=resultado_final)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
