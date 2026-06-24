@@ -15,7 +15,7 @@ def resultado():
 
     # Se não tiver chave, o site não trava, apenas avisa na tela
     if not api_key:
-        mensagem = "A inteligência artificial está temporariamente indisponível no momento."
+        mensagem = "A chave da API não está configurada no servidor. Por favor, adicione a variável GOOGLE_API_KEY no Render."
         return render_template('resultado.html', termo=termo, lista=mensagem)
 
     try:
@@ -25,8 +25,6 @@ def resultado():
         prompt = f"Liste 5 opções para o produto '{termo}'. Formate como: Nome;Preço;Diferencial."
         response = model.generate_content(prompt)
         
-        # Aqui você mantém a lógica de tratar o texto se quiser continuar usando a IA
-        # Se quiser apenas testar o site sem a IA, pode remover o bloco de try/except acima
         resultado_final = response.text 
     except Exception as e:
         resultado_final = f"Ocorreu um erro ao processar: {str(e)}"
@@ -35,4 +33,5 @@ def resultado():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)    port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
