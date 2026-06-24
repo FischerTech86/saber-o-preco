@@ -2,20 +2,25 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OPTIMO - Busca</title>
     <style>
-        body { background-color: #000; color: #fff; text-align: center; font-family: Arial, sans-serif; }
-        .logo { font-size: 60px; font-weight: bold; margin-top: 150px; color: #60a5fa; }
-        .search-box { margin-top: 30px; }
-        input { width: 500px; padding: 15px; border-radius: 30px; border: 1px solid #333; background: #111; color: white; outline: none; }
+        body { background-color: #000; color: #fff; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        .logo { font-size: 60px; font-weight: bold; color: #60a5fa; margin-bottom: 30px; letter-spacing: -1px; }
+        .search-box { width: 100%; text-align: center; }
+        input { width: 90%; max-width: 550px; padding: 15px 20px; border-radius: 30px; border: 1px solid #444; background: #111; color: white; font-size: 16px; outline: none; transition: border-color 0.3s; }
+        input:focus { border-color: #60a5fa; background: #1a1a1a; }
     </style>
 </head>
 <body>
-    <div class="logo">OPTIMO</div>
-    <div class="search-box">
-        <form action="/resultado" method="GET">
-            <input type="text" name="pesquisa" placeholder="O que você está procurando hoje?" required>
-        </form>
+    <div class="container">
+        <div class="logo">OPTIMO</div>
+        <div class="search-box">
+            <form action="/resultado" method="GET">
+                <input type="text" name="pesquisa" placeholder="O que você está procurando hoje?" required autocomplete="off">
+            </form>
+        </div>
     </div>
 </body>
 </html>
