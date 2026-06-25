@@ -2,9 +2,8 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Busca de Produtos</title>
+    <title>Optimo</title>
     <style>
-        /* Estilo Dark Mode */
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             padding: 40px; 
@@ -14,8 +13,21 @@
             margin: auto; 
         }
         
-        h1 { color: #60a5fa; }
-        
+        /* Estilo para o título animado */
+        .animated-title {
+            font-size: 3.5rem; /* Bem grande */
+            text-align: center;
+            color: #60a5fa;
+            margin-bottom: 20px;
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
+
         .card { 
             background: #1a1a1a; 
             border: 1px solid #333; 
@@ -24,24 +36,9 @@
             border-radius: 10px; 
         }
         
-        input { 
-            padding: 12px; 
-            width: 70%; 
-            border-radius: 5px; 
-            border: none; 
-            font-size: 16px;
-        }
-        
-        button { 
-            padding: 12px 20px; 
-            background: #60a5fa; 
-            color: white; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            font-size: 16px;
-        }
-        
+        form { text-align: center; margin-bottom: 40px; }
+        input { padding: 12px; width: 60%; border-radius: 5px; border: none; font-size: 16px; }
+        button { padding: 12px 20px; background: #60a5fa; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-left: 10px;}
         button:hover { background: #3b82f6; }
         
         a { color: #60a5fa; text-decoration: none; font-weight: bold; }
@@ -50,7 +47,7 @@
 </head>
 <body>
 
-    <h1>Pesquisar Produtos</h1>
+    <h1 class="animated-title">Optimo</h1>
     
     <form action="/" method="GET">
         <input type="text" name="pesquisa" placeholder="O que você procura?" required>
