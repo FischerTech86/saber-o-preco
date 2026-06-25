@@ -3,33 +3,24 @@ import os
 
 app = Flask(__name__)
 
+# Esta linha define a rota da página inicial
 @app.route('/')
 def index():
+    # 1. Captura o que o usuário digitou
     termo = request.args.get('pesquisa', '')
     lista = []
     
+    # 2. Se tiver pesquisa, cria a lista (a lógica de busca)
     if termo:
         busca = termo.replace(" ", "+")
-        
-        # A lista agora foca apenas no nome, diferencial e link
         lista = [
-            {
-                'nome': f'{termo} Premium',
-                'dif': 'Alta qualidade e durabilidade',
-                'link': f'https://www.google.com/search?q={busca}+premium&tbm=shop'
-            },
-            {
-                'nome': f'{termo} Padrão',
-                'dif': 'Equilíbrio ideal entre preço e qualidade',
-                'link': f'https://www.google.com/search?q={busca}+padrao&tbm=shop'
-            },
-            {
-                'nome': f'{termo} Econômico',
-                'dif': 'Opção mais barata disponível',
-                'link': f'https://www.google.com/search?q={busca}+barato&tbm=shop'
-            }
+            {'nome': f'{termo} Premium', 'dif': 'Alta qualidade', 'link': f'https://www.google.com/search?q={busca}+premium&tbm=shop'},
+            {'nome': f'{termo} Padrão', 'dif': 'Equilíbrio', 'link': f'https://www.google.com/search?q={busca}+padrao&tbm=shop'},
+            {'nome': f'{termo} Econômico', 'dif': 'Preço baixo', 'link': f'https://www.google.com/search?q={busca}+barato&tbm=shop'}
         ]
     
+    # 3. Aqui é onde entra a linha que você mandou!
+    # Ela "entrega" as variáveis para o seu arquivo HTML.
     return render_template('index.html', termo=termo, lista=lista)
 
 if __name__ == '__main__':
