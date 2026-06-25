@@ -4,8 +4,48 @@
     <meta charset="UTF-8">
     <title>Busca de Produtos</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; max-width: 800px; margin: auto; }
-        .card { border: 1px solid #ccc; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        /* Estilo Dark Mode */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            padding: 40px; 
+            background: #000; 
+            color: #fff; 
+            max-width: 800px; 
+            margin: auto; 
+        }
+        
+        h1 { color: #60a5fa; }
+        
+        .card { 
+            background: #1a1a1a; 
+            border: 1px solid #333; 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 10px; 
+        }
+        
+        input { 
+            padding: 12px; 
+            width: 70%; 
+            border-radius: 5px; 
+            border: none; 
+            font-size: 16px;
+        }
+        
+        button { 
+            padding: 12px 20px; 
+            background: #60a5fa; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-size: 16px;
+        }
+        
+        button:hover { background: #3b82f6; }
+        
+        a { color: #60a5fa; text-decoration: none; font-weight: bold; }
+        a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -13,11 +53,11 @@
     <h1>Pesquisar Produtos</h1>
     
     <form action="/" method="GET">
-        <input type="text" name="pesquisa" placeholder="Digite o produto..." required>
+        <input type="text" name="pesquisa" placeholder="O que você procura?" required>
         <button type="submit">Buscar</button>
     </form>
 
-    <hr>
+    <hr style="border: 0; border-top: 1px solid #333; margin: 30px 0;">
 
     {% if lista %}
         <h2>Resultados para: {{ termo }}</h2>
@@ -25,13 +65,11 @@
             <div class="card">
                 <h3>{{ item.nome }}</h3>
                 <p><strong>Diferencial:</strong> {{ item.dif }}</p>
-                <a href="{{ item.link }}" target="_blank" style="color: #007bff; font-weight: bold;">Ver no Google Shopping</a>
+                <a href="{{ item.link }}" target="_blank">Ver no Google Shopping</a>
             </div>
         {% endfor %}
     {% elif termo %}
-        <p>Nenhum produto encontrado para "{{ termo }}".</p>
-    {% else %}
-        <p>Digite algo na caixa acima para começar a busca.</p>
+        <p>Nenhum resultado encontrado para "{{ termo }}".</p>
     {% endif %}
 
 </body>
