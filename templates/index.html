@@ -1,26 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OPTIMO - Busca</title>
+    <title>Minha Busca</title>
     <style>
-        body { background-color: #000; color: #fff; font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        .logo { font-size: 60px; font-weight: bold; color: #60a5fa; margin-bottom: 30px; letter-spacing: -1px; }
-        .search-box { width: 100%; text-align: center; }
-        input { width: 90%; max-width: 550px; padding: 15px 20px; border-radius: 30px; border: 1px solid #444; background: #111; color: white; font-size: 16px; outline: none; transition: border-color 0.3s; }
-        input:focus { border-color: #60a5fa; background: #1a1a1a; }
+        body { font-family: sans-serif; padding: 40px; background: #000; color: #fff; }
+        .container { max-width: 600px; margin: auto; }
+        .card-produto { background: #1a1a1a; padding: 20px; margin-top: 20px; border-radius: 10px; }
+        .btn-link { display: inline-block; background: #60a5fa; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; margin-top: 10px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo">OPTIMO</div>
-        <div class="search-box">
-            <form action="/resultado" method="GET">
-                <input type="text" name="pesquisa" placeholder="O que você está procurando hoje?" required autocomplete="off">
-            </form>
-        </div>
+        <h1>O que você procura?</h1>
+        <form action="/" method="GET">
+            <input type="text" name="pesquisa" placeholder="Digite o produto..." required style="padding: 10px; width: 70%;">
+            <button type="submit" style="padding: 10px;">Buscar</button>
+        </form>
+
+        {% if lista %}
+            <h2>Resultados para: {{ termo }}</h2>
+            {% for item in lista %}
+                <div class="card-produto">
+                    <h3>{{ item.nome }}</h3>
+                    <p><strong>Preço:</strong> {{ item.preco }}</p>
+                    <p><strong>Diferencial:</strong> {{ item.dif }}</p>
+                    <a href="{{ item.link }}" target="_blank" class="btn-link">Ver no Google Shopping</a>
+                </div>
+            {% endfor %}
+        {% elif termo %}
+            <p>Nenhum resultado encontrado para "{{ termo }}".</p>
+        {% endif %}
     </div>
 </body>
 </html>
