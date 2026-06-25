@@ -1,21 +1,7 @@
-<!DOCTYPE html>
-<html>
-<body>
-    <h1>Busca de Produtos</h1>
-    <form action="/" method="GET">
-        <input type="text" name="pesquisa" placeholder="Digite o produto..." required>
-        <button type="submit">Buscar</button>
-    </form>
-
-    {% if lista %}
-        <h2>Resultados para: {{ termo }}</h2>
-        {% for item in lista %}
-            <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
-                <h3>{{ item.nome }}</h3>
-                <p>Preço: {{ item.preco }}</p>
-                <a href="{{ item.link }}" target="_blank">Ver no Google Shopping</a>
-            </div>
-        {% endfor %}
-    {% endif %}
-</body>
-</html>
+{% for item in lista %}
+    <div style="border: 1px solid #ccc; padding: 15px; margin: 10px 0; border-radius: 8px;">
+        <h3>{{ item.nome }}</h3>
+        <p><strong>Diferencial:</strong> {{ item.dif }}</p>
+        <a href="{{ item.link }}" target="_blank" style="text-decoration: none; color: #007bff; font-weight: bold;">Ver no Google Shopping</a>
+    </div>
+{% endfor %}
