@@ -9,10 +9,25 @@ def index():
     lista = []
     
     if termo:
-        # Simulando resultados
+        busca = termo.replace(" ", "+")
+        
+        # A lista agora foca apenas no nome, diferencial e link
         lista = [
-            {'nome': f'{termo} Marca A', 'preco': 'R$ 10,00', 'dif': 'Melhor preço', 'link': f'https://www.google.com/search?q={termo.replace(" ", "+")}+marca+a&tbm=shop'},
-            {'nome': f'{termo} Marca B', 'preco': 'R$ 15,00', 'dif': 'Melhor qualidade', 'link': f'https://www.google.com/search?q={termo.replace(" ", "+")}+marca+b&tbm=shop'},
+            {
+                'nome': f'{termo} Premium',
+                'dif': 'Alta qualidade e durabilidade',
+                'link': f'https://www.google.com/search?q={busca}+premium&tbm=shop'
+            },
+            {
+                'nome': f'{termo} Padrão',
+                'dif': 'Equilíbrio ideal entre preço e qualidade',
+                'link': f'https://www.google.com/search?q={busca}+padrao&tbm=shop'
+            },
+            {
+                'nome': f'{termo} Econômico',
+                'dif': 'Opção mais barata disponível',
+                'link': f'https://www.google.com/search?q={busca}+barato&tbm=shop'
+            }
         ]
     
     return render_template('index.html', termo=termo, lista=lista)
