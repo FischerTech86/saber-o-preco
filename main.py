@@ -5,11 +5,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    termo = request.args.get('pesquisa')
+    termo = request.args.get('pesquisa', '')
     lista = []
     
-    # Se o usuário pesquisou algo, geramos a lista (simulando dados)
     if termo:
+        # Simulando resultados
         lista = [
             {'nome': f'{termo} Marca A', 'preco': 'R$ 10,00', 'dif': 'Melhor preço', 'link': f'https://www.google.com/search?q={termo.replace(" ", "+")}+marca+a&tbm=shop'},
             {'nome': f'{termo} Marca B', 'preco': 'R$ 15,00', 'dif': 'Melhor qualidade', 'link': f'https://www.google.com/search?q={termo.replace(" ", "+")}+marca+b&tbm=shop'},
