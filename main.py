@@ -3,21 +3,10 @@ import os
 
 app = Flask(__name__)
 
-# Rota principal (Busca)
 @app.route('/')
 def index():
-    termo = request.args.get('pesquisa', '')
-    lista = []
-    if termo:
-        busca = termo.replace(" ", "+")
-        lista = [
-            {'nome': f'{termo} Premium', 'dif': 'Alta qualidade e durabilidade', 'link': f'https://www.google.com/search?q={busca}+premium&tbm=shop'},
-            {'nome': f'{termo} Padrão', 'dif': 'Equilíbrio ideal entre preço e qualidade', 'link': f'https://www.google.com/search?q={busca}+padrao&tbm=shop'},
-            {'nome': f'{termo} Econômico', 'dif': 'Opção mais barata disponível', 'link': f'https://www.google.com/search?q={busca}+barato&tbm=shop'}
-        ]
-    return render_template('index.html', termo=termo, lista=lista)
+    return render_template('index.html')
 
-# Rotas simples
 @app.route('/dicas')
 def dicas():
     return render_template('dicas.html')
