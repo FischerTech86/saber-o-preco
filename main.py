@@ -3,46 +3,33 @@ import os
 
 app = Flask(__name__)
 
-# Rota para a página inicial
+# Rota principal (Busca)
 @app.route('/')
 def index():
-    return render_template('index.html')
+    termo = request.args.get('pesquisa', '')
+    lista = []
+    if termo:
+        busca = termo.replace(" ", "+")
+        lista = [
+            {'nome': f'{termo} Premium', 'dif': 'Alta qualidade e durabilidade', 'link': f'https://www.google.com/search?q={busca}+premium&tbm=shop'},
+            {'nome': f'{termo} Padrão', 'dif': 'Equilíbrio ideal entre preço e qualidade', 'link': f'https://www.google.com/search?q={busca}+padrao&tbm=shop'},
+            {'nome': f'{termo} Econômico', 'dif': 'Opção mais barata disponível', 'link': f'https://www.google.com/search?q={busca}+barato&tbm=shop'}
+        ]
+    return render_template('index.html', termo=termo, lista=lista)
 
-# Rota para a página de IA (Comparação de produtos)
-@app.route('/ia', methods=['GET', 'POST'])
-def ia():
-    analise = None
-    prodA = ""
-    prodB = ""
-    
-    if request.method == 'POST':
-        prodA = request.form.get('prodA', '')
-        prodB = request.form.get('prodB', '')
-        
-        if prodA and prodB:
-            # Aqui você poderá, no futuro, conectar a API da IA real
-            analise = f"Análise Comparativa: Comparando '{prodA}' com '{prodB}'. O {prodA} apresenta características robustas, enquanto o {prodB} se destaca pela eficiência e preço. Recomendamos avaliar suas prioridades antes de decidir."
-        else:
-            analise = "Por favor, preencha o nome dos dois produtos para realizar a comparação."
-            
-    return render_template('ia.html', analise=analise, prodA=prodA, prodB=prodB)
-
-# Rota para Dicas
+# Rotas simples
 @app.route('/dicas')
 def dicas():
     return render_template('dicas.html')
 
-# Rota para Política
 @app.route('/politica')
 def politica():
     return render_template('politica.html')
 
-# Rota para Sobre
 @app.route('/sobre')
 def sobre():
     return render_template('sobre.html')
 
 if __name__ == '__main__':
-    # Configuração para rodar no Render (ou localmente)
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
