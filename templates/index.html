@@ -2,42 +2,51 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Optimo | Comparador</title>
+    <title>Optimo | Busca e IA</title>
     <style>
-        body { background: #0a111a; color: #fff; font-family: sans-serif; margin: 0; padding: 20px; }
+        body { background: #0a111a; color: #fff; font-family: sans-serif; padding: 20px; }
         .nav-menu { text-align: center; margin-bottom: 40px; }
-        .nav-menu a { color: #60a5fa; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        .nav-menu a { color: #60a5fa; margin: 0 15px; text-decoration: none; }
         
         .container { max-width: 900px; margin: 0 auto; }
-        h1 { text-align: center; color: #60a5fa; margin-bottom: 30px; }
+        h1 { text-align: center; color: #60a5fa; }
         
+        /* Estilo da Busca */
+        .search-box { text-align: center; margin-bottom: 50px; }
+        input[name="pesquisa"] { width: 60%; padding: 12px; border-radius: 20px; border: none; background: #111a28; color: white; border: 1px solid #333; }
+        
+        /* Estilo da IA */
         .form-area { display: flex; gap: 20px; margin-bottom: 30px; }
         .card { background: #111a28; padding: 20px; border-radius: 10px; border: 1px solid #333; flex: 1; }
-        input { width: 90%; padding: 12px; margin-top: 10px; border-radius: 5px; border: none; background: #222; color: white; }
-        button { width: 100%; padding: 15px; background: #60a5fa; border: none; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        input[type="text"] { width: 90%; padding: 10px; margin-top: 5px; background: #222; border: none; color: white; border-radius: 5px; }
+        button { padding: 10px 20px; background: #60a5fa; border: none; border-radius: 5px; color: white; cursor: pointer; }
         
-        .resultado { background: #111a28; padding: 25px; border-radius: 10px; border: 1px solid #60a5fa; margin-top: 20px; }
+        .resultado { background: #111a28; padding: 20px; border-radius: 10px; border: 1px solid #60a5fa; margin-top: 20px; }
     </style>
 </head>
 <body>
     <nav class="nav-menu">
-        <a href="/">Início</a>
-        <a href="/dicas">Dicas</a>
-        <a href="/politica">Política</a>
-        <a href="/sobre">Sobre</a>
+        <a href="/">Início</a> <a href="/dicas">Dicas</a>
     </nav>
 
     <div class="container">
         <h1>Optimo</h1>
+
+        <div class="search-box">
+            <form action="/" method="GET">
+                <input type="text" name="pesquisa" placeholder="O que você procura?" required>
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+
         <form method="POST" action="/">
+            <h3>Comparador de IA</h3>
             <div class="form-area">
                 <div class="card">
-                    <label>Produto A</label>
-                    <input type="text" name="prodA" value="{{ prodA or '' }}" placeholder="Ex: Samsung S23" required>
+                    <input type="text" name="prodA" placeholder="Produto A" value="{{ prodA or '' }}" required>
                 </div>
                 <div class="card">
-                    <label>Produto B</label>
-                    <input type="text" name="prodB" value="{{ prodB or '' }}" placeholder="Ex: iPhone 15" required>
+                    <input type="text" name="prodB" placeholder="Produto B" value="{{ prodB or '' }}" required>
                 </div>
             </div>
             <button type="submit">Comparar Produtos</button>
@@ -45,7 +54,6 @@
 
         {% if analise %}
         <div class="resultado">
-            <h3>Análise Comparativa</h3>
             <p>{{ analise }}</p>
         </div>
         {% endif %}
