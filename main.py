@@ -3,26 +3,35 @@ import os
 
 app = Flask(__name__)
 
+# Simulação simples de banco de dados para os produtos
+def buscar_dados_produto(nome):
+    # Aqui é onde, no futuro, você usará a API da IA para buscar dados reais
+    return {
+        "nome": nome.upper(),
+        "tela": "6.7 polegadas AMOLED",
+        "bateria": "5000 mAh",
+        "processador": "Octa-core de alta performance",
+        "camera": "108 MP"
+    }
+
 @app.route('/ia', methods=['GET', 'POST'])
 def ia():
+    res_a = None
+    res_b = None
     analise = None
-    prodA = ""
-    prodB = ""
-    
+
     if request.method == 'POST':
-        prodA = request.form.get('prodA')
-        prodB = request.form.get('prodB')
+        prod_a = request.form.get('prodA')
+        prod_b = request.form.get('prodB')
         
-        # Aqui é onde a mágica acontece. 
-        # Em breve, você trocará esse texto por uma chamada de API (OpenAI/Gemini)
-        analise = f"Análise Comparativa: Comparando '{prodA}' com '{prodB}'. O {prodA} apresenta um custo-benefício mais atrativo, enquanto o {prodB} oferece maior durabilidade. Para o seu dia a dia, a melhor opção é o {prodA}."
+        # Busca os dados (Simulando)
+        res_a = buscar_dados_produto(prod_a)
+        res_b = buscar_dados_produto(prod_b)
+        
+        # Aqui a IA diria o veredito
+        analise = f"Análise: O {res_a['nome']} se destaca pelo processamento, enquanto o {res_b['nome']} oferece um melhor custo-benefício em tela. Recomendamos o {res_a['nome']} para uso intenso."
 
-    return render_template('ia.html', analise=analise, prodA=prodA, prodB=prodB)
-
-# --- Suas outras rotas (index, dicas, etc) continuam aqui ---
-@app.route('/')
-def index():
-    return render_template('index.html')
+    return render_template('ia.html', res_a=res_a, res_b=res_b, analise=analise)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
