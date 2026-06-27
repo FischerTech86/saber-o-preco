@@ -3,6 +3,7 @@ import os
 
 app = Flask(__name__)
 
+# Rota Principal com Busca
 @app.route('/', methods=['GET'])
 def index():
     termo = request.args.get('pesquisa', '')
@@ -16,23 +17,7 @@ def index():
         ]
     return render_template('index.html', lista=lista)
 
-@app.route('/ia', methods=['GET', 'POST'])
-def ia():
-    analise = None
-    prodA = ""
-    prodB = ""
-    
-    if request.method == 'POST':
-        prodA = request.form.get('prodA')
-        prodB = request.form.get('prodB')
-        
-        # Lógica de comparação
-        if prodA and prodB:
-            analise = f"Análise Comparativa: Comparando '{prodA}' e '{prodB}'. O {prodA} apresenta um custo-benefício atrativo, enquanto o {prodB} se destaca pela performance técnica. Recomendamos analisar o uso pretendido antes da compra."
-    
-    # IMPORTANTE: Enviando prodA e prodB de volta para o HTML
-    return render_template('ia.html', analise=analise, prodA=prodA, prodB=prodB)
-
+# Rotas simples
 @app.route('/dicas')
 def dicas(): return render_template('dicas.html')
 
