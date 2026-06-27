@@ -3,21 +3,26 @@ import os
 
 app = Flask(__name__)
 
-# Rota Principal com Busca
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    termo = request.args.get('pesquisa', '')
-    lista = []
-    if termo:
-        busca_url = termo.replace(" ", "+")
-        lista = [
-            {'nome': f'{termo} Premium', 'dif': 'Alta qualidade e durabilidade', 'link': f'https://www.google.com/search?q={busca_url}+premium&tbm=shop'},
-            {'nome': f'{termo} Padrão', 'dif': 'Equilíbrio ideal entre preço e qualidade', 'link': f'https://www.google.com/search?q={busca_url}+padrao&tbm=shop'},
-            {'nome': f'{termo} Econômico', 'dif': 'Opção mais barata disponível', 'link': f'https://www.google.com/search?q={busca_url}+barato&tbm=shop'}
-        ]
-    return render_template('index.html', lista=lista)
+    analise = None
+    prodA = None
+    prodB = None
+    
+    if request.method == 'POST':
+        # Captura os dados do formulário
+        prodA = request.form.get('prodA')
+        prodB = request.form.get('prodB')
+        
+        # Lógica de comparação (aqui você pode integrar com uma API futuramente)
+        if prodA and prodB:
+            analise = (f"Análise Comparativa: Comparando '{prodA}' com '{prodB}'. "
+                       f"O {prodA} se destaca em usabilidade e design, enquanto o "
+                       f"{prodB} apresenta um desempenho técnico superior em processamento. "
+                       f"A escolha ideal depende se o seu foco é produtividade ou performance bruta.")
+            
+    return render_template('index.html', analise=analise, prodA=prodA, prodB=prodB)
 
-# Rotas simples
 @app.route('/dicas')
 def dicas(): return render_template('dicas.html')
 
