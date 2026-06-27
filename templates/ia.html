@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>IA Optimo</title>
+    <style>
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 20px; min-height: 100vh; }
+        .nav-menu { text-align: center; margin-bottom: 40px; }
+        .nav-menu a { color: #60a5fa; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 30px; }
+        
+        .form-area { display: flex; gap: 20px; justify-content: center; }
+        .card { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 15px; width: 45%; border: 1px solid #333; }
+        input { width: 90%; padding: 10px; border-radius: 5px; border: none; background: #111; color: #fff; margin-top: 10px; }
+        
+        .btn-center { text-align: center; margin: 30px 0; }
+        button { padding: 15px 40px; background: #60a5fa; border: none; border-radius: 50px; cursor: pointer; color: white; font-weight: bold; font-size: 1.1rem; }
+        
+        .analise-box { background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 15px; border: 1px solid #60a5fa; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-menu">
+        <a href="/">Início</a>
+        <a href="/dicas">Dicas</a>
+        <a href="/politica">Política</a>
+        <a href="/sobre">Sobre</a>
+        <a href="/ia" style="color: white; border-bottom: 2px solid #60a5fa;">IA Optimo</a>
+    </nav>
+
+    <div class="container">
+        <h1>IA Optimo</h1>
+        
+        <form method="POST" action="/ia">
+            <div class="form-area">
+                <div class="card">
+                    <h3>Produto A</h3>
+                    <input type="text" name="prodA" placeholder="Insira o Produto A" value="{{ prodA or '' }}" required>
+                </div>
+                <div class="card">
+                    <h3>Produto B</h3>
+                    <input type="text" name="prodB" placeholder="Insira o Produto B" value="{{ prodB or '' }}" required>
+                </div>
+            </div>
+            <div class="btn-center">
+                <button type="submit">Comparar Produtos</button>
+            </div>
+        </form>
+
+        {% if resultado %}
+        <div class="analise-box">
+            <h2>Análise Comparativa OPTIMO</h2>
+            <p>{{ resultado }}</p>
+        </div>
+        {% else %}
+        <div class="analise-box">
+            <h2>Análise Comparativa</h2>
+            <p>Aguardando a comparação dos produtos...</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
