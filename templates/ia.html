@@ -4,70 +4,22 @@
     <meta charset="UTF-8">
     <title>IA Optimo - Comparação</title>
     <style>
-        /* Aplicação da luz de fundo (gradiente azul) */
         body { 
             background: radial-gradient(circle at 20% 20%, #1e3a8a, transparent 40%), 
                         radial-gradient(circle at 80% 80%, #1e40af, transparent 40%), 
                         #000; 
-            color: #fff; 
-            font-family: sans-serif; 
-            padding: 40px; 
-            margin: 0; 
-            min-height: 100vh; 
+            color: #fff; font-family: sans-serif; padding: 40px; margin: 0; min-height: 100vh; 
         }
-        
         .nav-menu { text-align: center; margin-bottom: 30px; }
         .nav-menu a { color: #60a5fa; margin: 0 10px; text-decoration: none; font-weight: bold; }
         
-        /* Container principal centralizado */
-        .main-container { 
-            display: flex; 
-            gap: 20px; 
-            justify-content: center; 
-            margin-bottom: 30px; 
-        }
+        .main-container { display: flex; gap: 20px; justify-content: center; margin-bottom: 30px; }
+        .product-card { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 15px; width: 40%; border: 1px solid rgba(255, 255, 255, 0.1); text-align: center; }
         
-        /* Estilo dos cards */
-        .product-card { 
-            background: rgba(255, 255, 255, 0.05); 
-            padding: 20px; 
-            border-radius: 15px; 
-            width: 40%; 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            text-align: center;
-        }
-
-        input { 
-            width: 85%; 
-            padding: 12px; 
-            margin-top: 15px; 
-            border-radius: 8px; 
-            border: 1px solid #60a5fa; 
-            background: rgba(0, 0, 0, 0.3); 
-            color: white; 
-            text-align: center;
-        }
-
-        button { 
-            margin-top: 30px; 
-            padding: 15px 40px; 
-            background: #60a5fa; 
-            border: none; 
-            border-radius: 50px; 
-            color: white; 
-            font-weight: bold; 
-            cursor: pointer; 
-            font-size: 1.1rem;
-        }
-
-        /* Área de Análise sem anúncios */
-        .ai-area { 
-            background: rgba(255, 255, 255, 0.05); 
-            padding: 25px; 
-            border-radius: 15px; 
-            border: 1px solid #60a5fa; 
-            text-align: center; 
-        }
+        input { width: 85%; padding: 12px; margin-top: 15px; border-radius: 8px; border: 1px solid #60a5fa; background: rgba(0, 0, 0, 0.3); color: white; text-align: center; }
+        button { margin-top: 30px; padding: 15px 40px; background: #60a5fa; border: none; border-radius: 50px; cursor: pointer; color: white; font-weight: bold; font-size: 1.1rem; }
+        
+        .ai-area { background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 15px; border: 1px solid #60a5fa; text-align: center; }
     </style>
 </head>
 <body>
@@ -85,11 +37,11 @@
         <div class="main-container">
             <div class="product-card">
                 <h3>Produto A</h3>
-                <input type="text" name="prodA" placeholder="Ex: Arroz Tio João 1kg" required>
+                <input type="text" name="prodA" value="{{ prodA }}" placeholder="Ex: Arroz Tio João 1kg" required>
             </div>
             <div class="product-card">
                 <h3>Produto B</h3>
-                <input type="text" name="prodB" placeholder="Ex: Arroz Namorado 1kg" required>
+                <input type="text" name="prodB" value="{{ prodB }}" placeholder="Ex: Arroz Namorado 1kg" required>
             </div>
         </div>
         <button type="submit">Comparar Produtos</button>
@@ -97,7 +49,11 @@
 
     <div class="ai-area">
         <h2>Análise Comparativa</h2>
-        <p>Aguardando a comparação dos produtos...</p>
+        {% if analise %}
+            <p>{{ analise }}</p>
+        {% else %}
+            <p>Aguardando a comparação dos produtos...</p>
+        {% endif %}
     </div>
 </body>
 </html>
