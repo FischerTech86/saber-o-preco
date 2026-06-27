@@ -3,12 +3,11 @@ import os
 
 app = Flask(__name__)
 
+# Rota de Busca (o que você já tem)
 @app.route('/', methods=['GET'])
 def index():
     termo = request.args.get('pesquisa', '')
     lista = []
-    
-    # Se o usuário digitou algo, geramos os resultados
     if termo:
         busca_url = termo.replace(" ", "+")
         lista = [
@@ -16,9 +15,20 @@ def index():
             {'nome': f'{termo} Padrão', 'dif': 'Equilíbrio ideal entre preço e qualidade', 'link': f'https://www.google.com/search?q={busca_url}+padrao&tbm=shop'},
             {'nome': f'{termo} Econômico', 'dif': 'Opção mais barata disponível', 'link': f'https://www.google.com/search?q={busca_url}+barato&tbm=shop'}
         ]
-        
     return render_template('index.html', lista=lista)
 
+# Rota da IA (A parte que faltava)
+@app.route('/ia', methods=['GET', 'POST'])
+def ia():
+    analise = None
+    if request.method == 'POST':
+        prodA = request.form.get('prodA')
+        prodB = request.form.get('prodB')
+        # Lógica simples de comparação
+        analise = f"Análise Comparativa: Comparando '{prodA}' e '{prodB}'. O {prodA} apresenta um custo-benefício atrativo, enquanto o {prodB} se destaca pela performance técnica. Recomendamos analisar o uso pretendido antes da compra."
+    return render_template('ia.html', analise=analise)
+
+# Outras rotas
 @app.route('/dicas')
 def dicas(): return render_template('dicas.html')
 
