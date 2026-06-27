@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>IA Optimo - Comparação</title>
     <style>
-        /* Aplicando o gradiente azul de fundo para combinar com seu site */
         body { 
             background: radial-gradient(circle at 20% 20%, #1e3a8a, transparent 40%), 
                         radial-gradient(circle at 80% 80%, #1e40af, transparent 40%), 
@@ -18,11 +17,34 @@
         .nav-menu { text-align: center; margin-bottom: 30px; }
         .nav-menu a { color: #60a5fa; margin: 0 10px; text-decoration: none; font-weight: bold; }
         
-        /* Container centralizado */
         .main-container { display: flex; gap: 20px; justify-content: center; }
-        .product-card { background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 15px; width: 48%; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .product-card { background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 15px; width: 40%; border: 1px solid rgba(255, 255, 255, 0.1); text-align: center; }
         
-        /* Área de análise da IA */
+        /* Estilização dos campos de input */
+        input { 
+            width: 80%; 
+            padding: 12px; 
+            margin-top: 10px; 
+            border-radius: 8px; 
+            border: 1px solid #60a5fa; 
+            background: rgba(0, 0, 0, 0.3); 
+            color: white; 
+            text-align: center;
+        }
+        
+        /* Botão Comparar */
+        button { 
+            margin-top: 30px; 
+            padding: 15px 40px; 
+            background: #60a5fa; 
+            border: none; 
+            border-radius: 50px; 
+            color: white; 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 1.1rem;
+        }
+        
         .ai-area { background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 15px; margin-top: 20px; border: 1px solid #60a5fa; }
     </style>
 </head>
@@ -37,23 +59,23 @@
 
     <h1 style="text-align: center;">IA Optimo</h1>
 
-    <div class="main-container">
-        <!-- Produto A -->
-        <div class="product-card">
-            <h3>Produto A</h3>
-            <p>Insira as características do Produto A aqui.</p>
+    <form action="/ia" method="POST" style="text-align: center;">
+        <div class="main-container">
+            <div class="product-card">
+                <h3>Produto A</h3>
+                <input type="text" name="prodA" placeholder="Ex: Galaxy S23" required>
+            </div>
+            <div class="product-card">
+                <h3>Produto B</h3>
+                <input type="text" name="prodB" placeholder="Ex: iPhone 15" required>
+            </div>
         </div>
-        <!-- Produto B -->
-        <div class="product-card">
-            <h3>Produto B</h3>
-            <p>Insira as características do Produto B aqui.</p>
-        </div>
-    </div>
+        <button type="submit">Comparar Produtos</button>
+    </form>
 
-    <!-- Área de Análise da IA -->
     <div class="ai-area">
         <h2>Análise Comparativa</h2>
-        <p>Aguardando a comparação dos produtos...</p>
+        <p>Preencha os produtos acima e clique em comparar para ver o resultado da Iá Box.</p>
     </div>
 </body>
 </html>
