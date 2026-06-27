@@ -13,9 +13,13 @@
         .nav-menu { text-align: center; margin-bottom: 30px; }
         .nav-menu a { color: #60a5fa; margin: 0 10px; text-decoration: none; font-weight: bold; }
         .animated-title { font-size: 3.5rem; text-align: center; color: #fff; text-shadow: 0 0 20px #60a5fa; margin-bottom: 20px; }
-        .card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 25px; margin: 20px 0; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        
+        /* Estilo dos Blocos (Cards) */
+        .results-container { max-width: 800px; margin: 0 auto; }
+        .card { background: rgba(255, 255, 255, 0.05); padding: 25px; margin: 20px 0; border-radius: 15px; border: 1px solid #60a5fa; }
+        
         form { text-align: center; margin-bottom: 40px; }
-        input { padding: 15px; width: 60%; border-radius: 50px; border: none; background: rgba(255,255,255,0.1); color: white; }
+        input { padding: 15px; width: 60%; border-radius: 50px; border: 1px solid #60a5fa; background: rgba(0,0,0,0.3); color: white; text-align: center; }
         button { padding: 15px 30px; background: #60a5fa; border: none; border-radius: 50px; cursor: pointer; color: white; font-weight: bold; }
     </style>
 </head>
@@ -34,14 +38,16 @@
         <button type="submit">Buscar</button>
     </form>
 
-    {% if lista %}
-        {% for item in lista %}
-            <div class="card">
-                <h3>{{ item.nome }}</h3>
-                <p><strong>Diferencial:</strong> {{ item.dif }}</p>
-                <a href="{{ item.link }}" style="color:#60a5fa" target="_blank">Ver no Google Shopping</a>
-            </div>
-        {% endfor %}
-    {% endif %}
+    <div class="results-container">
+        {% if lista %}
+            {% for item in lista %}
+                <div class="card">
+                    <h3>{{ item.nome }}</h3>
+                    <p><strong>Diferencial:</strong> {{ item.dif }}</p>
+                    <a href="{{ item.link }}" style="color:#60a5fa; text-decoration: none; font-weight: bold;" target="_blank">Ver no Google Shopping →</a>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 </body>
 </html>
