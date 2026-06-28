@@ -16,9 +16,31 @@
             min-height: 100vh;
         }
 
-        /* Ajustei o topo do header para subir o conjunto todo */
         header { margin-top: 40px; text-align: center; }
-        h1 { font-size: 3rem; margin-bottom: 30px; }
+
+        /* A ANIMAÇÃO DO NOME */
+        .animated-title {
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            /* Aplica as animações */
+            animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite;
+        }
+
+        /* Efeito de flutuação */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Efeito de brilho pulsante */
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px rgba(37, 99, 235, 0.5); }
+            50% { text-shadow: 0 0 25px rgba(96, 165, 250, 0.8); }
+            100% { text-shadow: 0 0 10px rgba(37, 99, 235, 0.5); }
+        }
 
         .search-container {
             background: rgba(255, 255, 255, 0.08);
@@ -32,28 +54,20 @@
         input { background: transparent; border: none; color: white; padding: 15px 25px; width: 100%; outline: none; font-size: 1rem; }
         button { background: #2563eb; color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; }
 
-        /* AQUI ESTÁ A MUDANÇA: O margin-top agora é 20px (estava 50px) */
-        .results-area { 
-            width: 90%; 
-            max-width: 600px; 
-            margin-top: 20px; 
-        }
-        
+        .results-area { width: 90%; max-width: 600px; margin-top: 20px; }
         .card { 
             background: rgba(255, 255, 255, 0.05); 
             padding: 25px; 
             border-radius: 20px; 
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .btn-link { 
-            display: inline-block; margin-top: 15px; color: #60a5fa; text-decoration: none; font-weight: bold;
-        }
+        .btn-link { display: inline-block; margin-top: 15px; color: #60a5fa; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Optimo</h1>
+        <h1 class="animated-title">Optimo</h1>
     </header>
 
     <form method="POST" class="search-container">
