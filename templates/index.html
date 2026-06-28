@@ -2,40 +2,37 @@
 <html lang="pt-br">
 <head>
     <style>
-        body { background: #0a111a; color: #fff; font-family: sans-serif; padding: 20px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .card { padding: 20px; border-radius: 10px; border: 2px solid; }
-        .card-a { border-color: #ff4d4d; background: #1a0a0a; }
-        .card-b { border-color: #4d94ff; background: #0a0a1a; }
-        input { width: 90%; padding: 12px; margin-bottom: 10px; border-radius: 5px; background: #111; border: 1px solid #333; color: white; }
-        button { width: 100%; padding: 15px; background: #60a5fa; border: none; cursor: pointer; color: white; font-weight: bold; }
+        body { background: #0a111a; color: #fff; font-family: 'Segoe UI', sans-serif; padding: 20px; }
+        .grid-comp { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .card { padding: 20px; border-radius: 12px; border: 1px solid #333; background: #161b22; }
+        .card h3 { color: #60a5fa; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 8px 0; border-bottom: 1px solid #222; }
+        input { width: 95%; padding: 12px; margin-bottom: 10px; background: #0d1117; border: 1px solid #333; color: white; border-radius: 6px; }
+        button { width: 100%; padding: 15px; background: #60a5fa; border: none; cursor: pointer; color: white; font-weight: bold; border-radius: 6px; }
     </style>
 </head>
 <body>
     <div style="max-width: 900px; margin: auto;">
-        <h1>Optimo Comparador</h1>
+        <h1 style="text-align: center;">Optimo Comparador</h1>
         <form method="POST">
-            <div class="grid">
-                <input type="text" name="prodA" placeholder="Produto A (Ex: Notebook Dell)" required>
-                <input type="text" name="prodB" placeholder="Produto B (Ex: Macbook Pro)" required>
+            <div class="grid-comp">
+                <input type="text" name="prodA" placeholder="Produto A (Ex: iPhone 15 Pro)" required>
+                <input type="text" name="prodB" placeholder="Produto B (Ex: Galaxy S23 Ultra)" required>
             </div>
-            <button type="submit">Comparar Qualquer Produto</button>
+            <button type="submit">Gerar Ficha Técnica Comparativa</button>
         </form>
 
         {% if dados_a %}
-        <div class="grid">
-            <div class="card card-a">
+        <div class="grid-comp">
+            <div class="card">
                 <h3>{{ nome_a }}</h3>
-                <ul>{% for key, val in dados_a.items() %}<li><b>{{key}}:</b> {{val}}</li>{% endfor %}</ul>
+                <ul>{% for k, v in dados_a.items() %}<li><b>{{k}}:</b> {{v}}</li>{% endfor %}</ul>
             </div>
-            <div class="card card-b">
+            <div class="card">
                 <h3>{{ nome_b }}</h3>
-                <ul>{% for key, val in dados_b.items() %}<li><b>{{key}}:</b> {{val}}</li>{% endfor %}</ul>
+                <ul>{% for k, v in dados_b.items() %}<li><b>{{k}}:</b> {{v}}</li>{% endfor %}</ul>
             </div>
-        </div>
-        <div style="margin-top:20px; padding:20px; background:#161b22; border-left: 5px solid #60a5fa;">
-            <h3>Análise Inteligente</h3>
-            <p>{{ analise }}</p>
         </div>
         {% endif %}
     </div>
