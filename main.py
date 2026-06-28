@@ -5,33 +5,38 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    # Variáveis para a Busca
+    termo = request.args.get('pesquisa', '')
+    lista_busca = []
+    
+    # Variáveis para a Comparação
     analise = None
     prodA = None
     prodB = None
-    
+
+    # Lógica da Busca (GET)
+    if termo:
+        busca_url = termo.replace(" ", "+")
+        lista_busca = [
+            {'nome': f'{termo} Premium', 'dif': 'Alta qualidade', 'link': f'https://www.google.com/search?q={busca_url}+premium&tbm=shop'},
+            {'nome': f'{termo} Padrão', 'dif': 'Equilíbrio ideal', 'link': f'https://www.google.com/search?q={busca_url}+padrao&tbm=shop'},
+            {'nome': f'{termo} Econômico', 'dif': 'Melhor preço', 'link': f'https://www.google.com/search?q={busca_url}+barato&tbm=shop'}
+        ]
+
+    # Lógica da Comparação (POST)
     if request.method == 'POST':
-        # Captura os dados do formulário
         prodA = request.form.get('prodA')
         prodB = request.form.get('prodB')
-        
-        # Lógica de comparação (aqui você pode integrar com uma API futuramente)
         if prodA and prodB:
-            analise = (f"Análise Comparativa: Comparando '{prodA}' com '{prodB}'. "
-                       f"O {prodA} se destaca em usabilidade e design, enquanto o "
-                       f"{prodB} apresenta um desempenho técnico superior em processamento. "
-                       f"A escolha ideal depende se o seu foco é produtividade ou performance bruta.")
-            
-    return render_template('index.html', analise=analise, prodA=prodA, prodB=prodB)
+            analise = f"Análise Comparativa: O {prodA} e {prodB} foram analisados. Recomendamos focar em custo-benefício se o uso for casual, ou performance se for profissional."
 
+    return render_template('index.html', lista=lista_busca, analise=analise, prodA=prodA, prodB=prodB)
+
+# Outras rotas
 @app.route('/dicas')
 def dicas(): return render_template('dicas.html')
-
-@app.route('/politica')
-def politica(): return render_template('politica.html')
-
-@app.route('/sobre')
-def sobre(): return render_template('sobre.html')
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+    
