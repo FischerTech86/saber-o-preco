@@ -5,7 +5,8 @@
     <title>Optimo</title>
     <style>
         body {
-            background: radial-gradient(circle at 50% 10%, #1e3a8a, #000000);
+            /* Fundo preto com luz azul sutil no topo */
+            background: radial-gradient(circle at 50% -50%, #1e3a8a, #000000 65%);
             background-attachment: fixed;
             color: white;
             font-family: 'Segoe UI', sans-serif;
@@ -16,37 +17,35 @@
             min-height: 100vh;
         }
 
-        header { margin-top: 40px; text-align: center; }
+        header { margin-top: 60px; text-align: center; }
 
-        /* A ANIMAÇÃO DO NOME */
+        /* Nome animado */
         .animated-title {
             font-size: 3.5rem;
             margin-bottom: 30px;
             font-weight: 800;
             letter-spacing: -2px;
-            /* Aplica as animações */
             animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite;
         }
 
-        /* Efeito de flutuação */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
 
-        /* Efeito de brilho pulsante */
         @keyframes glow {
-            0% { text-shadow: 0 0 10px rgba(37, 99, 235, 0.5); }
-            50% { text-shadow: 0 0 25px rgba(96, 165, 250, 0.8); }
-            100% { text-shadow: 0 0 10px rgba(37, 99, 235, 0.5); }
+            0% { text-shadow: 0 0 10px rgba(37, 99, 235, 0.3); }
+            50% { text-shadow: 0 0 25px rgba(37, 99, 235, 0.6); }
+            100% { text-shadow: 0 0 10px rgba(37, 99, 235, 0.3); }
         }
 
+        /* Barra de busca */
         .search-container {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
             padding: 10px;
             border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             width: 90%;
             max-width: 600px;
@@ -54,12 +53,13 @@
         input { background: transparent; border: none; color: white; padding: 15px 25px; width: 100%; outline: none; font-size: 1rem; }
         button { background: #2563eb; color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; }
 
-        .results-area { width: 90%; max-width: 600px; margin-top: 20px; }
+        /* Resultados */
+        .results-area { width: 90%; max-width: 600px; margin-top: 30px; }
         .card { 
-            background: rgba(255, 255, 255, 0.05); 
+            background: rgba(255, 255, 255, 0.03); 
             padding: 25px; 
             border-radius: 20px; 
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         .btn-link { display: inline-block; margin-top: 15px; color: #60a5fa; text-decoration: none; font-weight: bold; }
     </style>
@@ -84,7 +84,7 @@
                     <a href="{{ resultado.link }}" target="_blank" class="btn-link">Ver no Google Shopping →</a>
                 </div>
             {% else %}
-                <p>Nenhum produto encontrado para "{{ termo }}".</p>
+                <p style="text-align: center; opacity: 0.6;">Nenhum produto encontrado para "{{ termo }}".</p>
             {% endif %}
         {% endif %}
     </div>
