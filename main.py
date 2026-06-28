@@ -1,36 +1,36 @@
 from flask import Flask, render_template, request
-import os
 
 app = Flask(__name__)
 
-# Simulação de Banco de Dados (Isso aqui seria uma API de produtos no futuro)
-db_produtos = {
-    "galaxy s23 ultra": {"Preço": "R$ 5.999", "Tela": "6.8\" QHD+", "Processador": "Snapdragon 8 Gen 2", "Câmera": "200MP"},
-    "iphone 15 pro": {"Preço": "R$ 6.999", "Tela": "6.1\" OLED", "Processador": "A17 Pro", "Câmera": "48MP"}
-}
+# Esta função "finge" ser uma IA que conhece todos os produtos
+def gerar_ficha_tecnica(nome_produto):
+    # Aqui você conectaria uma API real (como Gemini ou OpenAI) futuramente
+    return {
+        "Categoria": "Eletrônicos/Geral",
+        "Destaque": "Produto de alta performance",
+        "Durabilidade": "Alta",
+        "Custo-benefício": "Requer análise de mercado"
+    }
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     dados_a = None
     dados_b = None
     analise = None
+    nome_a = ""
+    nome_b = ""
 
     if request.method == 'POST':
-        nome_a = request.form.get('prodA').lower()
-        nome_b = request.form.get('prodB').lower()
+        nome_a = request.form.get('prodA')
+        nome_b = request.form.get('prodB')
         
-        # Busca os dados no dicionário
-        dados_a = db_produtos.get(nome_a, {"Status": "Produto não encontrado"})
-        dados_b = db_produtos.get(nome_b, {"Status": "Produto não encontrado"})
+        # Gera dados para qualquer nome que for digitado
+        dados_a = gerar_ficha_tecnica(nome_a)
+        dados_b = gerar_ficha_tecnica(nome_b)
         
-        # Gera uma análise baseada nos dados
-        if "Preço" in dados_a and "Preço" in dados_b:
-            analise = f"Comparação entre {nome_a.upper()} e {nome_b.upper()}: O primeiro foca em {dados_a.get('Processador')}, enquanto o segundo utiliza {dados_b.get('Processador')}."
-        else:
-            analise = "Não foi possível realizar uma comparação técnica detalhada com os nomes fornecidos. Tente 'Galaxy S23 Ultra' ou 'iPhone 15 Pro'."
+        analise = f"Comparação automática entre {nome_a} e {nome_b}: O foco principal é verificar a compatibilidade técnica. {nome_a} apresenta características de mercado robustas, enquanto {nome_b} é uma alternativa competitiva. Recomendamos comparar os preços atuais em marketplaces."
 
-    return render_template('index.html', dados_a=dados_a, dados_b=dados_b, analise=analise)
+    return render_template('index.html', dados_a=dados_a, dados_b=dados_b, analise=analise, nome_a=nome_a, nome_b=nome_b)
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
