@@ -16,8 +16,9 @@
             min-height: 100vh;
         }
 
-        header { margin-top: 80px; text-align: center; }
-        h1 { font-size: 3.5rem; margin-bottom: 40px; }
+        /* Ajustei o topo do header para subir o conjunto todo */
+        header { margin-top: 40px; text-align: center; }
+        h1 { font-size: 3rem; margin-bottom: 30px; }
 
         .search-container {
             background: rgba(255, 255, 255, 0.08);
@@ -31,8 +32,13 @@
         input { background: transparent; border: none; color: white; padding: 15px 25px; width: 100%; outline: none; font-size: 1rem; }
         button { background: #2563eb; color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; }
 
-        /* Área de Resultados */
-        .results-area { width: 90%; max-width: 600px; margin-top: 50px; }
+        /* AQUI ESTÁ A MUDANÇA: O margin-top agora é 20px (estava 50px) */
+        .results-area { 
+            width: 90%; 
+            max-width: 600px; 
+            margin-top: 20px; 
+        }
+        
         .card { 
             background: rgba(255, 255, 255, 0.05); 
             padding: 25px; 
@@ -51,7 +57,7 @@
     </header>
 
     <form method="POST" class="search-container">
-        <input type="text" name="query" placeholder="Ex: iphone 15 ou galaxy s23" required>
+        <input type="text" name="query" placeholder="O que você procura?" required>
         <button type="submit">Buscar</button>
     </form>
 
@@ -64,7 +70,7 @@
                     <a href="{{ resultado.link }}" target="_blank" class="btn-link">Ver no Google Shopping →</a>
                 </div>
             {% else %}
-                <p>Nenhum produto encontrado para "{{ termo }}". Tente "iphone 15" ou "galaxy s23".</p>
+                <p>Nenhum produto encontrado para "{{ termo }}".</p>
             {% endif %}
         {% endif %}
     </div>
