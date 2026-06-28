@@ -2,21 +2,42 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Esta função "finge" ser uma IA que conhece todos os produtos
-def gerar_ficha_tecnica(nome_produto):
-    # Aqui você conectaria uma API real (como Gemini ou OpenAI) futuramente
-    return {
-        "Categoria": "Eletrônicos/Geral",
-        "Destaque": "Produto de alta performance",
-        "Durabilidade": "Alta",
-        "Custo-benefício": "Requer análise de mercado"
+# Banco de dados simulado mais rico
+db_produtos = {
+    "iphone 15 pro": {
+        "Categoria": "Smartphone",
+        "Tela": "6.1 Super Retina XDR",
+        "Processador": "A17 Pro",
+        "Câmera": "48MP Principal",
+        "Bateria": "Até 23h de vídeo"
+    },
+    "galaxy s23 ultra": {
+        "Categoria": "Smartphone",
+        "Tela": "6.8 Dynamic AMOLED 2X",
+        "Processador": "Snapdragon 8 Gen 2",
+        "Câmera": "200MP Principal",
+        "Bateria": "5000 mAh"
+    },
+    "geladeira brastemp": {
+        "Categoria": "Eletrodoméstico",
+        "Capacidade": "443 Litros",
+        "Tipo": "Frost Free",
+        "Eficiência": "A+++"
     }
+}
+
+def obter_dados_produto(nome):
+    # Procura no nosso banco de dados
+    nome_limpo = nome.lower()
+    return db_produtos.get(nome_limpo, {
+        "Status": "Produto não encontrado no banco de dados local.",
+        "Dica": "Tente buscar por 'iPhone 15 Pro', 'Galaxy S23 Ultra' ou 'Geladeira Brastemp' para testar."
+    })
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     dados_a = None
     dados_b = None
-    analise = None
     nome_a = ""
     nome_b = ""
 
@@ -24,13 +45,10 @@ def index():
         nome_a = request.form.get('prodA')
         nome_b = request.form.get('prodB')
         
-        # Gera dados para qualquer nome que for digitado
-        dados_a = gerar_ficha_tecnica(nome_a)
-        dados_b = gerar_ficha_tecnica(nome_b)
-        
-        analise = f"Comparação automática entre {nome_a} e {nome_b}: O foco principal é verificar a compatibilidade técnica. {nome_a} apresenta características de mercado robustas, enquanto {nome_b} é uma alternativa competitiva. Recomendamos comparar os preços atuais em marketplaces."
+        dados_a = obter_dados_produto(nome_a)
+        dados_b = obter_dados_produto(nome_b)
 
-    return render_template('index.html', dados_a=dados_a, dados_b=dados_b, analise=analise, nome_a=nome_a, nome_b=nome_b)
+    return render_template('index.html', dados_a=dados_a, dados_b=dados_b, nome_a=nome_a, nome_b=nome_b)
 
 if __name__ == '__main__':
     app.run(debug=True)
