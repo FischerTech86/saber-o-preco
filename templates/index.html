@@ -2,49 +2,93 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Comparador</title>
+    <title>Optimo</title>
     <style>
-        body { font-family: sans-serif; background-color: #f4f4f4; padding: 20px; }
-        .container { max-width: 800px; margin: auto; }
-        .grid-form { display: flex; gap: 10px; margin-bottom: 20px; }
-        input { flex: 1; padding: 10px; }
-        button { padding: 10px 20px; cursor: pointer; }
+        body {
+            /* Aqui está o fundo preto com a luz azul (radial gradient) */
+            background: radial-gradient(circle at 50% -20%, #1e3a8a, #000000);
+            background-attachment: fixed;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .container { max-width: 900px; margin: auto; text-align: center; }
         
-        .grid-results { display: flex; gap: 20px; }
-        .card { flex: 1; background: white; padding: 20px; border: 1px solid #ddd; }
+        h1 { font-size: 3rem; margin-bottom: 30px; }
+
+        .search-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        input {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            outline: none;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .results { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        li { list-style: none; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Comparador de Produtos</h1>
+        <h1>Optimo</h1>
         
-        <form method="POST" class="grid-form">
-            <input type="text" name="prodA" placeholder="Produto A" required>
-            <input type="text" name="prodB" placeholder="Produto B" required>
-            <button type="submit">Comparar</button>
+        <form method="POST" class="search-box">
+            <input type="text" name="prodA" placeholder="Produto A..." required>
+            <input type="text" name="prodB" placeholder="Produto B..." required>
+            <button type="submit">Buscar</button>
         </form>
 
-        {% if dados_a and dados_b %}
-            <div class="grid-results">
+        {% if request.method == 'POST' %}
+            <div class="results">
                 <div class="card">
                     <h3>{{ nome_a.upper() }}</h3>
-                    <ul>
-                        {% for chave, valor in dados_a.items() %}
-                            <li><b>{{ chave }}:</b> {{ valor }}</li>
-                        {% endfor %}
-                    </ul>
+                    {% if resultado_a %}
+                        <ul>{% for k, v in resultado_a.items() %}<li><b>{{k}}:</b> {{v}}</li>{% endfor %}</ul>
+                    {% else %}
+                        <p>Produto não encontrado.</p>
+                    {% endif %}
                 </div>
                 <div class="card">
                     <h3>{{ nome_b.upper() }}</h3>
-                    <ul>
-                        {% for chave, valor in dados_b.items() %}
-                            <li><b>{{ chave }}:</b> {{ valor }}</li>
-                        {% endfor %}
-                    </ul>
+                    {% if resultado_b %}
+                        <ul>{% for k, v in resultado_b.items() %}<li><b>{{k}}:</b> {{v}}</li>{% endfor %}</ul>
+                    {% else %}
+                        <p>Produto não encontrado.</p>
+                    {% endif %}
                 </div>
             </div>
-        {% elif request.method == 'POST' %}
-            <p style="color:red;">Produto não encontrado no banco de dados.</p>
         {% endif %}
     </div>
 </body>
