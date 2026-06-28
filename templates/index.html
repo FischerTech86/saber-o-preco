@@ -2,80 +2,72 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Optimo</title>
     <style>
-        /* Estilo idêntico ao das screenshots */
         body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             background: radial-gradient(circle at 50% 10%, #1e3a8a, #000000);
             background-attachment: fixed;
             color: white;
             font-family: 'Segoe UI', sans-serif;
-        }
-
-        h1 { 
-            font-size: 3.5rem; 
-            margin-bottom: 40px; 
-            font-weight: 700;
-            letter-spacing: -2px;
-        }
-
-        /* Container da busca (Pílula) */
-        .search-form {
+            margin: 0;
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header { margin-top: 80px; text-align: center; }
+        h1 { font-size: 3.5rem; margin-bottom: 40px; }
+
+        .search-container {
             background: rgba(255, 255, 255, 0.08);
-            padding: 8px;
+            padding: 10px;
             border-radius: 50px;
             border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
             width: 90%;
-            max-width: 550px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            max-width: 600px;
         }
+        input { background: transparent; border: none; color: white; padding: 15px 25px; width: 100%; outline: none; font-size: 1rem; }
+        button { background: #2563eb; color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; }
 
-        input[type="text"] {
-            background: transparent;
-            border: none;
-            color: white;
-            padding: 15px 25px;
-            width: 100%;
-            outline: none;
-            font-size: 1.1rem;
+        /* Área de Resultados */
+        .results-area { width: 90%; max-width: 600px; margin-top: 50px; }
+        .card { 
+            background: rgba(255, 255, 255, 0.05); 
+            padding: 25px; 
+            border-radius: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        button {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1rem;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background: #1d4ed8;
+        .btn-link { 
+            display: inline-block; margin-top: 15px; color: #60a5fa; text-decoration: none; font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <h1>Optimo</h1>
+    <header>
+        <h1>Optimo</h1>
+    </header>
 
-    <form action="https://www.google.com/search" method="GET" class="search-form">
-        <input type="hidden" name="tbm" value="shop">
-        
-        <input type="text" name="q" placeholder="O que você procura?" required>
+    <form method="POST" class="search-container">
+        <input type="text" name="query" placeholder="Ex: iphone 15 ou galaxy s23" required>
         <button type="submit">Buscar</button>
     </form>
+
+    <div class="results-area">
+        {% if request.method == 'POST' %}
+            {% if resultado %}
+                <div class="card">
+                    <h3>{{ resultado.titulo }}</h3>
+                    <p>{{ resultado.desc }}</p>
+                    <a href="{{ resultado.link }}" target="_blank" class="btn-link">Ver no Google Shopping →</a>
+                </div>
+            {% else %}
+                <p>Nenhum produto encontrado para "{{ termo }}". Tente "iphone 15" ou "galaxy s23".</p>
+            {% endif %}
+        {% endif %}
+    </div>
 
 </body>
 </html>
