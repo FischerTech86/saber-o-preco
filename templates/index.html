@@ -4,62 +4,65 @@
     <meta charset="UTF-8">
     <title>Optimo</title>
     <style>
-        /* Fundo escuro com a luz azul radial */
+        /* Fundo com a luz azul radial e preto */
         body {
-            background: radial-gradient(circle at 50% 0%, #1e3a8a, #000000);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at 50% 10%, #1e3a8a, #000000);
             background-attachment: fixed;
             color: white;
             font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
-        .container { text-align: center; width: 100%; max-width: 600px; padding: 20px; }
-        h1 { font-size: 3rem; margin-bottom: 30px; letter-spacing: -1px; }
-        
-        /* A barra de pesquisa */
-        .search-container {
+
+        h1 { font-size: 3rem; margin-bottom: 30px; font-weight: bold; }
+
+        /* A Barra de Pesquisa (pílula) */
+        .search-form {
+            display: flex;
             background: rgba(255, 255, 255, 0.05);
-            padding: 10px 20px;
+            padding: 10px;
             border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 90%;
+            max-width: 500px;
         }
+
         input {
             background: transparent;
             border: none;
             color: white;
-            padding: 15px;
+            padding: 15px 20px;
             width: 100%;
-            font-size: 1.1rem;
             outline: none;
+            font-size: 1rem;
         }
+
         button {
             background: #2563eb;
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 10px 25px;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
-            transition: 0.3s;
         }
-        button:hover { background: #3b82f6; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Optimo</h1>
+
+    <h1>Optimo</h1>
+
+    <form action="https://www.google.com/search" method="GET" class="search-form">
+        <input type="hidden" name="tbm" value="shop">
         
-        <form action="https://www.google.com/search" method="GET" class="search-container">
-            <input type="hidden" name="tbm" value="shop">
-            
-            <input type="text" name="q" placeholder="O que você procura?" required>
-            <button type="submit">Buscar</button>
-        </form>
-    </div>
+        <input type="text" name="q" placeholder="O que você procura?" required>
+        <button type="submit">Buscar</button>
+    </form>
+
 </body>
 </html>
