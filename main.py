@@ -2,14 +2,14 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Dados para as seções extras
+# Os dados estão aqui. O HTML vai ler exatamente este dicionário.
 conteudo_extra = {
     "dicas": [
-        "Sempre verifique a reputação do vendedor.",
-        "Compare o preço do frete antes de finalizar.",
-        "Fique atento às promoções relâmpago."
+        "Verifique sempre a reputação do vendedor antes de comprar.",
+        "Compare o valor do frete, às vezes o barato sai caro.",
+        "Aproveite cupons de desconto na primeira compra."
     ],
-    "politica": "Nossa política é ajudar você a encontrar o melhor preço de forma rápida, transparente e segura, sem coletar dados sensíveis."
+    "politica": "O Optimo é uma ferramenta de busca que visa facilitar sua jornada de compra, garantindo transparência nos resultados."
 }
 
 @app.route('/', methods=['GET', 'POST'])
@@ -18,7 +18,7 @@ def index():
     if request.method == 'POST':
         termo = request.form.get('query', '').strip()
     
-    # Passando o conteudo_extra para o HTML
+    # Enviamos o dicionário 'conteudo_extra' como 'info' para o HTML
     return render_template('index.html', termo=termo, info=conteudo_extra)
 
 if __name__ == '__main__':
