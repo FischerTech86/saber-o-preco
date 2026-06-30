@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Dados básicos para o sistema
+# Dados para o sistema
 info = {
     "dicas": ["Verifique o frete antes de comprar.", "Olhe a avaliação da loja."],
     "politica": "O Optimo facilita sua busca de forma rápida e segura."
