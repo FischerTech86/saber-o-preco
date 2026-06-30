@@ -4,31 +4,75 @@
     <meta charset="UTF-8">
     <title>Optimo</title>
     <style>
-        body { background: #000; color: white; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        header { margin-top: 50px; text-align: center; }
-        h1 { font-size: 3rem; color: #3b82f6; text-shadow: 0 0 20px #3b82f6; }
+        /* Base da página */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Fundo preto absoluto */
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* --- O EFEITO DE LUZ (Igual à imagem) --- */
+        .light-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Fica atrás de tudo */
+            overflow: hidden;
+        }
+
+        .light-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px); /* Isso cria o efeito de luz suave */
+            opacity: 0.6;
+            animation: move 10s infinite alternate;
+        }
+
+        /* Três luzes azuis em posições diferentes */
+        .blob-1 { width: 400px; height: 400px; background: #001f3f; top: -100px; left: -100px; }
+        .blob-2 { width: 500px; height: 500px; background: #0074D9; bottom: -100px; right: -100px; }
+        .blob-3 { width: 300px; height: 300px; background: #001233; top: 40%; left: 40%; }
+
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(50px, 50px); }
+        }
+
+        /* --- Conteúdo --- */
+        header { margin-top: 100px; text-align: center; }
+        h1 { font-size: 4rem; font-weight: 800; text-shadow: 0 0 20px #0074D9; }
         
-        .search-container { background: #111; padding: 10px; border-radius: 50px; border: 1px solid #333; display: flex; width: 90%; max-width: 500px; margin-top: 20px; }
-        input { background: transparent; border: none; color: white; padding: 10px 20px; width: 100%; outline: none; }
-        button { background: #3b82f6; border: none; padding: 10px 25px; border-radius: 50px; color: white; cursor: pointer; }
+        .search-form { background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; width: 90%; max-width: 500px; margin-top: 20px; }
+        input { background: transparent; border: none; color: white; padding: 15px 20px; width: 100%; outline: none; }
+        button { background: #0074D9; border: none; padding: 10px 25px; border-radius: 50px; color: white; cursor: pointer; }
 
         .results { width: 90%; max-width: 500px; margin-top: 40px; }
-        .card { background: #111; padding: 20px; border-radius: 15px; border: 1px solid #222; margin-bottom: 20px; }
-        
-        /* Estilo da seção de Dicas e Política */
-        .info-box { background: #0a0a0a; padding: 20px; border-radius: 15px; border: 1px solid #222; margin-top: 30px; width: 90%; max-width: 500px; }
-        .info-box h3 { color: #3b82f6; margin-top: 0; }
-        ul { padding-left: 20px; }
+        .card { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
     </style>
 </head>
 <body>
+
+    <div class="light-container">
+        <div class="light-blob blob-1"></div>
+        <div class="light-blob blob-2"></div>
+        <div class="light-blob blob-3"></div>
+    </div>
 
     <header>
         <h1>Optimo</h1>
     </header>
 
-    <form method="POST" class="search-container">
-        <input type="text" name="query" placeholder="O que procura?" required>
+    <form method="POST" class="search-form">
+        <input type="text" name="query" placeholder="O que você procura?" required>
         <button type="submit">Buscar</button>
     </form>
 
@@ -36,22 +80,10 @@
     <div class="results">
         <div class="card">
             <h3>Resultados para: {{ termo }}</h3>
-            <a href="https://www.google.com/search?tbm=shop&q={{ termo }}" target="_blank">Ver no Google Shopping</a>
+            <a href="https://www.google.com/search?tbm=shop&q={{ termo }}" target="_blank" style="color: #60a5fa;">Ver no Google Shopping</a>
         </div>
     </div>
     {% endif %}
-
-    <div class="info-box">
-        <h3>💡 Dicas</h3>
-        <ul>
-            {% for dica in info.dicas %}
-                <li>{{ dica }}</li>
-            {% endfor %}
-        </ul>
-        
-        <h3>🛡️ Política</h3>
-        <p>{{ info.politica }}</p>
-    </div>
 
 </body>
 </html>
