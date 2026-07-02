@@ -24,30 +24,21 @@
 
         .card { 
             background: rgba(255, 255, 255, 0.05); 
-            padding: 30px; 
+            padding: 25px; 
             border-radius: 20px; 
             border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 300px;
+            width: 320px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        /* Estilização da Ficha Técnica */
-        .ficha-tecnica {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            font-size: 0.85rem;
-            color: #ccc;
-            text-align: left;
-        }
-        .ficha-tecnica p { margin: 5px 0; }
+        .ficha-tecnica { background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 10px; margin: 15px 0; font-size: 0.85rem; text-align: left; }
+        .ficha-tecnica p { margin: 5px 0; color: #bbb; }
         .ficha-tecnica strong { color: #60a5fa; }
 
-        .product-img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; display: block; }
-        .btn-link { display: block; margin-top: 10px; color: #60a5fa; text-decoration: none; font-weight: bold; text-align: center; }
+        .product-img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; }
+        .btn-link { display: block; margin-top: 10px; color: #60a5fa; text-decoration: none; font-weight: bold; text-align: center; border: 1px solid #60a5fa; padding: 10px; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -67,28 +58,35 @@
     {% if termo %}
     <div class="results-grid">
         
-        <!-- Esquerda: Mais Barato (Com Ficha Técnica) -->
+        <!-- 1. ESQUERDA: Mais Barato -->
         <div class="card">
             <h3>Mais Barato</h3>
             <div class="ficha-tecnica">
-                <p><strong>Marca:</strong> Genérica</p>
-                <p><strong>Peso:</strong> 500g</p>
-                <p><strong>Avaliação:</strong> 4.2/5 ⭐</p>
-                <p><strong>Preço/Kg:</strong> R$ 12,00</p>
+                <p><strong>Status:</strong> Menor preço encontrado</p>
+                <p>Clique abaixo para ver a lista ordenada do mais barato ao mais caro.</p>
             </div>
+            <!-- Filtro &tbs=p_ord:p força a ordenação por preço crescente -->
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}&tbs=p_ord:p" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
 
-        <!-- Meio: Econômico (Com imagem) -->
+        <!-- 2. MEIO: Econômico (Custo-Benefício) -->
         <div class="card">
             <h3>Econômico</h3>
             <img src="https://image.pollinations.ai/prompt/value-for-money-{{ termo | urlencode }}" class="product-img" alt="Econômico">
+            <div class="ficha-tecnica">
+                <p><strong>Status:</strong> Melhor custo-benefício sugerido.</p>
+            </div>
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
 
-        <!-- Direita: Mais Caro -->
+        <!-- 3. DIREITA: Mais Caro -->
         <div class="card">
             <h3>Mais Caro</h3>
+            <div class="ficha-tecnica">
+                <p><strong>Status:</strong> Produtos Premium</p>
+                <p>Clique abaixo para ver a lista ordenada do mais caro ao mais barato.</p>
+            </div>
+            <!-- Filtro &tbs=p_ord:pd força a ordenação por preço decrescente -->
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}&tbs=p_ord:pd" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
 
