@@ -62,29 +62,29 @@
         <div class="card">
             <h3>Mais Barato</h3>
             <div class="ficha-tecnica">
-                <p><strong>Status:</strong> Menor preço encontrado</p>
-                <p>Clique abaixo para ver a lista ordenada do mais barato ao mais caro.</p>
+                <p><strong>Status:</strong> Opção de entrada</p>
+                <p><strong>Custo:</strong> O menor valor do mercado.</p>
             </div>
-            <!-- Filtro &tbs=p_ord:p força a ordenação por preço crescente -->
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}&tbs=p_ord:p" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
 
-        <!-- 2. MEIO: Econômico (Custo-Benefício) -->
+        <!-- 2. MEIO: Econômico (Imagem) -->
         <div class="card">
             <h3>Econômico</h3>
             <img src="https://image.pollinations.ai/prompt/value-for-money-{{ termo | urlencode }}" class="product-img" alt="Econômico">
             <div class="ficha-tecnica">
-                <p><strong>Status:</strong> Melhor custo-benefício sugerido.</p>
+                <p><strong>Status:</strong> Melhor custo-benefício.</p>
             </div>
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
 
-        <!-- 3. DIREITA: Mais Caro -->
+        <!-- 3. DIREITA: Mais Caro (Ficha Técnica adicionada) -->
         <div class="card">
             <h3>Mais Caro</h3>
             <div class="ficha-tecnica">
-                <p><strong>Status:</strong> Produtos Premium</p>
-                <p>Clique abaixo para ver a lista ordenada do mais caro ao mais barato.</p>
+                <p><strong>Status:</strong> Linha Premium</p>
+                <p><strong>Qualidade:</strong> Superior e durável.</p>
+                <p><strong>Categoria:</strong> Alto padrão.</p>
             </div>
             <!-- Filtro &tbs=p_ord:pd força a ordenação por preço decrescente -->
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}&tbs=p_ord:pd" target="_blank" class="btn-link">Ver Ofertas</a>
