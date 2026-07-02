@@ -6,7 +6,6 @@
     <style>
         body { margin: 0; background-color: #000; color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         
-        /* Luzes de fundo */
         .light-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
         .light-blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.5; }
         .blob-1 { width: 600px; height: 600px; background: #001f3f; top: -100px; left: -100px; }
@@ -19,7 +18,6 @@
         input { background: transparent; border: none; color: white; padding: 15px 20px; width: 100%; outline: none; }
         button { background: #0074D9; border: none; padding: 10px 25px; border-radius: 50px; color: white; cursor: pointer; }
 
-        /* Grid de 3 colunas */
         .results-grid { display: flex; justify-content: center; gap: 20px; width: 90%; max-width: 1100px; }
 
         .card { 
@@ -38,7 +36,8 @@
         .ficha-tecnica strong { color: #60a5fa; }
 
         .product-img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; }
-        .btn-link { display: block; margin-top: 10px; color: #60a5fa; text-decoration: none; font-weight: bold; text-align: center; border: 1px solid #60a5fa; padding: 10px; border-radius: 10px; }
+        .btn-link { display: block; margin-top: 10px; color: #60a5fa; text-decoration: none; font-weight: bold; text-align: center; border: 1px solid #60a5fa; padding: 10px; border-radius: 10px; transition: 0.3s; }
+        .btn-link:hover { background: #60a5fa; color: #000; }
     </style>
 </head>
 <body>
@@ -63,12 +62,13 @@
             <h3>Mais Barato</h3>
             <div class="ficha-tecnica">
                 <p><strong>Status:</strong> Opção de entrada</p>
-                <p><strong>Custo:</strong> O menor valor do mercado.</p>
+                <p><strong>Custo:</strong> O menor valor disponível.</p>
             </div>
+            <!-- Parâmetro &tbs=p_ord:p força a ordenação do menor para o maior -->
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}&tbs=p_ord:p" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
 
-        <!-- 2. MEIO: Econômico (Imagem) -->
+        <!-- 2. MEIO: Econômico -->
         <div class="card">
             <h3>Econômico</h3>
             <img src="https://image.pollinations.ai/prompt/value-for-money-{{ termo | urlencode }}" class="product-img" alt="Econômico">
@@ -78,15 +78,14 @@
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
 
-        <!-- 3. DIREITA: Mais Caro (Ficha Técnica adicionada) -->
+        <!-- 3. DIREITA: Mais Caro -->
         <div class="card">
             <h3>Mais Caro</h3>
             <div class="ficha-tecnica">
                 <p><strong>Status:</strong> Linha Premium</p>
-                <p><strong>Qualidade:</strong> Superior e durável.</p>
-                <p><strong>Categoria:</strong> Alto padrão.</p>
+                <p><strong>Qualidade:</strong> Top de linha.</p>
             </div>
-            <!-- Filtro &tbs=p_ord:pd força a ordenação por preço decrescente -->
+            <!-- Parâmetro &tbs=p_ord:pd força a ordenação do maior para o menor -->
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}&tbs=p_ord:pd" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
 
