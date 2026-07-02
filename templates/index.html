@@ -24,15 +24,18 @@
 
         .card { 
             background: rgba(255, 255, 255, 0.05); 
-            padding: 20px; 
+            padding: 30px; /* Aumentei um pouco o padding para compensar a falta de imagem */
             border-radius: 20px; 
             border: 1px solid rgba(255, 255, 255, 0.1);
             width: 300px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .product-img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; display: block; }
-        .btn-link { display: block; margin-top: 10px; color: #60a5fa; text-decoration: none; font-weight: bold; }
+        .btn-link { display: block; margin-top: 20px; color: #60a5fa; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -52,24 +55,22 @@
     {% if termo %}
     <div class="results-grid">
         
-        <!-- Esquerda: Mais Barato -->
+        <!-- Esquerda: Mais Barato (Sem imagem) -->
         <div class="card">
             <h3>Mais Barato</h3>
-            <img src="https://image.pollinations.ai/prompt/simple-cheap-{{ termo | urlencode }}" class="product-img" alt="Mais Barato">
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}&tbs=p_ord:p" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
 
-        <!-- Meio: Econômico -->
+        <!-- Meio: Econômico (Com imagem) -->
         <div class="card">
             <h3>Econômico</h3>
             <img src="https://image.pollinations.ai/prompt/value-for-money-{{ termo | urlencode }}" class="product-img" alt="Econômico">
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
 
-        <!-- Direita: Mais Caro -->
+        <!-- Direita: Mais Caro (Sem imagem) -->
         <div class="card">
             <h3>Mais Caro</h3>
-            <img src="https://image.pollinations.ai/prompt/luxury-high-end-{{ termo | urlencode }}" class="product-img" alt="Mais Caro">
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}&tbs=p_ord:pd" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
 
