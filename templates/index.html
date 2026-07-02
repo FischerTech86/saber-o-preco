@@ -6,6 +6,7 @@
     <style>
         body { margin: 0; background-color: #000; color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         
+        /* Luzes de fundo */
         .light-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
         .light-blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.5; }
         .blob-1 { width: 600px; height: 600px; background: #001f3f; top: -100px; left: -100px; }
@@ -18,7 +19,8 @@
         input { background: transparent; border: none; color: white; padding: 15px 20px; width: 100%; outline: none; }
         button { background: #0074D9; border: none; padding: 10px 25px; border-radius: 50px; color: white; cursor: pointer; }
 
-        .results-grid { display: flex; justify-content: center; gap: 20px; width: 90%; max-width: 1000px; }
+        /* Grid de 3 colunas */
+        .results-grid { display: flex; justify-content: center; gap: 20px; width: 90%; max-width: 1100px; }
 
         .card { 
             background: rgba(255, 255, 255, 0.05); 
@@ -26,14 +28,26 @@
             border-radius: 20px; 
             border: 1px solid rgba(255, 255, 255, 0.1);
             width: 300px;
-            text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
+        /* Estilização da Ficha Técnica */
+        .ficha-tecnica {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 0.85rem;
+            color: #ccc;
+            text-align: left;
+        }
+        .ficha-tecnica p { margin: 5px 0; }
+        .ficha-tecnica strong { color: #60a5fa; }
+
         .product-img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; display: block; }
-        .btn-link { display: block; margin-top: 20px; color: #60a5fa; text-decoration: none; font-weight: bold; }
+        .btn-link { display: block; margin-top: 10px; color: #60a5fa; text-decoration: none; font-weight: bold; text-align: center; }
     </style>
 </head>
 <body>
@@ -53,10 +67,15 @@
     {% if termo %}
     <div class="results-grid">
         
-        <!-- Esquerda: Mais Barato -->
+        <!-- Esquerda: Mais Barato (Com Ficha Técnica) -->
         <div class="card">
             <h3>Mais Barato</h3>
-            <!-- Link com filtro: Ordenar por preço (crescente) -->
+            <div class="ficha-tecnica">
+                <p><strong>Marca:</strong> Genérica</p>
+                <p><strong>Peso:</strong> 500g</p>
+                <p><strong>Avaliação:</strong> 4.2/5 ⭐</p>
+                <p><strong>Preço/Kg:</strong> R$ 12,00</p>
+            </div>
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}&tbs=p_ord:p" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
 
@@ -64,14 +83,12 @@
         <div class="card">
             <h3>Econômico</h3>
             <img src="https://image.pollinations.ai/prompt/value-for-money-{{ termo | urlencode }}" class="product-img" alt="Econômico">
-            <!-- Link padrão para melhor custo-benefício (geral) -->
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
 
         <!-- Direita: Mais Caro -->
         <div class="card">
             <h3>Mais Caro</h3>
-            <!-- Link com filtro: Ordenar por preço (decrescente) -->
             <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}&tbs=p_ord:pd" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
 
