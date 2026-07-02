@@ -4,48 +4,42 @@
     <meta charset="UTF-8">
     <title>Optimo</title>
     <style>
-        body {
-            margin: 0; padding: 0; background-color: #000; color: white;
-            font-family: 'Segoe UI', sans-serif; min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center; overflow-x: hidden;
-        }
-
-        /* Efeito de Luzes */
-        .light-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
-        .light-blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.6; animation: move 15s infinite alternate; }
-        .blob-1 { width: 700px; height: 700px; background: #001f3f; top: -150px; left: -150px; }
-        .blob-2 { width: 900px; height: 900px; background: #0074D9; bottom: -200px; right: -200px; }
-        .blob-3 { width: 600px; height: 600px; background: #001233; top: 40%; left: 30%; }
-        @keyframes move { from { transform: translate(0, 0); } to { transform: translate(100px, 100px); } }
-
-        /* Estilos do Conteúdo */
-        header { margin-top: 100px; text-align: center; }
-        h1 { font-size: 4rem; font-weight: 800; text-shadow: 0 0 20px #0074D9; }
+        body { margin: 0; background-color: #000; color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         
-        .search-form { background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; width: 90%; max-width: 500px; margin-top: 20px; }
+        /* Luzes de fundo */
+        .light-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .light-blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.5; }
+        .blob-1 { width: 600px; height: 600px; background: #001f3f; top: -100px; left: -100px; }
+        .blob-2 { width: 800px; height: 800px; background: #0074D9; bottom: -200px; right: -200px; }
+
+        header { margin-top: 50px; text-align: center; }
+        h1 { font-size: 3rem; color: #fff; text-shadow: 0 0 20px #0074D9; }
+
+        .search-form { background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; width: 90%; max-width: 500px; }
         input { background: transparent; border: none; color: white; padding: 15px 20px; width: 100%; outline: none; }
         button { background: #0074D9; border: none; padding: 10px 25px; border-radius: 50px; color: white; cursor: pointer; }
 
-        .results { width: 90%; max-width: 500px; margin-top: 40px; }
-        
-        /* Card com a imagem incluída */
+        /* Grid de 3 colunas */
+        .results-grid { 
+            display: flex; 
+            justify-content: center; 
+            gap: 20px; 
+            margin-top: 40px; 
+            width: 90%; 
+            max-width: 1000px; 
+        }
+
         .card { 
             background: rgba(255, 255, 255, 0.05); 
-            padding: 20px; border-radius: 20px; 
-            backdrop-filter: blur(10px); 
+            padding: 20px; 
+            border-radius: 20px; 
             border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 300px;
             text-align: center;
         }
-        
-        /* Ajuste para a imagem */
-        .product-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin: 15px 0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+
+        .product-img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
+        .btn-link { display: block; margin-top: 10px; color: #60a5fa; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -53,12 +47,9 @@
     <div class="light-container">
         <div class="light-blob blob-1"></div>
         <div class="light-blob blob-2"></div>
-        <div class="light-blob blob-3"></div>
     </div>
 
-    <header>
-        <h1>Optimo</h1>
-    </header>
+    <header><h1>Optimo</h1></header>
 
     <form method="POST" class="search-form">
         <input type="text" name="query" placeholder="O que você procura?" required>
@@ -66,15 +57,29 @@
     </form>
 
     {% if termo %}
-    <div class="results">
+    <div class="results-grid">
+        
+        <!-- Esquerda: Mais Barato -->
         <div class="card">
-            <h3>Resultados para: {{ termo }}</h3>
-            
-            <!-- A imagem é carregada dinamicamente pelo termo buscado -->
-            <img src="https://image.pollinations.ai/prompt/{{ termo }}" alt="{{ termo }}" class="product-img">
-            
-            <a href="https://www.google.com/search?tbm=shop&q={{ termo }}" target="_blank" style="color: #60a5fa; text-decoration: none;">Ver no Google Shopping</a>
+            <h3>Mais Barato</h3>
+            <img src="https://image.pollinations.ai/prompt/simple cheap {{ termo }}" class="product-img">
+            <a href="https://www.google.com/search?tbm=shop&q={{ termo }}&tbs=p_ord:p" target="_blank" class="btn-link">Ver Ofertas</a>
         </div>
+
+        <!-- Meio: Mais Econômico (Custo-Benefício) -->
+        <div class="card">
+            <h3>Econômico</h3>
+            <img src="https://image.pollinations.ai/prompt/value for money {{ termo }}" class="product-img">
+            <a href="https://www.google.com/search?tbm=shop&q={{ termo }}" target="_blank" class="btn-link">Ver Ofertas</a>
+        </div>
+
+        <!-- Direita: Mais Caro -->
+        <div class="card">
+            <h3>Mais Caro</h3>
+            <img src="https://image.pollinations.ai/prompt/luxury high end {{ termo }}" class="product-img">
+            <a href="https://www.google.com/search?tbm=shop&q={{ termo }}&tbs=p_ord:pd" target="_blank" class="btn-link">Ver Ofertas</a>
+        </div>
+
     </div>
     {% endif %}
 
