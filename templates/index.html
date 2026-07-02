@@ -3,18 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>Optimo</title>
-    <!-- Inclua aqui o estilo CSS que desenvolvemos anteriormente -->
+    <style>
+        body { margin: 0; background-color: #000; color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        
+        .light-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .light-blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.5; }
+        .blob-1 { width: 600px; height: 600px; background: #001f3f; top: -100px; left: -100px; }
+        .blob-2 { width: 800px; height: 800px; background: #0074D9; bottom: -200px; right: -200px; }
+
+        header { margin-top: 50px; text-align: center; }
+        h1 { font-size: 3rem; color: #fff; text-shadow: 0 0 20px #0074D9; }
+        nav { margin-bottom: 20px; }
+        nav a { color: #60a5fa; text-decoration: none; margin: 0 10px; }
+
+        .search-form { background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; width: 90%; max-width: 500px; margin-bottom: 40px; }
+        input { background: transparent; border: none; color: white; padding: 15px 20px; width: 100%; outline: none; }
+        button { background: #0074D9; border: none; padding: 10px 25px; border-radius: 50px; color: white; cursor: pointer; }
+
+        .results-grid { display: flex; justify-content: center; gap: 20px; width: 90%; max-width: 1100px; }
+
+        .card { 
+            background: rgba(255, 255, 255, 0.05); 
+            padding: 25px; 
+            border-radius: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .ficha-tecnica { background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 10px; margin: 15px 0; font-size: 0.85rem; text-align: left; }
+        .ficha-tecnica p { margin: 5px 0; color: #bbb; }
+        .ficha-tecnica strong { color: #60a5fa; }
+
+        .product-img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; }
+        .btn-link { display: block; margin-top: 10px; color: #60a5fa; text-decoration: none; font-weight: bold; text-align: center; border: 1px solid #60a5fa; padding: 10px; border-radius: 10px; }
+    </style>
 </head>
 <body>
+
+    <div class="light-container">
+        <div class="light-blob blob-1"></div>
+        <div class="light-blob blob-2"></div>
+    </div>
+
     <header><h1>Optimo</h1></header>
-    <nav>
-        <a href="/">Início</a> | <a href="/dicas">Dicas</a> | 
-        <a href="/politica">Política</a> | <a href="/sobre">Sobre</a>
-    </nav>
-    <form method="POST">
+    <nav><a href="/">Início</a> | <a href="/dicas">Dicas</a> | <a href="/politica">Política</a> | <a href="/sobre">Sobre</a></nav>
+
+    <form method="POST" class="search-form">
         <input type="text" name="query" placeholder="O que você procura?" required>
         <button type="submit">Buscar</button>
     </form>
-    <!-- Resultados aparecerão aqui -->
+
+    {% if termo %}
+    <div class="results-grid">
+        <div class="card">
+            <h3>Mais Barato</h3>
+            <div class="ficha-tecnica">
+                <p><strong>Status:</strong> Opção de entrada</p>
+            </div>
+            <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}&tbs=p_ord:p" target="_blank" class="btn-link">Ver Ofertas</a>
+        </div>
+
+        <div class="card">
+            <h3>Econômico</h3>
+            <img src="https://image.pollinations.ai/prompt/value-for-money-{{ termo | urlencode }}" class="product-img" alt="Econômico">
+            <div class="ficha-tecnica">
+                <p><strong>Status:</strong> Melhor custo-benefício.</p>
+            </div>
+            <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}" target="_blank" class="btn-link">Ver Ofertas</a>
+        </div>
+
+        <div class="card">
+            <h3>Mais Caro</h3>
+            <div class="ficha-tecnica">
+                <p><strong>Status:</strong> Linha Premium</p>
+            </div>
+            <a href="https://www.google.com/search?tbm=shop&q={{ termo | urlencode }}&tbs=p_ord:pd" target="_blank" class="btn-link">Ver Ofertas</a>
+        </div>
+    </div>
+    {% endif %}
+
 </body>
 </html>
