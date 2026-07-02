@@ -5,48 +5,20 @@
     <title>Optimo</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            color: white;
-            font-family: 'Segoe UI', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
+            margin: 0; padding: 0; background-color: #000; color: white;
+            font-family: 'Segoe UI', sans-serif; min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center; overflow-x: hidden;
         }
 
-        /* --- LUZES MAIORES (Ajustadas conforme solicitado) --- */
-        .light-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; 
-            overflow: hidden;
-        }
-
-        .light-blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(120px); /* Mantém a suavidade */
-            opacity: 0.6;
-            animation: move 15s infinite alternate;
-        }
-
-        /* Tamanhos ampliados para ocupar mais espaço */
+        /* Efeito de Luzes */
+        .light-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .light-blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.6; animation: move 15s infinite alternate; }
         .blob-1 { width: 700px; height: 700px; background: #001f3f; top: -150px; left: -150px; }
         .blob-2 { width: 900px; height: 900px; background: #0074D9; bottom: -200px; right: -200px; }
         .blob-3 { width: 600px; height: 600px; background: #001233; top: 40%; left: 30%; }
+        @keyframes move { from { transform: translate(0, 0); } to { transform: translate(100px, 100px); } }
 
-        @keyframes move {
-            from { transform: translate(0, 0); }
-            to { transform: translate(100px, 100px); }
-        }
-
-        /* --- Conteúdo --- */
+        /* Estilos do Conteúdo */
         header { margin-top: 100px; text-align: center; }
         h1 { font-size: 4rem; font-weight: 800; text-shadow: 0 0 20px #0074D9; }
         
@@ -55,7 +27,25 @@
         button { background: #0074D9; border: none; padding: 10px 25px; border-radius: 50px; color: white; cursor: pointer; }
 
         .results { width: 90%; max-width: 500px; margin-top: 40px; }
-        .card { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        
+        /* Card com a imagem incluída */
+        .card { 
+            background: rgba(255, 255, 255, 0.05); 
+            padding: 20px; border-radius: 20px; 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        
+        /* Ajuste para a imagem */
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 15px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -79,7 +69,11 @@
     <div class="results">
         <div class="card">
             <h3>Resultados para: {{ termo }}</h3>
-            <a href="https://www.google.com/search?tbm=shop&q={{ termo }}" target="_blank" style="color: #60a5fa;">Ver no Google Shopping</a>
+            
+            <!-- A imagem é carregada dinamicamente pelo termo buscado -->
+            <img src="https://image.pollinations.ai/prompt/{{ termo }}" alt="{{ termo }}" class="product-img">
+            
+            <a href="https://www.google.com/search?tbm=shop&q={{ termo }}" target="_blank" style="color: #60a5fa; text-decoration: none;">Ver no Google Shopping</a>
         </div>
     </div>
     {% endif %}
