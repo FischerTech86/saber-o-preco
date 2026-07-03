@@ -4,51 +4,19 @@
     <meta charset="UTF-8">
     <title>Optimo</title>
     <style>
-        body { 
-            margin: 0; background: #000; color: #fff; 
-            font-family: 'Segoe UI', sans-serif; 
-            display: flex; flex-direction: column; align-items: center; 
-            min-height: 100vh; background-image: radial-gradient(circle at top right, #001f3f, #000);
-        }
-
+        body { margin: 0; background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; background-image: radial-gradient(circle at top right, #001f3f, #000); }
         header { margin-top: 50px; text-align: center; }
-        h1 { font-size: 3rem; margin-bottom: 30px; }
-
-        /* Estilo da caixa de comparação (idêntico a image_056e28.png) */
-        .comparison-container { 
-            background: rgba(255, 255, 255, 0.05); padding: 40px; 
-            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center; width: 500px;
-        }
+        .comparison-container { background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); text-align: center; width: 500px; }
         .comparison-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .comparison-form input { 
-            border: 1px solid #333; border-radius: 10px; padding: 15px; 
-            background: #111; color: white; width: 100%; outline: none;
-        }
-        button { 
-            background: #007bff; border: none; padding: 15px; border-radius: 10px; 
-            color: white; cursor: pointer; font-weight: bold; margin-top: 10px;
-        }
-
-        /* Estilo da caixa de resposta */
-        .analise-box {
-            background: rgba(0, 123, 255, 0.05);
-            border: 1px solid #007bff;
-            padding: 30px;
-            border-radius: 20px;
-            width: 500px;
-            margin-top: 30px;
-            text-align: left;
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
+        .comparison-form input { border: 1px solid #333; border-radius: 10px; padding: 15px; background: #111; color: white; width: 100%; outline: none; }
+        button { background: #007bff; border: none; padding: 15px; border-radius: 10px; color: white; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        .analise-box { background: rgba(0, 123, 255, 0.05); border: 1px solid #007bff; padding: 30px; border-radius: 20px; width: 500px; margin-top: 30px; text-align: left; color: #e0e0e0; line-height: 1.6; }
     </style>
 </head>
 <body>
 
     <header><h1>Optimo</h1></header>
 
-    <!-- Caixa de Comparação -->
     <div class="comparison-container">
         <h2>Comparar Produtos</h2>
         <form method="POST" class="comparison-form">
@@ -58,11 +26,10 @@
         </form>
     </div>
 
-    <!-- Texto de análise (só aparece se houver comparação) -->
     {% if analise %}
     <div class="analise-box">
         <h3>Resultado da Comparação</h3>
-        <p>{{ analise }}</p>
+        <p>{{ analise | safe }}</p>
     </div>
     {% endif %}
 
