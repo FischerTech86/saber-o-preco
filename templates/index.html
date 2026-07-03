@@ -4,58 +4,65 @@
     <meta charset="UTF-8">
     <title>Optimo</title>
     <style>
-        body { margin: 0; background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; background-image: radial-gradient(circle at top right, #001f3f, #000); }
+        body { 
+            margin: 0; background: #000; color: #fff; 
+            font-family: 'Segoe UI', sans-serif; 
+            display: flex; flex-direction: column; align-items: center; 
+            min-height: 100vh; background-image: radial-gradient(circle at top right, #001f3f, #000);
+        }
+
         header { margin-top: 50px; text-align: center; }
-        .search-form { background: #111; padding: 10px 20px; border-radius: 50px; border: 1px solid #333; display: flex; width: 400px; margin-bottom: 60px; }
-        input { background: transparent; border: none; color: white; width: 100%; padding: 10px; outline: none; }
-        button { background: #007bff; border: none; padding: 10px 20px; border-radius: 50px; color: white; cursor: pointer; }
-        
-        /* Containers */
-        .comparison-container, .analise-container { background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); width: 600px; }
-        
-        /* Estilo da Análise Técnica */
-        .analise-container h2 { color: #60a5fa; margin-top: 0; }
-        .tech-box { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #007bff; }
-        .tech-item { margin-bottom: 10px; font-size: 0.95rem; }
+        h1 { font-size: 3rem; margin-bottom: 30px; }
+
+        /* Estilo da caixa de comparação (idêntico a image_056e28.png) */
+        .comparison-container { 
+            background: rgba(255, 255, 255, 0.05); padding: 40px; 
+            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center; width: 500px;
+        }
+        .comparison-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+        .comparison-form input { 
+            border: 1px solid #333; border-radius: 10px; padding: 15px; 
+            background: #111; color: white; width: 100%; outline: none;
+        }
+        button { 
+            background: #007bff; border: none; padding: 15px; border-radius: 10px; 
+            color: white; cursor: pointer; font-weight: bold; margin-top: 10px;
+        }
+
+        /* Estilo da caixa de resposta */
+        .analise-box {
+            background: rgba(0, 123, 255, 0.05);
+            border: 1px solid #007bff;
+            padding: 30px;
+            border-radius: 20px;
+            width: 500px;
+            margin-top: 30px;
+            text-align: left;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
 
     <header><h1>Optimo</h1></header>
 
-    <form method="POST" class="search-form">
-        <input type="text" name="query" placeholder="O que você procura?" required>
-        <button type="submit">Buscar</button>
-    </form>
-
-    <!-- Estado 1: Se houver análise técnica -->
-    {% if analise %}
-    <div class="analise-container">
-        <h2>Análise Técnica: {{ prod_a }} vs {{ prod_b }}</h2>
-        <p><strong>Veredito:</strong> O {{ analise.vencedor }} é a escolha superior.</p>
-        <div class="tech-box">
-            <p>{{ analise.motivo }}</p>
-        </div>
-        <div class="specs">
-            {% for key, value in analise.tecnico.items() %}
-            <div class="tech-item"><strong>{{ key }}:</strong> {{ value }}</div>
-            {% endfor %}
-        </div>
+    <!-- Caixa de Comparação -->
+    <div class="comparison-container">
+        <h2>Comparar Produtos</h2>
+        <form method="POST" class="comparison-form">
+            <input type="text" name="prod_a" placeholder="Produto A" required>
+            <input type="text" name="prod_b" placeholder="Produto B" required>
+            <button type="submit" style="width: 100%;">Comparar Produtos</button>
+        </form>
     </div>
 
-    <!-- Estado 2: Se houver busca comum -->
-    {% elif termo %}
-    <div style="text-align: center;">Resultados para {{ termo }}...</div>
-
-    <!-- Estado 3: Landing Page (como em image_0517cb.jpg) -->
-    {% else %}
-    <div class="comparison-container">
-        <h3>Comparar Produtos</h3>
-        <form method="POST">
-            <input type="text" name="prod_a" placeholder="Produto A" required><br><br>
-            <input type="text" name="prod_b" placeholder="Produto B" required><br><br>
-            <button type="submit">Comparar Produtos</button>
-        </form>
+    <!-- Texto de análise (só aparece se houver comparação) -->
+    {% if analise %}
+    <div class="analise-box">
+        <h3>Resultado da Comparação</h3>
+        <p>{{ analise }}</p>
     </div>
     {% endif %}
 
