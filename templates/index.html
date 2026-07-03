@@ -10,7 +10,9 @@
         .comparison-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
         .comparison-form input { border: 1px solid #333; border-radius: 10px; padding: 15px; background: #111; color: white; width: 100%; outline: none; }
         button { background: #007bff; border: none; padding: 15px; border-radius: 10px; color: white; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        button:disabled { background: #444; cursor: not-allowed; }
         .analise-box { background: rgba(0, 123, 255, 0.05); border: 1px solid #007bff; padding: 30px; border-radius: 20px; width: 500px; margin-top: 30px; text-align: left; color: #e0e0e0; line-height: 1.6; }
+        .erro-box { color: #ff6b6b; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -19,18 +21,20 @@
 
     <div class="comparison-container">
         <h2>Comparar Produtos</h2>
-        <form method="POST" class="comparison-form">
+        <form method="POST" class="comparison-form" onsubmit="document.getElementById('btn').disabled=true; document.getElementById('btn').innerText='Analisando...';">
             <input type="text" name="prod_a" placeholder="Produto A" required>
             <input type="text" name="prod_b" placeholder="Produto B" required>
-            <button type="submit" style="width: 100%;">Comparar Produtos</button>
+            <button type="submit" id="btn" style="width: 100%;">Comparar Produtos</button>
         </form>
     </div>
 
-    {% if analise %}
-    <div class="analise-box">
-        <h3>Resultado da Comparação</h3>
-        <p>{{ analise | safe }}</p>
-    </div>
+    {% if erro %}
+        <div class="erro-box">{{ erro }}</div>
+    {% elif analise %}
+        <div class="analise-box">
+            <h3>Resultado da Comparação</h3>
+            <p>{{ analise | safe }}</p>
+        </div>
     {% endif %}
 
 </body>
