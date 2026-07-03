@@ -4,23 +4,71 @@
     <meta charset="UTF-8">
     <title>Optimo</title>
     <style>
-        body { margin: 0; background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; background-image: radial-gradient(circle at top right, #001f3f, #000); }
+        body { 
+            margin: 0; background: #000; color: #fff; 
+            font-family: 'Segoe UI', sans-serif; 
+            display: flex; flex-direction: column; align-items: center; 
+            min-height: 100vh; background-image: radial-gradient(circle at top right, #001f3f, #000); 
+        }
+        
         header { margin-top: 50px; text-align: center; }
         h1 { margin-bottom: 20px; }
         
-        /* Campo de busca do topo */
-        .search-form { background: #111; padding: 10px 20px; border-radius: 50px; border: 1px solid #333; display: flex; width: 400px; margin-bottom: 40px; }
+        /* Barra de Busca (O "teclado" no topo) */
+        .search-form { 
+            background: #111; padding: 10px 20px; border-radius: 50px; 
+            border: 1px solid #333; display: flex; width: 400px; margin-bottom: 40px; 
+        }
         .search-form input { background: transparent; border: none; color: white; width: 100%; padding: 10px; outline: none; }
         .search-form button { background: #007bff; border: none; padding: 10px 20px; border-radius: 50px; color: white; cursor: pointer; }
 
-        /* Container de comparação */
-        .comparison-container { background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); text-align: center; width: 500px; }
-        .comparison-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .comparison-form input { border: 1px solid #333; border-radius: 10px; padding: 15px; background: #111; color: white; width: 100%; outline: none; }
-        .btn-comparar { background: #007bff; border: none; padding: 15px; border-radius: 10px; color: white; cursor: pointer; font-weight: bold; margin-top: 10px; }
-        .btn-comparar:disabled { background: #444; cursor: not-allowed; }
+        /* Container de Comparação (Amarelo Reto e Organizado) */
+        .comparison-container { 
+            background: rgba(0, 0, 0, 0.5); 
+            padding: 40px; 
+            border-radius: 10px; /* Borda reta */
+            border: 2px solid #FFD700; /* Amarelo reto */
+            text-align: center; 
+            width: 500px; 
+        }
         
-        .analise-box { background: rgba(0, 123, 255, 0.05); border: 1px solid #007bff; padding: 30px; border-radius: 20px; width: 500px; margin-top: 30px; text-align: left; color: #e0e0e0; line-height: 1.6; }
+        .comparison-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+        
+        /* Inputs do Produto (Amarelo Reto) */
+        .comparison-form input { 
+            border: 1px solid #FFD700; 
+            border-radius: 5px; /* Borda reta */
+            padding: 15px; 
+            background: #111; 
+            color: white; 
+            width: 100%; 
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .btn-comparar { 
+            background: #FFD700; /* Botão combinando com o tema */
+            border: none; 
+            padding: 15px; 
+            border-radius: 5px; 
+            color: #000; 
+            cursor: pointer; 
+            font-weight: bold; 
+            margin-top: 10px;
+        }
+        .btn-comparar:disabled { background: #777; cursor: not-allowed; }
+        
+        .analise-box { 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid #FFD700; 
+            padding: 30px; 
+            border-radius: 10px; 
+            width: 500px; 
+            margin-top: 30px; 
+            text-align: left; 
+            color: #e0e0e0; 
+            line-height: 1.6; 
+        }
         .erro-box { color: #ff6b6b; margin-top: 20px; }
     </style>
 </head>
@@ -34,9 +82,9 @@
         <button type="submit">Buscar</button>
     </form>
 
-    <!-- Container de Comparação -->
+    <!-- Container de Comparação (Amarelo Reto) -->
     <div class="comparison-container">
-        <h2>Comparar Produtos</h2>
+        <h2 style="color: #FFD700;">Comparar Produtos</h2>
         <form method="POST" class="comparison-form" onsubmit="document.getElementById('btn').disabled=true; document.getElementById('btn').innerText='Analisando...';">
             <input type="text" name="prod_a" placeholder="Produto A" required>
             <input type="text" name="prod_b" placeholder="Produto B" required>
@@ -49,7 +97,7 @@
         <div class="erro-box">{{ erro }}</div>
     {% elif analise %}
         <div class="analise-box">
-            <h3>Resultado da Comparação</h3>
+            <h3 style="color: #FFD700;">Resultado da Comparação</h3>
             <p>{{ analise | safe }}</p>
         </div>
     {% endif %}
