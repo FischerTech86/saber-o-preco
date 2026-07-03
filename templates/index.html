@@ -4,45 +4,25 @@
     <meta charset="UTF-8">
     <title>Optimo</title>
     <style>
-        body { margin: 0; background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; background-image: radial-gradient(circle at top right, #001f3f, #000); }
-        header { margin-top: 50px; text-align: center; }
-        .search-form { background: #111; padding: 10px 20px; border: 1px solid #333; display: flex; width: 400px; margin-bottom: 40px; }
-        .search-form input { background: transparent; border: none; color: white; width: 100%; padding: 10px; outline: none; }
-        .search-form button { background: #007bff; border: none; padding: 10px 20px; color: white; cursor: pointer; }
-        .comparison-container { background: rgba(0, 0, 0, 0.5); padding: 40px; border: 2px solid #007bff; text-align: center; width: 500px; }
-        .comparison-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .comparison-form input { border: 1px solid #007bff; padding: 15px; background: #111; color: white; width: 100%; outline: none; box-sizing: border-box; }
-        .btn-comparar { background: #007bff; border: none; padding: 15px; color: white; cursor: pointer; font-weight: bold; margin-top: 10px; }
-        .analise-box { background: rgba(0, 123, 255, 0.05); border: 1px solid #007bff; padding: 30px; width: 500px; margin-top: 30px; text-align: left; color: #e0e0e0; line-height: 1.6; }
-        .erro-box { color: #ff6b6b; margin-top: 20px; font-weight: bold; }
+        body { background: #000; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding-top: 50px; }
+        .box { border: 1px solid #007bff; padding: 20px; width: 400px; }
+        input, button { width: 100%; margin-bottom: 10px; padding: 10px; background: #111; color: white; border: 1px solid #333; }
+        button { background: #007bff; cursor: pointer; }
     </style>
 </head>
 <body>
-
-    <header><h1>Optimo</h1></header>
-
-    <form method="GET" class="search-form">
-        <input type="text" name="query" placeholder="O que você procura?">
-        <button type="submit">Buscar</button>
-    </form>
-
-    <div class="comparison-container">
-        <h2>Comparar Produtos</h2>
-        <form method="POST" class="comparison-form" onsubmit="document.getElementById('btn').disabled=true; document.getElementById('btn').innerText='Analisando...';">
+    <h1>Optimo</h1>
+    <div class="box">
+        <form method="POST">
             <input type="text" name="prod_a" placeholder="Produto A" required>
             <input type="text" name="prod_b" placeholder="Produto B" required>
-            <button type="submit" id="btn" class="btn-comparar" style="width: 100%;">Comparar Produtos</button>
+            <button type="submit">Comparar Produtos</button>
         </form>
     </div>
-
-    {% if erro %}
-        <div class="erro-box">{{ erro }}</div>
-    {% elif analise %}
-        <div class="analise-box">
-            <h3>Resultado da Comparação</h3>
+    {% if analise %}
+        <div class="box" style="margin-top: 20px;">
             <p>{{ analise | safe }}</p>
         </div>
     {% endif %}
-
 </body>
 </html>
