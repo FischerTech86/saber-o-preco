@@ -12,9 +12,8 @@
         }
         
         header { margin-top: 50px; text-align: center; }
-        h1 { margin-bottom: 20px; }
         
-        /* Barra de Busca (Teclado no topo) */
+        /* Barra de Busca no topo */
         .search-form { 
             background: #111; padding: 10px 20px; border-radius: 0; 
             border: 1px solid #333; display: flex; width: 400px; margin-bottom: 40px; 
@@ -22,7 +21,7 @@
         .search-form input { background: transparent; border: none; color: white; width: 100%; padding: 10px; outline: none; }
         .search-form button { background: #007bff; border: none; padding: 10px 20px; border-radius: 0; color: white; cursor: pointer; }
 
-        /* Container de Comparação (Azul e Reto) */
+        /* Container de Comparação */
         .comparison-container { 
             background: rgba(0, 0, 0, 0.5); 
             padding: 40px; 
@@ -34,7 +33,7 @@
         
         .comparison-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
         
-        /* Inputs do Produto (Azul e Reto) */
+        /* Inputs */
         .comparison-form input { 
             border: 1px solid #007bff; 
             border-radius: 0; 
@@ -58,6 +57,7 @@
         }
         .btn-comparar:disabled { background: #444; cursor: not-allowed; }
         
+        /* Caixa de Resultado */
         .analise-box { 
             background: rgba(0, 123, 255, 0.05); 
             border: 1px solid #007bff; 
@@ -69,20 +69,17 @@
             color: #e0e0e0; 
             line-height: 1.6; 
         }
-        .erro-box { color: #ff6b6b; margin-top: 20px; }
     </style>
 </head>
 <body>
 
     <header><h1>Optimo</h1></header>
 
-    <!-- Campo de Busca no topo -->
     <form method="GET" class="search-form">
         <input type="text" name="query" placeholder="O que você procura?">
         <button type="submit">Buscar</button>
     </form>
 
-    <!-- Container de Comparação (Azul e Reto) -->
     <div class="comparison-container">
         <h2>Comparar Produtos</h2>
         <form method="POST" class="comparison-form" onsubmit="document.getElementById('btn').disabled=true; document.getElementById('btn').innerText='Analisando...';">
@@ -92,14 +89,13 @@
         </form>
     </div>
 
-    <!-- Resultados -->
-    {% if erro %}
-        <div class="erro-box">{{ erro }}</div>
-    {% elif analise %}
+    {% if analise %}
         <div class="analise-box">
             <h3>Resultado da Comparação</h3>
             <p>{{ analise | safe }}</p>
         </div>
+    {% elif erro %}
+        <p style="color: red;">{{ erro }}</p>
     {% endif %}
 
 </body>
