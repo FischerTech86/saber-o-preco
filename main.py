@@ -2,7 +2,7 @@ import os
 import google.generativeai as genai
 from flask import Flask, render_template, request
 
-# Segurança: Substitua pela sua chave ou use variável de ambiente
+# Substitua pela sua chave (não compartilhe essa chave com ninguém!)
 genai.configure(api_key='SUA_CHAVE_AQUI')
 model = genai.GenerativeModel('gemini-1.5-flash')
 
@@ -21,7 +21,7 @@ def index():
             response = model.generate_content(prompt)
             analise = response.text.replace('\n', '<br>')
         except Exception:
-            erro = "Desculpe, não foi possível realizar a análise no momento. Tente novamente."
+            erro = "Desculpe, não foi possível realizar a análise no momento."
 
     return render_template('index.html', analise=analise, erro=erro)
 
