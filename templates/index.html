@@ -21,25 +21,36 @@
         input { background: transparent; border: none; color: white; width: 100%; padding: 10px; outline: none; }
         button { background: #007bff; border: none; padding: 10px 20px; border-radius: 50px; color: white; cursor: pointer; }
 
-        .results-grid { display: flex; gap: 20px; justify-content: center; width: 90%; max-width: 1000px; }
+        .results-grid { display: flex; gap: 30px; justify-content: center; width: 90%; max-width: 1000px; }
 
+        /* Design do Card Melhorado */
         .card { 
-            background: rgba(255, 255, 255, 0.05); 
+            background: rgba(255, 255, 255, 0.03); 
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px; border-radius: 15px; 
-            width: 300px; height: 400px;
+            padding: 30px; border-radius: 20px; 
+            width: 300px; 
             display: flex; flex-direction: column; justify-content: space-between;
+            transition: transform 0.3s ease;
+        }
+        .card:hover { border-color: #007bff; }
+
+        .product-img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; }
+
+        /* Estilo do Badge (O que melhora a parte que você marcou) */
+        .badge { 
+            display: inline-block; background: rgba(0, 123, 255, 0.2); 
+            color: #60a5fa; padding: 4px 12px; border-radius: 20px; 
+            font-size: 0.75rem; font-weight: bold; margin-bottom: 10px; text-transform: uppercase;
         }
 
-        .product-img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; }
-
-        .ficha-tecnica { font-size: 0.9rem; color: #aaa; margin-bottom: 20px; }
-        .ficha-tecnica strong { color: #007bff; }
-
+        .ficha-tecnica { font-size: 0.9rem; color: #aaa; margin-bottom: 25px; line-height: 1.6; }
+        
         .btn-ofertas { 
-            display: block; text-align: center; padding: 10px; 
-            border: 1px solid #007bff; color: #fff; text-decoration: none; border-radius: 10px;
+            display: block; text-align: center; padding: 12px; 
+            background: #007bff; color: #fff; text-decoration: none; border-radius: 10px;
+            font-weight: bold; transition: background 0.3s;
         }
+        .btn-ofertas:hover { background: #0056b3; }
     </style>
 </head>
 <body>
@@ -53,33 +64,33 @@
 
     {% if termo %}
     <div class="results-grid">
-        <!-- Esquerda -->
+        <!-- Card 1 -->
         <div class="card">
             <h3>Mais Barato</h3>
+            <span class="badge">Econômico</span>
             <div class="ficha-tecnica">
-                <p><strong>Status:</strong> Opção de entrada</p>
-                <p><strong>Custo:</strong> O menor valor do mercado.</p>
+                <p>Opção de entrada para quem busca economizar no básico.</p>
             </div>
             <a href="https://www.google.com/search?tbm=shop&q={{ termo }}&tbs=p_ord:p" class="btn-ofertas">Ver Ofertas</a>
         </div>
 
-        <!-- Meio -->
+        <!-- Card 2 -->
         <div class="card">
             <h3>Econômico</h3>
+            <span class="badge">Custo-Benefício</span>
             <img src="https://image.pollinations.ai/prompt/{{ termo }}" class="product-img">
             <div class="ficha-tecnica">
-                <p><strong>Status:</strong> Melhor custo-benefício.</p>
+                <p>O melhor equilíbrio entre qualidade e preço.</p>
             </div>
             <a href="https://www.google.com/search?tbm=shop&q={{ termo }}" class="btn-ofertas">Ver Ofertas</a>
         </div>
 
-        <!-- Direita -->
+        <!-- Card 3 -->
         <div class="card">
             <h3>Mais Caro</h3>
+            <span class="badge">Premium</span>
             <div class="ficha-tecnica">
-                <p><strong>Status:</strong> Linha Premium</p>
-                <p><strong>Qualidade:</strong> Superior e durável.</p>
-                <p><strong>Categoria:</strong> Alto padrão.</p>
+                <p>Linha de alto padrão com durabilidade superior.</p>
             </div>
             <a href="https://www.google.com/search?tbm=shop&q={{ termo }}&tbs=p_ord:pd" class="btn-ofertas">Ver Ofertas</a>
         </div>
