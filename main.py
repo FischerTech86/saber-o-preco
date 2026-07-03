@@ -2,7 +2,7 @@ import os
 import google.generativeai as genai
 from flask import Flask, render_template, request
 
-# O código vai buscar a chave que você configurou no Render
+# O código busca a chave que você deve configurar no painel do Render
 api_key = os.getenv('GOOGLE_API_KEY')
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-1.5-flash')
@@ -24,6 +24,7 @@ def index():
                 response = model.generate_content(prompt)
                 analise = response.text.replace('\n', '<br>')
             except Exception as e:
+                # O erro aparece aqui se a chave for inválida ou não encontrada
                 erro = "Erro ao conectar com a IA. Verifique sua API KEY no Render."
 
     return render_template('index.html', analise=analise, erro=erro)
