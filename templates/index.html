@@ -28,35 +28,35 @@
             text-align: center; width: 400px;
         }
         .comparison-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .comparison-form input { border: 1px solid #333; border-radius: 10px; }
+        .comparison-form input { border: 1px solid #333; border-radius: 10px; padding: 10px; background: #111; color: white; }
 
-        /* Grid de Resultados */
+        /* Grid de Resultados (Seu design original) */
         .results-grid { display: flex; gap: 30px; justify-content: center; width: 90%; max-width: 1000px; }
         .card { 
             background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px; border-radius: 20px; width: 300px; 
+            padding: 30px; border-radius: 20px; width: 300px; display: flex; flex-direction: column;
         }
-        .badge { display: inline-block; background: rgba(0, 123, 255, 0.2); color: #60a5fa; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; margin-bottom: 20px; }
+        .badge { display: inline-block; background: rgba(0, 123, 255, 0.2); color: #60a5fa; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; }
         .specs-table { margin-bottom: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
         .spec-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.85rem; }
-        .btn-ofertas { display: block; text-align: center; padding: 12px; background: #007bff; color: #fff; text-decoration: none; border-radius: 10px; font-weight: bold; }
+        .spec-label { color: #888; }
+        .spec-value { color: #eee; font-weight: bold; }
+        .btn-ofertas { display: block; text-align: center; padding: 12px; background: #007bff; color: #fff; text-decoration: none; border-radius: 10px; font-weight: bold; margin-top: auto; }
     </style>
 </head>
 <body>
 
     <header><h1>Optimo</h1></header>
 
-    <!-- Barra de busca sempre visível -->
     <form method="POST" class="search-form">
         <input type="text" name="query" placeholder="O que você procura?" required>
         <button type="submit">Buscar</button>
     </form>
 
     {% if not termo %}
-    <!-- Esta parte SÓ aparece quando não há pesquisa -->
+    <!-- Tela Inicial (Landing Page) -->
     <div class="comparison-container">
         <h2>Comparar Produtos</h2>
-        <p style="color:#888; font-size: 0.9rem;">Insira dois produtos para comparar agora:</p>
         <form method="POST" class="comparison-form">
             <input type="text" name="prod_a" placeholder="Produto A" required>
             <input type="text" name="prod_b" placeholder="Produto B" required>
@@ -64,15 +64,36 @@
         </form>
     </div>
     {% else %}
-    <!-- Esta parte SÓ aparece após a pesquisa -->
+    <!-- Tela de Resultados (Seu Design de 3 Cards) -->
     <div class="results-grid">
         <div class="card">
-            <h3>Resultado para: {{ termo }}</h3>
-            <span class="badge">Análise</span>
+            <h3>Mais Barato</h3>
+            <span class="badge">Econômico</span>
             <div class="specs-table">
-                <div class="spec-row"><span class="spec-label">Status:</span> <span class="spec-value">Encontrado</span></div>
+                <div class="spec-row"><span class="spec-label">Foco:</span> <span class="spec-value">Funcionalidade</span></div>
+                <div class="spec-row"><span class="spec-label">Ideal para:</span> <span class="spec-value">Uso diário</span></div>
+            </div>
+            <a href="https://www.google.com/search?tbm=shop&q={{ termo }}&tbs=p_ord:p" class="btn-ofertas">Ver Ofertas</a>
+        </div>
+
+        <div class="card">
+            <h3>Econômico</h3>
+            <span class="badge">Custo-Benefício</span>
+            <div class="specs-table">
+                <div class="spec-row"><span class="spec-label">Equilíbrio:</span> <span class="spec-value">Excelente</span></div>
+                <div class="spec-row"><span class="spec-label">Durabilidade:</span> <span class="spec-value">Média</span></div>
             </div>
             <a href="https://www.google.com/search?tbm=shop&q={{ termo }}" class="btn-ofertas">Ver Ofertas</a>
+        </div>
+
+        <div class="card">
+            <h3>Mais Caro</h3>
+            <span class="badge">Premium</span>
+            <div class="specs-table">
+                <div class="spec-row"><span class="spec-label">Construção:</span> <span class="spec-value">Robusta</span></div>
+                <div class="spec-row"><span class="spec-label">Vida útil:</span> <span class="spec-value">Longa</span></div>
+            </div>
+            <a href="https://www.google.com/search?tbm=shop&q={{ termo }}&tbs=p_ord:pd" class="btn-ofertas">Ver Ofertas</a>
         </div>
     </div>
     {% endif %}
