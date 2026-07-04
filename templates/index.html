@@ -2,31 +2,104 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Saber o Preço</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de Produtos</title>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; background-color: #f4f4f4; }
-        .container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 350px; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        .resultado { margin-top: 20px; padding: 15px; background: #e9ecef; border-radius: 5px; }
+        /* Estilização Geral */
+        body {
+            margin: 0;
+            background: radial-gradient(circle at top, #1a2a6c, #000000);
+            background-attachment: fixed;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Barra de Pesquisa */
+        .search-container {
+            width: 80%;
+            max-width: 800px;
+            margin-top: 50px;
+        }
+
+        input {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            border: 2px solid #00d4ff;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            outline: none;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Container dos Resultados */
+        .results {
+            width: 80%;
+            max-width: 600px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+
+        .price-tag {
+            font-weight: bold;
+            color: #00d4ff;
+            font-size: 1.5rem;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Comparador de Produtos</h2>
-    <form method="POST">
-        <input type="text" name="prod_a" placeholder="Nome do Produto A" required>
-        <input type="text" name="prod_b" placeholder="Nome do Produto B" required>
-        <button type="submit">Comparar</button>
-    </form>
+    <div class="search-container">
+        <input type="text" placeholder="O que você está procurando hoje?">
+    </div>
 
-    {% if analise %}
-        <div class="resultado">
-            {{ analise | safe }}
+    <div class="results">
+        <div class="card">
+            <div>
+                <h3>Plano Iniciante</h3>
+                <p>Ideal para começar</p>
+            </div>
+            <div class="price-tag">R$ 10,00</div>
         </div>
-    {% endif %}
-</div>
+
+        <div class="card">
+            <div>
+                <h3>Plano Econômico</h3>
+                <p>Melhor custo-benefício</p>
+            </div>
+            <div class="price-tag">R$ 29,90</div>
+        </div>
+
+        <div class="card">
+            <div>
+                <h3>Plano Premium</h3>
+                <p>Acesso total e exclusivo</p>
+            </div>
+            <div class="price-tag">R$ 59,90</div>
+        </div>
+    </div>
 
 </body>
 </html>
