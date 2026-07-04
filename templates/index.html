@@ -18,7 +18,8 @@
         .search-container {
             width: 80%;
             max-width: 800px;
-            margin-top: 150px; /* Ajustado para centralizar quando só tem a busca */
+            margin-top: 250px; /* Centralizado inicialmente */
+            transition: 0.5s;
         }
 
         input {
@@ -29,9 +30,10 @@
             background: rgba(0, 0, 0, 0.6);
             color: white;
             outline: none;
+            text-align: center;
         }
 
-        /* Escondido por padrão */
+        /* Escondido inicialmente */
         #results {
             display: none;
             width: 80%;
@@ -52,20 +54,24 @@
 </head>
 <body>
 
-    <div class="search-container">
-        <!-- O evento oninput faz aparecer assim que você começa a digitar -->
-        <input type="text" placeholder="O que você está procurando?" oninput="mostrarResultados()">
+    <div class="search-container" id="searchBar">
+        <input type="text" id="userInput" placeholder="O que você está procurando?" onkeydown="verificarEnter(event)">
     </div>
 
     <div id="results">
-        <div class="card"><h3>Plano Iniciante</h3><div class="price-tag">R$ 10,00</div></div>
-        <div class="card"><h3>Plano Econômico</h3><div class="price-tag">R$ 29,90</div></div>
-        <div class="card"><h3>Plano Premium</h3><div class="price-tag">R$ 59,90</div></div>
+        <div class="card"><h3>Plano Iniciante</h3><div>R$ 10,00</div></div>
+        <div class="card"><h3>Plano Econômico</h3><div>R$ 29,90</div></div>
+        <div class="card"><h3>Plano Premium</h3><div>R$ 59,90</div></div>
     </div>
 
     <script>
-        function mostrarResultados() {
-            document.getElementById('results').style.display = 'block';
+        function verificarEnter(event) {
+            // Verifica se a tecla pressionada foi o "Enter" (código 13)
+            if (event.keyCode === 13) {
+                document.getElementById('results').style.display = 'block';
+                // Move a barra de pesquisa para cima ao mostrar resultados
+                document.getElementById('searchBar').style.marginTop = '50px';
+            }
         }
     </script>
 
