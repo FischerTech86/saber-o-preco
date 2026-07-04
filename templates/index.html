@@ -10,7 +10,7 @@
             background: radial-gradient(circle at top, #1a2a6c, #000000);
             background-attachment: fixed;
             color: white;
-            font-family: sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -78,7 +78,7 @@
             <div>Ver no Google Shopping</div>
         </a>
         <a id="linkEconomico" href="#" target="_blank" class="card">
-            <h3>Preço Econômico</h3>
+            <h3>Preço Econômico (Relevância)</h3>
             <div>Ver no Google Shopping</div>
         </a>
         <a id="linkAlto" href="#" target="_blank" class="card">
@@ -91,21 +91,19 @@
         function verificarEnter(event) {
             if (event.key === 'Enter' || event.keyCode === 13) {
                 const termo = document.getElementById('userInput').value;
-                if (!termo) return; // Não faz nada se o campo estiver vazio
+                if (!termo) return;
                 
                 const encodedTermo = encodeURIComponent(termo);
                 
-                // Atualiza os links com os parâmetros do Google Shopping
+                // Links com filtros aplicados
                 document.getElementById('linkBaixo').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:p`;
-                document.getElementById('linkEconomico').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop`;
+                document.getElementById('linkEconomico').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:rv`;
                 document.getElementById('linkAlto').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:pd`;
 
-                // Exibe os resultados
+                // Exibição dos resultados
                 const resultsDiv = document.getElementById('results');
                 resultsDiv.style.display = 'block';
                 setTimeout(() => { resultsDiv.style.opacity = '1'; }, 50);
-                
-                // Ajusta a posição da barra de pesquisa
                 document.getElementById('searchBar').style.marginTop = '50px';
             }
         }
