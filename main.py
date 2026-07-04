@@ -1,30 +1,20 @@
-import os
-import google.generativeai as genai
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Configuração segura: O código busca a chave do ambiente (Render)
-# Se não estiver no Render, ele usa None para evitar travar
-api_key = os.getenv('GOOGLE_API_KEY')
-genai.configure(api_key=api_key)
-model = genai.GenerativeModel('gemini-1.5-flash')
-
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
-
-@app.route('/chat', methods=['POST'])
-def chat():
-    user_message = request.json.get('message')
-    if not user_message:
-        return jsonify({'reply': 'Por favor, digite algo.'})
-    
-    try:
-        response = model.generate_content(user_message)
-        return jsonify({'reply': response.text})
-    except Exception as e:
-        return jsonify({'reply': 'Erro: Verifique se a API KEY está configurada corretamente no Render.'})
+    analise = None
+    if request.method == 'POST':
+        prod_a = request.form.get('prod_a')
+        prod_b = request.form.get('prod_b')
+        
+        # Como tiramos a IA, o site agora reconhece os produtos 
+        # mas não tenta processá-los externamente.
+        if prod_a and prod_b:
+            analise = f"Produtos recebidos: Comparando <strong>{prod_a}</strong> e <strong>{prod_b}</strong>. (Sistema local ativo)."
+            
+    return render_template('index.html', analise=analise)
 
 if __name__ == '__main__':
     app.run()
