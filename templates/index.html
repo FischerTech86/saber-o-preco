@@ -95,7 +95,8 @@
                 
                 const encodedTermo = encodeURIComponent(termo);
                 
-                // Links configurados com os parâmetros oficiais de filtro do Google
+                // Aplicando os parâmetros de ordenação (p = menor, rv = relevância, pd = maior)
+                // O tbm=shop força a exibição na aba de compras
                 document.getElementById('linkBaixo').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:p`;
                 document.getElementById('linkEconomico').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:rv`;
                 document.getElementById('linkAlto').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:pd`;
