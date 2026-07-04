@@ -2,44 +2,38 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busca de Produtos</title>
     <style>
-        /* Estilização Geral */
         body {
             margin: 0;
             background: radial-gradient(circle at top, #1a2a6c, #000000);
             background-attachment: fixed;
             color: white;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
         }
 
-        /* Barra de Pesquisa */
         .search-container {
             width: 80%;
             max-width: 800px;
-            margin-top: 50px;
+            margin-top: 150px; /* Ajustado para centralizar quando só tem a busca */
         }
 
         input {
             width: 100%;
             padding: 20px;
-            font-size: 1.2rem;
             border-radius: 50px;
             border: 2px solid #00d4ff;
             background: rgba(0, 0, 0, 0.6);
             color: white;
             outline: none;
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
-        /* Container dos Resultados */
-        .results {
+        /* Escondido por padrão */
+        #results {
+            display: none;
             width: 80%;
             max-width: 600px;
             margin-top: 40px;
@@ -53,53 +47,27 @@
             border-radius: 15px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            border-color: #00d4ff;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
-        }
-
-        .price-tag {
-            font-weight: bold;
-            color: #00d4ff;
-            font-size: 1.5rem;
         }
     </style>
 </head>
 <body>
 
     <div class="search-container">
-        <input type="text" placeholder="O que você está procurando hoje?">
+        <!-- O evento oninput faz aparecer assim que você começa a digitar -->
+        <input type="text" placeholder="O que você está procurando?" oninput="mostrarResultados()">
     </div>
 
-    <div class="results">
-        <div class="card">
-            <div>
-                <h3>Plano Iniciante</h3>
-                <p>Ideal para começar</p>
-            </div>
-            <div class="price-tag">R$ 10,00</div>
-        </div>
-
-        <div class="card">
-            <div>
-                <h3>Plano Econômico</h3>
-                <p>Melhor custo-benefício</p>
-            </div>
-            <div class="price-tag">R$ 29,90</div>
-        </div>
-
-        <div class="card">
-            <div>
-                <h3>Plano Premium</h3>
-                <p>Acesso total e exclusivo</p>
-            </div>
-            <div class="price-tag">R$ 59,90</div>
-        </div>
+    <div id="results">
+        <div class="card"><h3>Plano Iniciante</h3><div class="price-tag">R$ 10,00</div></div>
+        <div class="card"><h3>Plano Econômico</h3><div class="price-tag">R$ 29,90</div></div>
+        <div class="card"><h3>Plano Premium</h3><div class="price-tag">R$ 59,90</div></div>
     </div>
+
+    <script>
+        function mostrarResultados() {
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
 
 </body>
 </html>
