@@ -1,29 +1,30 @@
 import os
 import google.generativeai as genai
-from flask import Flask, render_template, request
-
-# Cole sua chave aqui dentro das aspas, mantendo as aspas
-API_KEY = 'AQ.Ab8RN6IEZOhh-CKCj52x5WcxMgoNHxCOrQ_Dt1fi2te0upOU5Q'
-
-genai.configure(api_key=API_KEY)
-model = genai.GenerativeModel('gemini-1.5-flash')
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+# Configuração segura: O código busca a chave do ambiente (Render)
+# Se não estiver no Render, ele usa None para evitar travar
+api_key = os.getenv('GOOGLE_API_KEY')
+genai.configure(api_key=api_key)
+model = genai.GenerativeModel('gemini-1.5-flash')
+
+@app.route('/')
 def index():
-    analise = None
-    if request.method == 'POST':
-        prod_a = request.form.get('prod_a')
-        prod_b = request.form.get('prod_b')
-        if prod_a and prod_b:
-            try:
-                prompt = f"Compare os produtos '{prod_a}' e '{prod_b}' de forma técnica e objetiva."
-                response = model.generate_content(prompt)
-                analise = response.text.replace('\n', '<br>')
-            except:
-                analise = "Erro na conexão com a IA. Verifique se a API KEY está correta."
-    return render_template('index.html', analise=analise)
+    return render_template('index.html')
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    user_message = request.json.get('message')
+    if not user_message:
+        return jsonify({'reply': 'Por favor, digite algo.'})
+    
+    try:
+        response = model.generate_content(user_message)
+        return jsonify({'reply': response.text})
+    except Exception as e:
+        return jsonify({'reply': 'Erro: Verifique se a API KEY está configurada corretamente no Render.'})
 
 if __name__ == '__main__':
     app.run()
