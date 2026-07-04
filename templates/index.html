@@ -78,7 +78,7 @@
             <div>Ver no Google Shopping</div>
         </a>
         <a id="linkEconomico" href="#" target="_blank" class="card">
-            <h3>Preço Econômico (Relevância)</h3>
+            <h3>Relevância</h3>
             <div>Ver no Google Shopping</div>
         </a>
         <a id="linkAlto" href="#" target="_blank" class="card">
@@ -95,12 +95,12 @@
                 
                 const encodedTermo = encodeURIComponent(termo);
                 
-                // Links com filtros aplicados
+                // Links configurados com os parâmetros oficiais de filtro do Google
                 document.getElementById('linkBaixo').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:p`;
                 document.getElementById('linkEconomico').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:rv`;
                 document.getElementById('linkAlto').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:pd`;
 
-                // Exibição dos resultados
+                // Animação de exibição
                 const resultsDiv = document.getElementById('results');
                 resultsDiv.style.display = 'block';
                 setTimeout(() => { resultsDiv.style.opacity = '1'; }, 50);
