@@ -3,77 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        body {
-            margin: 0;
-            background: radial-gradient(circle at top, #1a2a6c, #000000);
-            background-attachment: fixed;
-            color: white;
-            font-family: sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .search-container {
-            width: 80%;
-            max-width: 800px;
-            margin-top: 250px; /* Centralizado inicialmente */
-            transition: 0.5s;
-        }
-
-        input {
-            width: 100%;
-            padding: 20px;
-            border-radius: 50px;
-            border: 2px solid #00d4ff;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            outline: none;
-            text-align: center;
-        }
-
-        /* Escondido inicialmente */
-        #results {
-            display: none;
-            width: 80%;
-            max-width: 600px;
-            margin-top: 40px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid #333;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 15px;
-            display: flex;
-            justify-content: space-between;
-        }
+        body { margin: 0; background: radial-gradient(circle at top, #1a2a6c, #000000); background-attachment: fixed; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .search-container { width: 80%; max-width: 800px; margin-top: 250px; transition: 0.5s; }
+        input { width: 100%; padding: 20px; border-radius: 50px; border: 2px solid #00d4ff; background: rgba(0, 0, 0, 0.6); color: white; outline: none; text-align: center; font-size: 1.1rem;}
+        #results { display: none; width: 80%; max-width: 600px; margin-top: 40px; }
+        .card { background: rgba(255, 255, 255, 0.05); border: 1px solid #333; padding: 25px; margin-bottom: 20px; border-radius: 15px; text-decoration: none; color: white; display: block; }
+        .card:hover { border-color: #00d4ff; background: rgba(0, 212, 255, 0.1); }
     </style>
 </head>
 <body>
 
     <div class="search-container" id="searchBar">
-        <input type="text" id="userInput" placeholder="O que você está procurando?" onkeydown="verificarEnter(event)">
+        <input type="text" id="userInput" placeholder="O que você está procurando?" onkeydown="verificarBusca(event)">
     </div>
 
     <div id="results">
-        <div class="card"><h3>Plano Iniciante</h3><div>R$ 10,00</div></div>
-        <div class="card"><h3>Plano Econômico</h3><div>R$ 29,90</div></div>
-        <div class="card"><h3>Plano Premium</h3><div>R$ 59,90</div></div>
+        <!-- Os links serão gerados dinamicamente -->
+        <a id="link-barato" class="card" href="#" target="_blank"><h3>Mais Baratos</h3><p>Clique para ver opções de menor preço</p></a>
+        <a id="link-economico" class="card" href="#" target="_blank"><h3>Melhor Custo-Benefício</h3><p>Equilíbrio entre preço e qualidade</p></a>
+        <a id="link-caro" class="card" href="#" target="_blank"><h3>Opções Premium</h3><p>Produtos de alta gama</p></a>
     </div>
 
     <script>
-        function verificarEnter(event) {
-            // Verifica se a tecla pressionada foi o "Enter" (código 13)
-            if (event.keyCode === 13) {
-                document.getElementById('results').style.display = 'block';
-                // Move a barra de pesquisa para cima ao mostrar resultados
-                document.getElementById('searchBar').style.marginTop = '50px';
+        function verificarBusca(event) {
+            if (event.key === "Enter") {
+                let query = document.getElementById('userInput').value;
+                
+                // Validação: Só funciona se tiver texto escrito
+                if (query.trim() !== "") {
+                    // Atualiza os links com a pesquisa e os filtros do Google Shopping
+                    // 'sort=p' filtra por preço crescente
+                    document.getElementById('link-barato').href = `https://www.google.com/search?q=${query}&tbm=shop&tbs=p_ord:p`;
+                    document.getElementById('link-economico').href = `https://www.google.com/search?q=${query}&tbm=shop`;
+                    document.getElementById('link-caro').href = `https://www.google.com/search?q=${query}&tbm=shop&tbs=p_ord:pd`;
+
+                    // Exibe os resultados e move a barra
+                    document.getElementById('results').style.display = 'block';
+                    document.getElementById('searchBar').style.marginTop = '50px';
+                }
             }
         }
     </script>
-
 </body>
 </html>
