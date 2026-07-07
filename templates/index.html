@@ -83,11 +83,12 @@
             position: fixed;
             bottom: 80px;
             right: 20px;
-            width: 300px;
+            width: 320px;
             background: #111;
             border: 1px solid #00d4ff;
             padding: 20px;
             border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
         }
     </style>
 </head>
@@ -108,11 +109,10 @@
         </a>
     </div>
 
-    <!-- IA Flutuante -->
     <div id="ai-btn" onclick="toggleIA()">IA Optimo</div>
     <div id="ai-modal">
-        <input type="text" id="aiInput" placeholder="Pergunte algo à IA..." onkeydown="perguntarIA(event)">
-        <div id="ai-resp" style="margin-top:10px; font-size:0.9rem;"></div>
+        <input type="text" id="aiInput" placeholder="Pergunte algo à IA..." onkeydown="perguntarIA(event)" style="width: 100%; margin-bottom: 10px; padding: 10px; border-radius: 10px; border: none;">
+        <div id="ai-resp" style="font-size:0.9rem; color: #fff;">IA Optimo: Estou pronta para ajudar. O que deseja saber?</div>
     </div>
 
     <script>
@@ -122,7 +122,8 @@
                 document.getElementById('linkBaixo').href = `https://www.google.com/search?q=${encodeURIComponent(termo)}&tbm=shop&tbs=p_ord:p,mr:1`;
                 document.getElementById('linkAlto').href = `https://www.google.com/search?udm=28&q=${encodeURIComponent(termo)}&shoprs=CAEYFyoPZ29vZ2xlIHNob3BwaW5nMikIFxIdUHJlw6dvOiBkbyBtYWlvciBwYXJhIG8gbWVub3IqBBABGAFQAmACiAEC`;
                 document.getElementById('results').style.display = 'block';
-                document.getElementById('results').style.opacity = '1';
+                setTimeout(() => { document.getElementById('results').style.opacity = '1'; }, 50);
+                document.getElementById('searchBar').style.marginTop = '50px';
             }
         }
 
@@ -133,11 +134,23 @@
 
         function perguntarIA(event) {
             if (event.key === 'Enter') {
-                const pergunta = document.getElementById('aiInput').value;
-                document.getElementById('ai-resp').innerText = "IA Optimo: Você perguntou '" + pergunta + "'. Estou processando sua resposta...";
+                const pergunta = document.getElementById('aiInput').value.toLowerCase();
+                const resp = document.getElementById('ai-resp');
+                
+                resp.innerText = "Pensando...";
+                
+                // Lógica de resposta simples da IA
+                setTimeout(() => {
+                    if (pergunta.includes("arroz")) {
+                        resp.innerText = "IA Optimo: O melhor arroz costuma ser o tipo 'Agulhinha' pelo custo-benefício, ou o 'Integral' para uma opção mais saudável.";
+                    } else if (pergunta.includes("feijão")) {
+                        resp.innerText = "IA Optimo: O feijão carioca é o favorito no Brasil, mas o preto é excelente para o preparo da tradicional feijoada.";
+                    } else {
+                        resp.innerText = "IA Optimo: Essa é uma boa pergunta! Sobre '" + pergunta + "', recomendo pesquisar preços comparativos para garantir a melhor economia.";
+                    }
+                }, 1000);
             }
         }
     </script>
-
 </body>
 </html>
