@@ -33,26 +33,45 @@
     </div>
 
     <script>
-        // Base de dados completa da sua IA
         const baseConhecimento = {
-            "arroz": [
-                "IA Optimo: O arroz branco é o clássico, mas se quer economia, compare as marcas nas promoções de atacado!",
-                "IA Optimo: O arroz integral demora um pouco mais para cozinhar, mas é uma escolha muito mais nutritiva para o dia a dia.",
-                "IA Optimo: Muita gente prefere o arroz parboilizado pois ele não empapa facilmente. Vale o teste!"
-            ],
-            "feijão": [
-                "IA Optimo: O feijão carioca é o rei das mesas brasileiras, fácil de achar e com ótimo preço.",
-                "IA Optimo: Que tal um feijão preto hoje? Fica incrível com tempero fresco e alho douradinho.",
-                "IA Optimo: Dica: deixe o feijão de molho por algumas horas antes de cozinhar, isso ajuda na digestão e economiza gás!"
-            ],
-            "oi": [
-                "IA Optimo: Olá! Tudo bem? Como posso te ajudar a encontrar os melhores preços?",
-                "IA Optimo: Oi! Estou aqui pronta para analisar o mercado para você.",
-                "IA Optimo: Opa! Alguma dúvida sobre algum produto específico?"
-            ]
+            "arroz": ["IA Optimo: O arroz branco é o clássico, mas se quer economia, compare as marcas nas promoções de atacado!", "IA Optimo: O arroz integral é uma escolha mais nutritiva para o dia a dia."],
+            "feijão": ["IA Optimo: O feijão carioca é o rei das mesas, fácil de achar e com ótimo preço.", "IA Optimo: Dica: deixe o feijão de molho antes de cozinhar para economizar gás!"],
+            "farofa": ["IA Optimo: Farofa combina com quase tudo! Procure pelas versões crocantes que duram mais na despensa.", "IA Optimo: Fazer sua própria farofa com manteiga e temperos frescos sempre sai mais barato."],
+            "oi": ["IA Optimo: Olá! Como posso te ajudar a encontrar os melhores preços hoje?", "IA Optimo: Oi! Estou aqui pronta para analisar o mercado para você."],
+            // Resposta padrão caso não encontre o produto
+            "padrao": ["IA Optimo: Essa é uma pergunta interessante! Recomendo pesquisar no Shopping para ver a variação de preços atual.", "IA Optimo: Não tenho dados específicos desse item agora, mas compare sempre o preço por quilo/litro!"]
         };
 
-        // Função de busca de produtos
+        function perguntarIA(event) {
+            if (event.key === 'Enter') {
+                const input = document.getElementById('aiInput').value.toLowerCase();
+                const resp = document.getElementById('ai-resp');
+                resp.innerText = "Pensando...";
+                
+                setTimeout(() => {
+                    let encontrado = false;
+                    for (let chave in baseConhecimento) {
+                        if (input.includes(chave) && chave !== "padrao") {
+                            const lista = baseConhecimento[chave];
+                            resp.innerText = lista[Math.floor(Math.random() * lista.length)];
+                            encontrado = true;
+                            break;
+                        }
+                    }
+                    // Se não encontrou, usa uma das respostas padrão
+                    if (!encontrado) {
+                        const padrao = baseConhecimento["padrao"];
+                        resp.innerText = padrao[Math.floor(Math.random() * padrao.length)];
+                    }
+                }, 800);
+            }
+        }
+
+        function toggleIA() {
+            const modal = document.getElementById('ai-modal');
+            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+        }
+
         function verificarEnter(event) {
             if (event.key === 'Enter') {
                 const termo = document.getElementById('userInput').value;
@@ -64,33 +83,6 @@
                 setTimeout(() => { document.getElementById('results').style.opacity = '1'; }, 50);
                 document.getElementById('searchBar').style.marginTop = '50px';
             }
-        }
-
-        // Função da IA Optimo
-        function perguntarIA(event) {
-            if (event.key === 'Enter') {
-                const input = document.getElementById('aiInput').value.toLowerCase();
-                const resp = document.getElementById('ai-resp');
-                resp.innerText = "Pensando...";
-                
-                setTimeout(() => {
-                    let encontrado = false;
-                    for (let chave in baseConhecimento) {
-                        if (input.includes(chave)) {
-                            const lista = baseConhecimento[chave];
-                            resp.innerText = lista[Math.floor(Math.random() * lista.length)];
-                            encontrado = true;
-                            break;
-                        }
-                    }
-                    if (!encontrado) resp.innerText = "IA Optimo: Desculpe, não tenho informações cadastradas sobre isso no momento.";
-                }, 800);
-            }
-        }
-
-        function toggleIA() {
-            const modal = document.getElementById('ai-modal');
-            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
         }
     </script>
 </body>
