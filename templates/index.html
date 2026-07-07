@@ -3,93 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busca de Produtos com IA</title>
+    <title>Busca e IA Optimo</title>
     <style>
-        body {
-            margin: 0;
-            background: radial-gradient(circle at top, #1a2a6c, #000000);
-            background-attachment: fixed;
-            color: white;
-            font-family: 'Segoe UI', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .search-container {
-            width: 80%;
-            max-width: 800px;
-            margin-top: 250px;
-            transition: all 0.5s ease;
-        }
-
-        input {
-            width: 100%;
-            padding: 20px;
-            border-radius: 50px;
-            border: 2px solid #00d4ff;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            outline: none;
-            text-align: center;
-            font-size: 1.1rem;
-            box-sizing: border-box;
-        }
-
-        #results {
-            display: none;
-            width: 80%;
-            max-width: 600px;
-            margin-top: 40px;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid #333;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            background: rgba(0, 212, 255, 0.1);
-            border-color: #00d4ff;
-        }
-
-        /* Estilo da IA Flutuante */
-        #ai-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            background: #00d4ff;
-            color: black;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        #ai-modal {
-            display: none;
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 320px;
-            background: #111;
-            border: 1px solid #00d4ff;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
-        }
+        body { margin: 0; background: radial-gradient(circle at top, #1a2a6c, #000000); background-attachment: fixed; color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .search-container { width: 80%; max-width: 800px; margin-top: 250px; transition: all 0.5s ease; }
+        input { width: 100%; padding: 20px; border-radius: 50px; border: 2px solid #00d4ff; background: rgba(0, 0, 0, 0.6); color: white; outline: none; text-align: center; font-size: 1.1rem; box-sizing: border-box; }
+        #results { display: none; width: 80%; max-width: 600px; margin-top: 40px; opacity: 0; transition: opacity 0.5s ease; }
+        .card { background: rgba(255, 255, 255, 0.05); border: 1px solid #333; padding: 25px; margin-bottom: 20px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: white; transition: 0.3s; }
+        .card:hover { background: rgba(0, 212, 255, 0.1); border-color: #00d4ff; }
+        #ai-btn { position: fixed; bottom: 20px; right: 20px; padding: 15px 25px; background: #00d4ff; color: black; border-radius: 30px; cursor: pointer; font-weight: bold; }
+        #ai-modal { display: none; position: fixed; bottom: 80px; right: 20px; width: 320px; background: #111; border: 1px solid #00d4ff; padding: 20px; border-radius: 15px; box-shadow: 0 0 15px rgba(0, 212, 255, 0.3); }
     </style>
 </head>
 <body>
@@ -99,57 +22,75 @@
     </div>
 
     <div id="results">
-        <a id="linkBaixo" href="#" target="_blank" class="card">
-            <h3>Preço Baixo</h3>
-            <div>Ver no Google Shopping</div>
-        </a>
-        <a id="linkAlto" href="#" target="_blank" class="card">
-            <h3>Preço Alto</h3>
-            <div>Ver no Google Shopping</div>
-        </a>
+        <a id="linkBaixo" href="#" target="_blank" class="card"><h3>Preço Baixo</h3></a>
+        <a id="linkAlto" href="#" target="_blank" class="card"><h3>Preço Alto</h3></a>
     </div>
 
     <div id="ai-btn" onclick="toggleIA()">IA Optimo</div>
     <div id="ai-modal">
-        <input type="text" id="aiInput" placeholder="Pergunte algo à IA..." onkeydown="perguntarIA(event)" style="width: 100%; margin-bottom: 10px; padding: 10px; border-radius: 10px; border: none;">
-        <div id="ai-resp" style="font-size:0.9rem; color: #fff;">IA Optimo: Estou pronta para ajudar. O que deseja saber?</div>
+        <input type="text" id="aiInput" placeholder="Pergunte algo..." onkeydown="perguntarIA(event)" style="width: 90%; margin-bottom: 10px; padding: 10px; border-radius: 10px; border: none;">
+        <div id="ai-resp" style="font-size:0.9rem; color: #fff;">IA Optimo: Olá! Em que posso te ajudar hoje?</div>
     </div>
 
     <script>
+        // Base de dados completa da sua IA
+        const baseConhecimento = {
+            "arroz": [
+                "IA Optimo: O arroz branco é o clássico, mas se quer economia, compare as marcas nas promoções de atacado!",
+                "IA Optimo: O arroz integral demora um pouco mais para cozinhar, mas é uma escolha muito mais nutritiva para o dia a dia.",
+                "IA Optimo: Muita gente prefere o arroz parboilizado pois ele não empapa facilmente. Vale o teste!"
+            ],
+            "feijão": [
+                "IA Optimo: O feijão carioca é o rei das mesas brasileiras, fácil de achar e com ótimo preço.",
+                "IA Optimo: Que tal um feijão preto hoje? Fica incrível com tempero fresco e alho douradinho.",
+                "IA Optimo: Dica: deixe o feijão de molho por algumas horas antes de cozinhar, isso ajuda na digestão e economiza gás!"
+            ],
+            "oi": [
+                "IA Optimo: Olá! Tudo bem? Como posso te ajudar a encontrar os melhores preços?",
+                "IA Optimo: Oi! Estou aqui pronta para analisar o mercado para você.",
+                "IA Optimo: Opa! Alguma dúvida sobre algum produto específico?"
+            ]
+        };
+
+        // Função de busca de produtos
         function verificarEnter(event) {
             if (event.key === 'Enter') {
                 const termo = document.getElementById('userInput').value;
-                document.getElementById('linkBaixo').href = `https://www.google.com/search?q=${encodeURIComponent(termo)}&tbm=shop&tbs=p_ord:p,mr:1`;
-                document.getElementById('linkAlto').href = `https://www.google.com/search?udm=28&q=${encodeURIComponent(termo)}&shoprs=CAEYFyoPZ29vZ2xlIHNob3BwaW5nMikIFxIdUHJlw6dvOiBkbyBtYWlvciBwYXJhIG8gbWVub3IqBBABGAFQAmACiAEC`;
+                if (!termo) return;
+                const encoded = encodeURIComponent(termo);
+                document.getElementById('linkBaixo').href = `https://www.google.com/search?q=${encoded}&tbm=shop&tbs=p_ord:p,mr:1`;
+                document.getElementById('linkAlto').href = `https://www.google.com/search?udm=28&q=${encoded}&shoprs=CAEYFyoPZ29vZ2xlIHNob3BwaW5nMikIFxIdUHJlw6dvOiBkbyBtYWlvciBwYXJhIG8gbWVub3IqBBABGAFQAmACiAEC`;
                 document.getElementById('results').style.display = 'block';
                 setTimeout(() => { document.getElementById('results').style.opacity = '1'; }, 50);
                 document.getElementById('searchBar').style.marginTop = '50px';
             }
         }
 
+        // Função da IA Optimo
+        function perguntarIA(event) {
+            if (event.key === 'Enter') {
+                const input = document.getElementById('aiInput').value.toLowerCase();
+                const resp = document.getElementById('ai-resp');
+                resp.innerText = "Pensando...";
+                
+                setTimeout(() => {
+                    let encontrado = false;
+                    for (let chave in baseConhecimento) {
+                        if (input.includes(chave)) {
+                            const lista = baseConhecimento[chave];
+                            resp.innerText = lista[Math.floor(Math.random() * lista.length)];
+                            encontrado = true;
+                            break;
+                        }
+                    }
+                    if (!encontrado) resp.innerText = "IA Optimo: Desculpe, não tenho informações cadastradas sobre isso no momento.";
+                }, 800);
+            }
+        }
+
         function toggleIA() {
             const modal = document.getElementById('ai-modal');
             modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function perguntarIA(event) {
-            if (event.key === 'Enter') {
-                const pergunta = document.getElementById('aiInput').value.toLowerCase();
-                const resp = document.getElementById('ai-resp');
-                
-                resp.innerText = "Pensando...";
-                
-                // Lógica de resposta simples da IA
-                setTimeout(() => {
-                    if (pergunta.includes("arroz")) {
-                        resp.innerText = "IA Optimo: O melhor arroz costuma ser o tipo 'Agulhinha' pelo custo-benefício, ou o 'Integral' para uma opção mais saudável.";
-                    } else if (pergunta.includes("feijão")) {
-                        resp.innerText = "IA Optimo: O feijão carioca é o favorito no Brasil, mas o preto é excelente para o preparo da tradicional feijoada.";
-                    } else {
-                        resp.innerText = "IA Optimo: Essa é uma boa pergunta! Sobre '" + pergunta + "', recomendo pesquisar preços comparativos para garantir a melhor economia.";
-                    }
-                }, 1000);
-            }
         }
     </script>
 </body>
