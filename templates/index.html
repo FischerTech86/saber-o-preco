@@ -77,8 +77,8 @@
             <h3>Preço Baixo</h3>
             <div>Ver no Google Shopping</div>
         </a>
-        <a id="linkEconomico" href="#" target="_blank" class="card">
-            <h3>Relevância</h3>
+        <a id="linkMedio" href="#" target="_blank" class="card">
+            <h3>Preço Médio (Comum)</h3>
             <div>Ver no Google Shopping</div>
         </a>
         <a id="linkAlto" href="#" target="_blank" class="card">
@@ -95,13 +95,13 @@
                 
                 const encodedTermo = encodeURIComponent(termo);
                 
-                // Preço Baixo: Mantido o padrão com mr:1
+                // 1. Preço Baixo: Mantido o parâmetro original
                 document.getElementById('linkBaixo').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:p,mr:1`;
                 
-                // Relevância: Mantido o padrão
-                document.getElementById('linkEconomico').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:rv,mr:1`;
+                // 2. Preço Médio: Usando ordenação de relevância (p_ord:rv) que entrega valores de mercado comuns
+                document.getElementById('linkMedio').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:rv`;
                 
-                // Preço Alto: Usando o token (shoprs) específico que você encontrou para forçar "maior para o menor"
+                // 3. Preço Alto: Mantido o seu link customizado de maior para menor
                 document.getElementById('linkAlto').href = `https://www.google.com/search?udm=28&q=${encodedTermo}&shoprs=CAEYFyoPZ29vZ2xlIHNob3BwaW5nMikIFxIdUHJlw6dvOiBkbyBtYWlvciBwYXJhIG8gbWVub3IqBBABGAFQAmACiAEC`;
 
                 const resultsDiv = document.getElementById('results');
