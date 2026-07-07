@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busca Inteligente</title>
+    <title>Busca de Produtos - Técnica Categoria</title>
     <style>
         body {
             margin: 0;
@@ -95,10 +95,11 @@
                 
                 const encodedTermo = encodeURIComponent(termo);
                 
-                // Técnica com parâmetro 'mr:1' para forçar melhor processamento do filtro
-                document.getElementById('linkBaixo').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:p,mr:1`;
-                document.getElementById('linkEconomico').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:rv,mr:1`;
-                document.getElementById('linkAlto').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:pd,mr:1`;
+                // Técnica alternativa forçando 'cat:1' (Categoria de Produto)
+                // Isso sinaliza ao Google que a busca deve ser tratada como vitrine de produtos
+                document.getElementById('linkBaixo').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=cat:1,p_ord:p`;
+                document.getElementById('linkEconomico').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=cat:1,p_ord:rv`;
+                document.getElementById('linkAlto').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=cat:1,p_ord:pd`;
 
                 const resultsDiv = document.getElementById('results');
                 resultsDiv.style.display = 'block';
