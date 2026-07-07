@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busca de Produtos</title>
+    <title>IA Optimo</title>
     <style>
         body {
             margin: 0;
@@ -15,13 +15,14 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            padding-top: 100px;
         }
 
+        /* Campo de Entrada (Input) */
         .search-container {
             width: 80%;
-            max-width: 800px;
-            margin-top: 250px;
-            transition: all 0.5s ease;
+            max-width: 600px;
+            margin-bottom: 40px;
         }
 
         input {
@@ -37,69 +38,64 @@
             box-sizing: border-box;
         }
 
-        #results {
-            display: none;
+        /* Retângulo da IA Optimo */
+        #ai-container {
             width: 80%;
             max-width: 600px;
-            margin-top: 40px;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .card {
+            min-height: 200px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid #333;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 15px;
+            border: 2px solid #333;
+            border-radius: 20px;
+            padding: 20px;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            text-decoration: none;
-            color: white;
+            text-align: center;
             transition: 0.3s;
         }
 
-        .card:hover {
-            background: rgba(0, 212, 255, 0.1);
-            border-color: #00d4ff;
+        #ai-container h2 {
+            margin-top: 0;
+            color: #00d4ff;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        #ai-response {
+            font-size: 1rem;
+            color: #ccc;
+            margin-top: 10px;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
 
-    <div class="search-container" id="searchBar">
-        <input type="text" id="userInput" placeholder="O que você está procurando?" onkeydown="verificarEnter(event)">
+    <div class="search-container">
+        <input type="text" id="userInput" placeholder="O que você quer perguntar para a IA?" onkeydown="perguntarIA(event)">
     </div>
 
-    <div id="results">
-        <!-- Apenas Preço Baixo e Preço Alto -->
-        <a id="linkBaixo" href="#" target="_blank" class="card">
-            <h3>Preço Baixo</h3>
-            <div>Ver no Google Shopping</div>
-        </a>
-        <a id="linkAlto" href="#" target="_blank" class="card">
-            <h3>Preço Alto</h3>
-            <div>Ver no Google Shopping</div>
-        </a>
+    <div id="ai-container">
+        <h2>IA Optimo</h2>
+        <div id="ai-response">Aguardando sua pergunta...</div>
     </div>
 
     <script>
-        function verificarEnter(event) {
+        function perguntarIA(event) {
             if (event.key === 'Enter' || event.keyCode === 13) {
                 const termo = document.getElementById('userInput').value;
+                const responseBox = document.getElementById('ai-response');
+                
                 if (!termo) return;
-                
-                const encodedTermo = encodeURIComponent(termo);
-                
-                // Atualiza apenas os dois links restantes
-                document.getElementById('linkBaixo').href = `https://www.google.com/search?q=${encodedTermo}&tbm=shop&tbs=p_ord:p,mr:1`;
-                document.getElementById('linkAlto').href = `https://www.google.com/search?udm=28&q=${encodedTermo}&shoprs=CAEYFyoPZ29vZ2xlIHNob3BwaW5nMikIFxIdUHJlw6dvOiBkbyBtYWlvciBwYXJhIG8gbWVub3IqBBABGAFQAmACiAEC`;
 
-                const resultsDiv = document.getElementById('results');
-                resultsDiv.style.display = 'block';
-                setTimeout(() => { resultsDiv.style.opacity = '1'; }, 50);
-                document.getElementById('searchBar').style.marginTop = '50px';
+                // Efeito visual de processamento
+                responseBox.innerText = "Pensando...";
+                
+                // Simulação de resposta da IA
+                setTimeout(() => {
+                    responseBox.innerText = "IA Optimo: Você perguntou sobre '" + termo + "'. Como sou um protótipo, estou pronta para aprender mais com você!";
+                }, 1000);
             }
         }
     </script>
