@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IA Optimo - Sistema Completo</title>
     <style>
-        /* Design Original: Fundo preto com brilho azul */
         body { 
             margin: 0; 
             background: radial-gradient(circle at top, #1a2a6c, #000000); 
@@ -18,7 +17,22 @@
             min-height: 100vh; 
         }
 
-        .search-container { width: 80%; max-width: 800px; margin-top: 250px; transition: 0.5s; }
+        /* Animação para o título */
+        @keyframes neonPulse {
+            0% { text-shadow: 0 0 5px #00d4ff, 0 0 10px #00d4ff; opacity: 0.8; }
+            50% { text-shadow: 0 0 20px #00d4ff, 0 0 30px #00d4ff; opacity: 1; }
+            100% { text-shadow: 0 0 5px #00d4ff, 0 0 10px #00d4ff; opacity: 0.8; }
+        }
+
+        .titulo-optimo {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #fff;
+            animation: neonPulse 2s infinite;
+            letter-spacing: 5px;
+        }
+
+        .search-container { width: 80%; max-width: 800px; margin-top: 150px; text-align: center; }
         
         input { 
             width: 100%; padding: 20px; border-radius: 50px; 
@@ -26,7 +40,6 @@
             color: white; outline: none; text-align: center; font-size: 1.1rem; box-sizing: border-box;
         }
 
-        /* Retângulos de busca */
         #results { display: none; width: 80%; max-width: 600px; margin-top: 40px; }
         .card { 
             background: rgba(255, 255, 255, 0.05); border: 1px solid #333; 
@@ -36,7 +49,6 @@
         }
         .card:hover { border-color: #00d4ff; background: rgba(0, 212, 255, 0.1); }
 
-        /* IA Optimo */
         #ai-btn { position: fixed; bottom: 20px; right: 20px; padding: 15px 25px; background: #00d4ff; color: black; border-radius: 30px; cursor: pointer; font-weight: bold; }
         #ai-modal { display: none; position: fixed; bottom: 80px; right: 20px; width: 320px; background: #111; border: 1px solid #00d4ff; padding: 20px; border-radius: 15px; }
     </style>
@@ -44,6 +56,9 @@
 <body>
 
     <div class="search-container" id="searchBar">
+        <!-- Título Animado -->
+        <h1 class="titulo-optimo">OPTIMO</h1>
+        
         <input type="text" id="userInput" placeholder="O que você está procurando?" onkeydown="verificarEnter(event)">
     </div>
 
@@ -59,7 +74,6 @@
     </div>
 
     <script>
-        // A base de conhecimento onde você controla cada resposta
         const baseConhecimento = {
             "arroz": ["IA Optimo: O arroz branco é o clássico, mas se quer economia, compare as marcas nas promoções de atacado!", "IA Optimo: O arroz integral é uma escolha mais nutritiva para o dia a dia."],
             "feijão": ["IA Optimo: O feijão carioca é o rei das mesas, fácil de achar e com ótimo preço.", "IA Optimo: Dica: deixe o feijão de molho antes de cozinhar para economizar gás!"],
@@ -81,7 +95,6 @@
             if (event.key === 'Enter') {
                 const input = document.getElementById('aiInput').value.toLowerCase();
                 const resp = document.getElementById('ai-resp');
-                
                 let encontrado = false;
                 for (let chave in baseConhecimento) {
                     if (input.includes(chave) && chave !== "padrao") {
@@ -91,9 +104,7 @@
                         break;
                     }
                 }
-                if (!encontrado) {
-                    resp.innerText = baseConhecimento["padrao"][0];
-                }
+                if (!encontrado) resp.innerText = baseConhecimento["padrao"][0];
             }
         }
 
