@@ -1,9 +1,16 @@
-<!DOCTYPE html>
+⚠️ AVISO SUPREMO E EXTREMO — LEIA ANTES DE TUDO ⚠️
+É PROIBIDO mudar, apagar, resumir, reescrever ou alterar qualquer coisa que eu NÃO tenha pedido explicitamente nesta mensagem.
+MANTENHA INTACTO 100% do que já existe e do que eu já pedi antes (estrutura, visual, cores, textos, botões, configurações e informações do app).
+Altere EXCLUSIVAMENTE o ponto exato que eu pedir abaixo — nada além disso.
+Se precisar enviar código, mande de forma leve e organizada para não travar meu computador.
+
+O QUE EU QUERO MUDAR AGORA (SOMENTE ISTO):
+[<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OptimosStore • Login</title>
+  <title>OptimosStore • Operada por Fishtech</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
@@ -19,8 +26,8 @@
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(circle at 50% 25%, rgba(249, 115, 22, 0.11), transparent 45%),
-        radial-gradient(circle at 15% 80%, rgba(30, 64, 175, 0.14), transparent 50%),
+        radial-gradient(circle at 50% 24%, rgba(249, 115, 22, 0.12), transparent 45%),
+        radial-gradient(circle at 15% 80%, rgba(30, 64, 175, 0.15), transparent 50%),
         #090e1a;
     }
   </style>
@@ -43,7 +50,7 @@
     <div class="justify-self-center">
       <div class="inline-flex items-center gap-2 bg-[#101726]/95 border border-slate-800/90 px-4 py-1.5 rounded-full text-xs font-medium text-slate-200 shadow-lg">
         <span class="w-2 h-2 rounded-full bg-[#f97316]"></span>
-        <span>Visitante</span>
+        <span id="status-badge">Visitante</span>
       </div>
     </div>
 
@@ -91,13 +98,13 @@
 
         <div class="text-center space-y-1.5 pt-1 text-xs">
           <div>
-            <button type="button" onclick="msg('Recuperação de senha enviada para o seu e-mail.')" class="text-[#f97316] hover:underline cursor-pointer">
+            <button type="button" onclick="openInfoModal('Recuperar Senha', 'Informe seu e-mail cadastrado nas Configurações ou utilize o acesso salvo localmente neste dispositivo para redefinir sua senha.')" class="text-[#f97316] hover:underline cursor-pointer">
               Esqueceu a senha?
             </button>
           </div>
           <div class="text-slate-400">
             Você não tem conta?
-            <button type="button" onclick="msg('Cadastro disponível na sua conta.')" class="text-[#f97316] font-semibold hover:underline cursor-pointer">
+            <button type="button" onclick="openRegisterModal()" class="text-[#f97316] font-semibold hover:underline cursor-pointer">
               Crie uma aqui
             </button>
           </div>
@@ -116,7 +123,6 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-      <!-- 1. O que é o OptimosStore? -->
       <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
         <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">💡 O que é o OptimosStore?</h3>
         <p class="text-xs text-slate-300 leading-relaxed">
@@ -124,7 +130,6 @@
         </p>
       </div>
 
-      <!-- 2. Segurança e Privacidade Total -->
       <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
         <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">🔒 Segurança e Privacidade Total</h3>
         <p class="text-xs text-slate-300 leading-relaxed">
@@ -132,7 +137,6 @@
         </p>
       </div>
 
-      <!-- 3. Recursos do Buscador -->
       <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
         <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">📊 Recursos do Buscador</h3>
         <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
@@ -142,7 +146,6 @@
         </ul>
       </div>
 
-      <!-- 4. IA Auxiliadora OptimosStore -->
       <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
         <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">🤖 IA Auxiliadora OptimosStore</h3>
         <p class="text-xs text-slate-300 leading-relaxed">
@@ -150,7 +153,6 @@
         </p>
       </div>
 
-      <!-- 5. Alertas e Economia -->
       <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
         <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">🏆 Alertas e Economia</h3>
         <p class="text-xs text-slate-300 leading-relaxed">
@@ -158,20 +160,19 @@
         </p>
       </div>
 
-      <!-- 6. Links Rápidos e Termos -->
       <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
         <h3 class="text-sm font-bold text-[#fb923c] mb-3">🔗 Links Rápidos e Termos</h3>
         <div class="flex flex-col gap-2 text-xs font-semibold">
-          <button type="button" onclick="msg('Termos de Serviço do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
+          <button type="button" onclick="openInfoModal('Termos de Serviço', 'O OptimosStore é um buscador e comparador informativo de preços e especificações operado pela Fishtech. Os valores exibidos podem variar conforme a loja de destino.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
             📄 Termos de Serviço
           </button>
-          <button type="button" onclick="msg('Política de Privacidade do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
+          <button type="button" onclick="openInfoModal('Política de Privacidade', 'Suas preferências, conta local e lista de preços são armazenadas apenas no armazenamento local (LocalStorage) do seu navegador.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
             🔒 Política de Privacidade
           </button>
-          <button type="button" onclick="msg('Guia do Comprador do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
+          <button type="button" onclick="openInfoModal('Guia do Comprador', 'Compare o menor, médio e maior preço, confira a ficha técnica do item e avalie o frete e a reputação do vendedor antes de concluir sua compra.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
             📖 Guia do Comprador
           </button>
-          <button type="button" onclick="msg('Transparência de Ofertas do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
+          <button type="button" onclick="openInfoModal('Transparência de Ofertas', 'As comparações consideram especificações técnicas e faixa de preço de mercado para ajudar você a identificar ofertas reais.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
             🛡️ Transparência de Ofertas
           </button>
         </div>
@@ -194,44 +195,152 @@
         <label for="cfg-name" class="block text-xs text-slate-300 mb-1">Nome de exibição</label>
         <input id="cfg-name" type="text" placeholder="Seu nome ou apelido" class="w-full bg-[#172033] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-[#f97316]" />
       </div>
+      <div>
+        <label for="cfg-currency" class="block text-xs text-slate-300 mb-1">Moeda padrão</label>
+        <select id="cfg-currency" class="w-full bg-[#172033] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-[#f97316]">
+          <option value="BRL">BRL (R$)</option>
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+        </select>
+      </div>
+      <button type="button" onclick="clearLocalData()" class="w-full bg-red-950/50 hover:bg-red-900/60 border border-red-800/60 text-red-300 text-xs font-semibold py-2 rounded-lg transition cursor-pointer">
+        Limpar dados salvos no navegador
+      </button>
     </div>
     <button type="button" onclick="saveSettings()" class="w-full bg-[#e67e22] hover:bg-[#f97316] text-white font-bold text-xs py-2.5 rounded-xl cursor-pointer">
-      Salvar
+      Salvar Configurações
     </button>
   </aside>
 
+  <!-- MODAL GENÉRICO (TERMOS / CADASTRO) -->
+  <div id="app-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 p-4">
+    <div class="w-full max-w-md bg-[#0f1624] border border-slate-800 rounded-2xl p-6 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+        <h3 id="modal-title" class="font-bold text-white text-sm">Informação</h3>
+        <button type="button" onclick="closeModal()" class="text-slate-400 hover:text-white cursor-pointer">✕</button>
+      </div>
+      <div id="modal-body" class="text-xs text-slate-300 leading-relaxed"></div>
+    </div>
+  </div>
+
+  <!-- NOTIFICAÇÃO TOAST -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 hidden bg-[#101726] border border-[#f97316]/60 text-white text-xs font-medium px-4 py-3 rounded-xl shadow-2xl"></div>
+
   <script>
+    function showToast(text) {
+      const toast = document.getElementById('toast');
+      toast.textContent = text;
+      toast.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => toast.classList.add('hidden'), 3200);
+    }
+
     function togglePassword() {
       const input = document.getElementById('pass');
       input.type = input.type === 'password' ? 'text' : 'password';
     }
+
     function toggleSettings(open) {
       const panel = document.getElementById('settings-panel');
       panel.classList.toggle('translate-x-full', !open);
     }
+
     function saveSettings() {
       const name = document.getElementById('cfg-name').value.trim();
-      if (name) localStorage.setItem('optimos_display_name', name);
+      const currency = document.getElementById('cfg-currency').value;
+      if (name) {
+        localStorage.setItem('optimos_display_name', name);
+        document.getElementById('status-badge').textContent = name;
+      }
+      localStorage.setItem('optimos_currency', currency);
       toggleSettings(false);
-      alert('Configurações salvas!');
+      showToast('Configurações salvas com sucesso!');
     }
+
+    function clearLocalData() {
+      localStorage.removeItem('optimos_last_user');
+      localStorage.removeItem('optimos_display_name');
+      localStorage.removeItem('optimos_currency');
+      document.getElementById('user').value = '';
+      document.getElementById('cfg-name').value = '';
+      document.getElementById('status-badge').textContent = 'Visitante';
+      toggleSettings(false);
+      showToast('Dados locais removidos.');
+    }
+
+    function openInfoModal(title, text) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-body').innerHTML = `
+        <p>${text}</p>
+        <button type="button" onclick="closeModal()" class="mt-5 w-full bg-[#e67e22] hover:bg-[#f97316] text-white font-bold py-2.5 rounded-lg cursor-pointer">Fechar</button>
+      `;
+      const modal = document.getElementById('app-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function openRegisterModal() {
+      document.getElementById('modal-title').textContent = 'Criar Conta no OptimosStore';
+      document.getElementById('modal-body').innerHTML = `
+        <form onsubmit="handleRegister(event)" class="space-y-3">
+          <div>
+            <label class="block text-slate-300 font-semibold mb-1">Nome de usuário ou e-mail</label>
+            <input id="reg-user" type="text" required placeholder="Ex: Peixinho1533" class="w-full bg-[#172033] border border-slate-700 rounded-lg px-3 py-2 text-white outline-none focus:border-[#f97316]" />
+          </div>
+          <div>
+            <label class="block text-slate-300 font-semibold mb-1">Crie uma senha</label>
+            <input id="reg-pass" type="password" required minlength="4" placeholder="Mínimo 4 caracteres" class="w-full bg-[#172033] border border-slate-700 rounded-lg px-3 py-2 text-white outline-none focus:border-[#f97316]" />
+          </div>
+          <button type="submit" class="w-full bg-[#e67e22] hover:bg-[#f97316] text-white font-bold py-2.5 rounded-lg cursor-pointer">Criar Conta e Preencher Login</button>
+        </form>
+      `;
+      const modal = document.getElementById('app-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      const regUser = document.getElementById('reg-user').value.trim();
+      const regPass = document.getElementById('reg-pass').value;
+      localStorage.setItem('optimos_last_user', regUser);
+      localStorage.setItem('optimos_display_name', regUser);
+      document.getElementById('user').value = regUser;
+      document.getElementById('pass').value = regPass;
+      document.getElementById('cfg-name').value = regUser;
+      closeModal();
+      showToast('Conta criada! Agora clique em "Acessar o OptimosStore".');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('app-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
     function handleLogin(e) {
       e.preventDefault();
       const user = document.getElementById('user').value.trim();
       if (document.getElementById('remember').checked) {
         localStorage.setItem('optimos_last_user', user);
+      } else {
+        localStorage.removeItem('optimos_last_user');
       }
-      alert('Login enviado para: ' + user);
+      document.getElementById('status-badge').textContent = user;
+      showToast('Bem-vindo ao OptimosStore, ' + user + '!');
     }
-    function msg(text) {
-      alert(text);
-    }
+
     window.addEventListener('DOMContentLoaded', () => {
       const savedUser = localStorage.getItem('optimos_last_user');
       const savedName = localStorage.getItem('optimos_display_name');
+      const savedCurrency = localStorage.getItem('optimos_currency');
       if (savedUser) document.getElementById('user').value = savedUser;
-      if (savedName) document.getElementById('cfg-name').value = savedName;
+      if (savedName) {
+        document.getElementById('cfg-name').value = savedName;
+        document.getElementById('status-badge').textContent = savedName;
+      }
+      if (savedCurrency) document.getElementById('cfg-currency').value = savedCurrency;
     });
   </script>
 </body>
-</html>
+</html>} 
