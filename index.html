@@ -1,3 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OptimosStore • Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #090e1a;
+      color: #e2e8f0;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 25%, rgba(249, 115, 22, 0.11), transparent 45%),
+        radial-gradient(circle at 15% 80%, rgba(30, 64, 175, 0.14), transparent 50%),
+        #090e1a;
+    }
+  </style>
+</head>
+<body class="relative antialiased">
+  <div class="bg-glow"></div>
+
+  <!-- TOPO -->
+  <header class="relative z-10 max-w-6xl mx-auto px-4 pt-5 pb-3 grid grid-cols-3 items-center gap-2">
+    <div class="justify-self-start bg-[#101726]/95 border border-slate-800/90 px-3.5 py-2 rounded-2xl flex items-center gap-2.5 shadow-lg">
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-[#f59e0b] to-[#ea580c] flex items-center justify-center text-white text-sm shadow">
+        🛍️
+      </div>
+      <div class="leading-tight">
+        <div class="font-bold text-white text-xs sm:text-sm">OptimosStore</div>
+        <div class="text-[10px] text-slate-400">Operada por Fishtech</div>
+      </div>
+    </div>
+
+    <div class="justify-self-center">
+      <div class="inline-flex items-center gap-2 bg-[#101726]/95 border border-slate-800/90 px-4 py-1.5 rounded-full text-xs font-medium text-slate-200 shadow-lg">
+        <span class="w-2 h-2 rounded-full bg-[#f97316]"></span>
+        <span>Visitante</span>
+      </div>
+    </div>
+
+    <div class="justify-self-end">
+      <button type="button" onclick="toggleSettings(true)" class="bg-[#101726]/95 hover:bg-slate-800 border border-slate-800/90 hover:border-[#f97316]/50 text-slate-200 text-xs sm:text-sm font-medium px-4 py-2 rounded-2xl flex items-center gap-2 shadow-lg transition cursor-pointer">
+        <span class="text-[#f97316]">⚙️</span>
+        <span>Configurações</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="relative z-10 max-w-6xl mx-auto px-4 pt-4 pb-16">
+    <!-- CARD CENTRAL DE LOGIN -->
+    <section class="max-w-[400px] mx-auto bg-[#0f1624]/95 border border-slate-800/90 rounded-2xl p-7 shadow-2xl">
+      <div class="flex flex-col items-center text-center mb-6">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#f59e0b] to-[#ea580c] flex items-center justify-center text-white text-lg shadow-md shadow-orange-500/20 mb-3">
+          🛍️
+        </div>
+        <h1 class="text-2xl font-black tracking-wide text-[#f97316]">OPTIMOSTORE</h1>
+        <p class="text-xs text-slate-400 mt-1">Bem-vindo ao OptimosStore</p>
+      </div>
+
+      <form onsubmit="handleLogin(event)" class="space-y-4">
+        <div>
+          <label for="user" class="block text-xs font-semibold text-slate-300 mb-1.5">Usuário ou E-mail</label>
+          <input id="user" type="text" required placeholder="Seu usuário ou e-mail" class="w-full bg-[#172033] border border-slate-700/80 focus:border-[#f97316] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 outline-none transition" />
+        </div>
+
+        <div>
+          <label for="pass" class="block text-xs font-semibold text-slate-300 mb-1.5">Senha</label>
+          <div class="relative">
+            <input id="pass" type="password" required placeholder="Sua senha" class="w-full bg-[#172033] border border-slate-700/80 focus:border-[#f97316] rounded-lg pl-3.5 pr-10 py-2.5 text-sm text-slate-100 placeholder-slate-500 outline-none transition" />
+            <button type="button" onclick="togglePassword()" aria-label="Mostrar senha" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs cursor-pointer">👁️</button>
+          </div>
+        </div>
+
+        <label class="inline-flex items-center gap-2 text-xs text-slate-400 cursor-pointer select-none">
+          <input id="remember" type="checkbox" checked class="w-3.5 h-3.5 accent-[#f97316] rounded cursor-pointer" />
+          <span>Lembrar sessão neste dispositivo</span>
+        </label>
+
+        <button type="submit" class="w-full bg-[#e67e22] hover:bg-[#f97316] text-white font-bold text-sm py-3 rounded-lg shadow-lg shadow-orange-500/20 transition cursor-pointer">
+          Acessar o OptimosStore
+        </button>
+
+        <div class="text-center space-y-1.5 pt-1 text-xs">
+          <div>
+            <button type="button" onclick="msg('Recuperação de senha enviada para o seu e-mail.')" class="text-[#f97316] hover:underline cursor-pointer">
+              Esqueceu a senha?
+            </button>
+          </div>
+          <div class="text-slate-400">
+            Você não tem conta?
+            <button type="button" onclick="msg('Cadastro disponível na sua conta.')" class="text-[#f97316] font-semibold hover:underline cursor-pointer">
+              Crie uma aqui
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- INFORMAÇÕES DO APP & GUIA COMPLETO -->
+    <section class="mt-14 pt-8 border-t border-slate-800/80">
+      <div class="text-center mb-8">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white">🚀 Informações do App & Guia Completo</h2>
+        <p class="text-xs sm:text-sm text-[#f97316] mt-1">Conheça como o OptimosStore funciona e quais recursos sustentam a plataforma</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-[#0f1624]/95 border border-slate-800/90 rounded-2xl p-5">
+          <h3 class="text-sm font-bold text-[#fb923c] mb-2">🔍 Buscador OptimosStore</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">Pesquisa de produtos, comparação de preços e consulta rápida de informações para ajudar na escolha.</p>
+        </div>
+
+        <div class="bg-[#0f1624]/95 border border-slate-800/90 rounded-2xl p-5">
+          <h3 class="text-sm font-bold text-[#fb923c] mb-2">🔒 Segurança e Privacidade</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">Dados de sessão salvos localmente no seu navegador com foco em simplicidade e privacidade.</p>
+        </div>
+
+        <div class="bg-[#0f1624]/95 border border-slate-800/90 rounded-2xl p-5">
+          <h3 class="text-sm font-bold text-[#fb923c] mb-2">📊 Comparação Inteligente</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">Organização de valores e critérios de custo-benefício para facilitar a comparação entre opções.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PAINEL LATERAL DE CONFIGURAÇÕES -->
+  <aside id="settings-panel" class="fixed top-0 right-0 bottom-0 z-50 w-80 max-w-[90vw] bg-[#0f1624] border-l border-slate-800 shadow-2xl transform translate-x-full transition-transform duration-200 p-5 flex flex-col justify-between">
+    <div class="space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-white text-sm">⚙️ Configurações</h3>
+        <button type="button" onclick="toggleSettings(false)" class="text-slate-400 hover:text-white cursor-pointer">✕</button>
+      </div>
+      <div>
+        <label for="cfg-name" class="block text-xs text-slate-300 mb-1">Nome de exibição</label>
+        <input id="cfg-name" type="text" placeholder="Seu nome ou apelido" class="w-full bg-[#172033] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-[#f97316]" />
+      </div>
+    </div>
+    <button type="button" onclick="saveSettings()" class="w-full bg-[#e67e22] hover:bg-[#f97316] text-white font-bold text-xs py-2.5 rounded-xl cursor-pointer">
+      Salvar
+    </button>
+  </aside>
+
+  <script>
+    function togglePassword() {
+      const input = document.getElementById('pass');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+    function toggleSettings(open) {
+      const panel = document.getElementById('settings-panel');
+      panel.classList.toggle('translate-x-full', !open);
+    }
+    function saveSettings() {
+      const name = document.getElementById('cfg-name').value.trim();
+      if (name) localStorage.setItem('optimos_display_name', name);
+      toggleSettings(false);
+      alert('Configurações salvas!');
+    }
+    function handleLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('user').value.trim();
+      if (document.getElementById('remember').checked) {
+        localStorage.setItem('optimos_last_user', user);
+      }
+      alert('Login enviado para: ' + user);
+    }
+    function msg(text) {
+      alert(text);
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedUser = localStorage.getItem('optimos_last_user');
+      const savedName = localStorage.getItem('optimos_display_name');
+      if (savedUser) document.getElementById('user').value = savedUser;
+      if (savedName) document.getElementById('cfg-name').value = savedName;
+    });
+  </script>
+</body>
+</html>
 <!-- INFORMAÇÕES DO APP & GUIA COMPLETO (ESTILO 6 CARDS) -->
     <section class="mt-16 pt-10 border-t border-slate-800/80">
       <div class="text-center mb-10">
@@ -74,3 +260,10 @@
         © 2026 Fishtech. Todos os direitos reservados. OptimosStore é uma marca registrada.
       </p>
     </section>
+ATENÇÃO - REGRA OBRIGATÓRIA:
+1. NÃO apague, NÃO resuma e NÃO omita nenhuma parte do código que eu enviar.
+2. Altere SOMENTE o que eu pedir abaixo. Tudo o que eu não pedir para mudar deve ser MANTIDO exatamente como está (topo, login, estilos Tailwind, configurações e scripts).
+3. Se o código for grande, divida a resposta em partes numeradas (Parte 1, Parte 2...) para não cortar no meio nem travar meu navegador.
+
+O que eu quero mudar agora:
+[ESCREVA AQUI APENAS O QUE VOCÊ QUER MUDAR]
