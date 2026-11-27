@@ -55,10 +55,9 @@
     </div>
   </header>
 
-  <!-- CONTEÚDO PRINCIPAL -->
-  <main class="relative z-10 max-w-6xl mx-auto px-4 pt-4 pb-16">
-    <!-- CARD CENTRAL DE LOGIN -->
-    <section class="max-w-[400px] mx-auto bg-[#0f1624]/95 border border-slate-800/90 rounded-2xl p-7 shadow-2xl">
+  <!-- TELA 1: FOCO TOTAL NO LOGIN AO ABRIR O SITE -->
+  <section class="relative z-10 min-h-[calc(100vh-84px)] flex flex-col items-center justify-center px-4 py-6">
+    <div class="w-full max-w-[400px] bg-[#0f1624]/95 border border-slate-800/90 rounded-2xl p-7 shadow-2xl">
       <div class="flex flex-col items-center text-center mb-6">
         <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#f59e0b] to-[#ea580c] flex items-center justify-center text-white text-lg shadow-md shadow-orange-500/20 mb-3">
           🛍️
@@ -104,33 +103,85 @@
           </div>
         </div>
       </form>
-    </section>
+    </div>
+  </section>
 
-    <!-- INFORMAÇÕES DO APP & GUIA COMPLETO -->
-    <section class="mt-14 pt-8 border-t border-slate-800/80">
-      <div class="text-center mb-8">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-white">🚀 Informações do App & Guia Completo</h2>
-        <p class="text-xs sm:text-sm text-[#f97316] mt-1">Conheça como o OptimosStore funciona e quais recursos sustentam a plataforma</p>
+  <!-- TELA 2: INFORMAÇÕES DO APP & GUIA COMPLETO (APARECE AO ROLAR PARA BAIXO) -->
+  <section class="relative z-10 max-w-6xl mx-auto px-4 pt-12 pb-16 border-t border-slate-800/80">
+    <div class="text-center mb-10">
+      <h2 class="text-xl sm:text-2xl font-extrabold text-white">🚀 Informações do App & Guia Completo</h2>
+      <p class="text-xs sm:text-sm text-[#f97316] font-medium mt-1.5">
+        Tudo o que você precisa saber sobre a plataforma OptimosStore
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+      <!-- 1. O que é o OptimosStore? -->
+      <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
+        <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">💡 O que é o OptimosStore?</h3>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Um buscador de preços e comparação de produtos desenvolvido pela <strong class="text-white">Fishtech</strong>. Feito para você pesquisar itens, comparar lojas, ver fichas técnicas e encontrar ofertas com mais facilidade na hora de comprar.
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-[#0f1624]/95 border border-slate-800/90 rounded-2xl p-5">
-          <h3 class="text-sm font-bold text-[#fb923c] mb-2">🔍 Buscador OptimosStore</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">Pesquisa de produtos, comparação de preços e consulta rápida de informações para ajudar na escolha.</p>
-        </div>
+      <!-- 2. Segurança e Privacidade Total -->
+      <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
+        <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">🔒 Segurança e Privacidade Total</h3>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Seus dados de acesso, listas e preferências ficam salvos localmente no seu dispositivo por <strong class="text-white">LocalStorage</strong>, mantendo a navegação simples e respeitando sua privacidade.
+        </p>
+      </div>
 
-        <div class="bg-[#0f1624]/95 border border-slate-800/90 rounded-2xl p-5">
-          <h3 class="text-sm font-bold text-[#fb923c] mb-2">🔒 Segurança e Privacidade</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">Dados de sessão salvos localmente no seu navegador com foco em simplicidade e privacidade.</p>
-        </div>
+      <!-- 3. Recursos do Buscador -->
+      <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
+        <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">📊 Recursos do Buscador</h3>
+        <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+          <li><span class="text-[#f97316] font-bold">•</span> <strong class="text-white">Comparação de Preços:</strong> Veja diferentes valores e condições para achar a melhor opção.</li>
+          <li><span class="text-[#f97316] font-bold">•</span> <strong class="text-white">Ficha Técnica:</strong> Consulte detalhes e especificações importantes antes de fechar negócio.</li>
+          <li><span class="text-[#f97316] font-bold">•</span> <strong class="text-white">Custo-Benefício:</strong> Avalie se o preço combina com o que o produto entrega.</li>
+        </ul>
+      </div>
 
-        <div class="bg-[#0f1624]/95 border border-slate-800/90 rounded-2xl p-5">
-          <h3 class="text-sm font-bold text-[#fb923c] mb-2">📊 Comparação Inteligente</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">Organização de valores e critérios de custo-benefício para facilitar a comparação entre opções.</p>
+      <!-- 4. IA Auxiliadora OptimosStore -->
+      <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
+        <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">🤖 IA Auxiliadora OptimosStore</h3>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Nossa inteligência artificial ajuda a tirar dúvidas sobre o produto, resumir características técnicas e avaliar se vale a pena comprar no momento.
+        </p>
+      </div>
+
+      <!-- 5. Alertas e Economia -->
+      <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
+        <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">🏆 Alertas e Economia</h3>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Organize sua lista de preços, acompanhe variações de valor e ative alertas para aproveitar quedas de preço e economizar nas compras.
+        </p>
+      </div>
+
+      <!-- 6. Links Rápidos e Termos -->
+      <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
+        <h3 class="text-sm font-bold text-[#fb923c] mb-3">🔗 Links Rápidos e Termos</h3>
+        <div class="flex flex-col gap-2 text-xs font-semibold">
+          <button type="button" onclick="msg('Termos de Serviço do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
+            📄 Termos de Serviço
+          </button>
+          <button type="button" onclick="msg('Política de Privacidade do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
+            🔒 Política de Privacidade
+          </button>
+          <button type="button" onclick="msg('Guia do Comprador do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
+            📖 Guia do Comprador
+          </button>
+          <button type="button" onclick="msg('Transparência de Ofertas do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
+            🛡️ Transparência de Ofertas
+          </button>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+
+    <p class="text-center text-[11px] text-slate-500 mt-8">
+      © 2026 Fishtech. Todos os direitos reservados. OptimosStore é uma marca registrada.
+    </p>
+  </section>
 
   <!-- PAINEL LATERAL DE CONFIGURAÇÕES -->
   <aside id="settings-panel" class="fixed top-0 right-0 bottom-0 z-50 w-80 max-w-[90vw] bg-[#0f1624] border-l border-slate-800 shadow-2xl transform translate-x-full transition-transform duration-200 p-5 flex flex-col justify-between">
@@ -184,120 +235,3 @@
   </script>
 </body>
 </html>
-<!-- INFORMAÇÕES DO APP & GUIA COMPLETO (ESTILO 6 CARDS) -->
-    <section class="mt-16 pt-10 border-t border-slate-800/80">
-      <div class="text-center mb-10">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-white">🚀 Informações do App & Guia Completo</h2>
-        <p class="text-xs sm:text-sm text-[#f97316] font-medium mt-1.5">
-          Tudo o que você precisa saber sobre a plataforma OptimosStore
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-        <!-- 1. O que é o OptimosStore? -->
-        <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
-          <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">💡 O que é o OptimosStore?</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Um buscador de preços e comparação de produtos desenvolvido pela <strong class="text-white">Fishtech</strong>. Feito para você pesquisar itens, comparar lojas, ver fichas técnicas e encontrar ofertas com mais facilidade na hora de comprar.
-          </p>
-        </div>
-
-        <!-- 2. Segurança e Privacidade Total -->
-        <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
-          <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">🔒 Segurança e Privacidade Total</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Seus dados de acesso, listas e preferências ficam salvos localmente no seu dispositivo por <strong class="text-white">LocalStorage</strong>, mantendo a navegação simples e respeitando sua privacidade.
-          </p>
-        </div>
-
-        <!-- 3. Recursos do Buscador -->
-        <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
-          <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">📊 Recursos do Buscador</h3>
-          <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
-            <li><span class="text-[#f97316] font-bold">•</span> <strong class="text-white">Comparação de Preços:</strong> Veja diferentes valores e condições para achar a melhor opção.</li>
-            <li><span class="text-[#f97316] font-bold">•</span> <strong class="text-white">Ficha Técnica:</strong> Consulte detalhes e especificações importantes antes de fechar negócio.</li>
-            <li><span class="text-[#f97316] font-bold">•</span> <strong class="text-white">Custo-Benefício:</strong> Avalie se o preço combina com o que o produto entrega.</li>
-          </ul>
-        </div>
-
-        <!-- 4. IA Auxiliadora OptimosStore -->
-        <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
-          <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">🤖 IA Auxiliadora OptimosStore</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Nossa inteligência artificial ajuda você a tirar dúvidas sobre o produto, resumir características técnicas e decidir se vale a pena comprar no momento.
-          </p>
-        </div>
-
-        <!-- 5. Alertas e Economia -->
-        <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
-          <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">🏆 Alertas e Economia</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Organize sua lista de preços, acompanhe variações de valor e ative alertas para aproveitar quedas de preço e economizar nas suas compras.
-          </p>
-        </div>
-
-        <!-- 6. Links Rápidos e Termos -->
-        <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
-          <h3 class="text-sm font-bold text-[#fb923c] mb-3">🔗 Links Rápidos e Termos</h3>
-          <div class="flex flex-col gap-2 text-xs font-semibold">
-            <button type="button" onclick="msg('Termos de Serviço do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
-              📄 Termos de Serviço
-            </button>
-            <button type="button" onclick="msg('Política de Privacidade do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
-              🔒 Política de Privacidade
-            </button>
-            <button type="button" onclick="msg('Guia do Comprador do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
-              📖 Guia do Comprador
-            </button>
-            <button type="button" onclick="msg('Transparência de Ofertas do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
-              🛡️ Transparência de Ofertas
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <p class="text-center text-[11px] text-slate-500 mt-8">
-        <!-- 4. IA Auxiliadora OptimosStore -->
-        <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
-          <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">🤖 IA Auxiliadora OptimosStore</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Nossa inteligência artificial ajuda a tirar dúvidas sobre o produto, resumir características técnicas e avaliar se vale a pena comprar no momento.
-          </p>
-        </div>
-
-        <!-- 5. Alertas e Economia -->
-        <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
-          <h3 class="text-sm font-bold text-[#fb923c] mb-2.5">🏆 Alertas e Economia</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Organize sua lista de preços, acompanhe variações de valor e ative alertas para aproveitar quedas de preço e economizar nas compras.
-          </p>
-        </div>
-
-        <!-- 6. Links Rápidos e Termos -->
-        <div class="bg-[#0e1525]/95 border border-slate-800/90 rounded-2xl p-6 shadow-xl">
-          <h3 class="text-sm font-bold text-[#fb923c] mb-3">🔗 Links Rápidos e Termos</h3>
-          <div class="flex flex-col gap-2 text-xs font-semibold">
-            <button type="button" onclick="msg('Termos de Serviço do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
-              📄 Termos de Serviço
-            </button>
-            <button type="button" onclick="msg('Política de Privacidade do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
-              🔒 Política de Privacidade
-            </button>
-            <button type="button" onclick="msg('Guia do Comprador do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
-              📖 Guia do Comprador
-            </button>
-            <button type="button" onclick="msg('Transparência de Ofertas do OptimosStore.')" class="w-full bg-[#132038] hover:bg-[#1c2e4f] border border-[#f97316]/30 hover:border-[#f97316] text-orange-300 py-2 px-3 rounded-lg transition cursor-pointer">
-              🛡️ Transparência de Ofertas
-            </button>
-          </div>
-        </div>
-        © 2026 Fishtech. Todos os direitos reservados. OptimosStore é uma marca registrada.
-      </p>
-    </section>
-ATENÇÃO - REGRA OBRIGATÓRIA:
-1. NÃO apague, NÃO resuma e NÃO omita nenhuma parte do código que eu enviar.
-2. Altere SOMENTE o que eu pedir abaixo. Tudo o que eu não pedir para mudar deve ser MANTIDO exatamente como está (topo, login, estilos Tailwind, configurações e scripts).
-3. Se o código for grande, divida a resposta em partes numeradas (Parte 1, Parte 2...) para não cortar no meio nem travar meu navegador.
-
-O que eu quero mudar agora:
-[ESCREVA AQUI APENAS O QUE VOCÊ QUER MUDAR]
